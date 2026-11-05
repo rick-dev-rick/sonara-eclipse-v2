@@ -29,3 +29,25 @@
 .mood-tile .cover img{width:100%;height:100%;object-fit:cover}
 .record .cover:has(img){background:#111}
 @media(max-width:1100px){.hero-home .hero-person,.artist-hero .hero-person{opacity:.62}}
+
+/* V2 Visual fidelity pass: reference compositions and local imagery */
+.cover:has(img) .cover-label,.cover:has(img) .moon-shape,.cover:has(img) .eclipse-ring,.cover:has(img) .road,.cover:has(img) .tail-lights{display:none}
+.cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hero-home .hero-person,.artist-hero .hero-person{position:absolute;top:0;bottom:0;right:0;height:100%;width:52%;background-position:center;background-size:cover;mask-image:linear-gradient(90deg,transparent 0%,black 28%);opacity:1}
+.hero-home .hero-person{background-image:url('/sonara-eclipse-v2/assets/hero-trap.webp')}
+.artist-hero .hero-person{background-image:url('/sonara-eclipse-v2/assets/hero-xxxtentacion.webp')}
+.album-hero{isolation:isolate;overflow:hidden}
+.album-hero:before{content:'';position:absolute;inset:0 0 0 auto;width:47%;background:url('/sonara-eclipse-v2/assets/hero-matue.webp') center/cover no-repeat;mask-image:linear-gradient(90deg,transparent 0%,black 34%);opacity:.73;z-index:0}
+.album-hero .album-description{z-index:3}
+.hero-home .hero-sun,.artist-hero .hero-sun{opacity:.08}
+.album-hero .hero-sun{opacity:.08}
+.hero-home,.artist-hero,.album-hero{background:#090a0d;border:1px solid #2c2c33}
+.nav-sidebar{background:linear-gradient(180deg,#08090c,#07080b)}
+.legacy-banner-row .cover,.forever-top>.cover{background:#101015}
+.hero-copy h1,.album-description h1{color:#f4f4f7}
+.music-row:nth-child(even){background:#101115}
+.music-row:hover,.trending>div:hover{background:#1a1a20}
+.record .cover,.album-strip .cover,.mood-tile,.side-album-grid .cover{border-color:#2a2a30}
+@media (max-width:760px){.hero-home .hero-person,.artist-hero .hero-person{width:67%}.album-hero:before{width:70%;opacity:.3}}
+
+.brand-symbol{font-size:0;letter-spacing:0;transform:none;background:url('/sonara-eclipse-v2/assets/brand-s.webp') center / contain no-repeat;box-shadow:none;text-shadow:none}

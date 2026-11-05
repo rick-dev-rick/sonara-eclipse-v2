@@ -3,13 +3,25 @@ import {House,Compass,Library,Disc3,UserRound,Heart,ListMusic,Search,Bell,Chevro
 import {demoTracks,xTracks,matueTracks,legacyTracks,albums,collections} from './data.js';
 const NAV=[['Início',House],['Explorar',Compass],['Biblioteca',Library],['Álbuns',Disc3],['Artistas',UserRound],['Favoritos',Heart],['Playlists',ListMusic]];
 const asset=name=>`${import.meta.env.BASE_URL}assets/${name}.webp`;
+const asset=(name)=>`${import.meta.env.BASE_URL}assets/${name}.webp`;
 const artURL={
- x:asset('legacy-portrait'), 'home-hero':asset('hero-home'), 'x-hero':asset('hero-x'),
- question:asset('x-question'), seventeen:asset('x-seventeen'), skins:asset('x-skins'),
- 'rec-paz':asset('rec-paz'), 'rec-little':asset('rec-little'),
- 'rec-og':asset('rec-og'), 'rec-hseh':asset('rec-hseh'), 'rec-djonga':asset('rec-djonga'),
- dark:asset('mood-dark'), focus:asset('mood-focus'), drive:asset('mood-drive'), energy:asset('mood-energy'),
- time:asset('album-eterno'), legacy:asset('legacy-portrait'),
+"x":asset("legacy-jahseh"),
+"home-hero":asset("hero-trap"),
+"x-hero":asset("hero-xxxtentacion"),
+"question":asset("cover-question"),
+"seventeen":asset("cover-17"),
+"skins":asset("cover-skins"),
+"rec-paz":asset("cover-paz"),
+"rec-little":asset("cover-little"),
+"rec-og":asset("cover-og"),
+"rec-hseh":asset("cover-hseh"),
+"rec-djonga":asset("cover-djonga"),
+"dark":asset("cover-after-dark"),
+"focus":asset("cover-deep-focus"),
+"drive":asset("cover-night-drive"),
+"energy":asset("cover-energy"),
+"time":asset("album-eterno"),
+"legacy":asset("legacy-jahseh")
 };
 const remembered=(name,initial)=>{try{return JSON.parse(localStorage.getItem(name))??initial}catch{return initial}};
 function Art({type='dark',className='',children}){return <div className={'cover cover-'+type+' '+className}>
@@ -37,7 +49,7 @@ export default function App(){
  const listen=i=>{setSong((i+demoTracks.length)%demoTracks.length);setTime(0);setPlaying(true)};
  const toggleLike=id=>setFavorites(s=>s.includes(id)?s.filter(t=>t!==id):[...s,id]);
  const showDemo=()=>listen(0);
- const info=<div className="demo-disclaimer">Catálogo visual demonstrativo. As gravações comerciais citadas não estão hospedadas nem são reproduzidas pela SONARA.</div>;
+ const info=<div className="demo-disclaimer">Informações artísticas e capas são composições demonstrativas, não lançamentos oficiais. Catálogo visual demonstrativo. As gravações comerciais citadas não estão hospedadas nem são reproduzidas pela SONARA.</div>;
  const tile=(title,type,artist='SONARA Sessions',onClick=()=>chooseAlbum(title))=><button key={title} className="record" onClick={onClick}><Art type={type}/><span className="record-play"><Play size={16} fill="currentColor"/></span><b>{title}</b><small>{artist}</small></button>;
  const albumTile=a=>tile(a.title,a.art,a.artist,()=>chooseAlbum(a.title));
  const tableX=(items=xTracks)=> <div className="music-table"><div className="music-table-header"><span>#</span><span>Título</span><span>Reproduções</span><Clock3 size={16}/><span/></div>{items.map((t,i)=><div className="music-row" key={t.title}><button className="track-num" onClick={showDemo}>{i===0?<AudioLines size={18}/>:i+1}</button><button className="row-track" onClick={showDemo}><Art type={t.cover||'three'}/><strong>{t.title}</strong><small className="explicit">E</small></button><span className="plays">{t.plays||'—'}</span><span className="duration">{t.length}</span><IconButton Icon={Heart} title="Favoritar faixa" active={favorites.includes(t.title)} fill={favorites.includes(t.title)} onClick={()=>toggleLike(t.title)}/></div>)}</div>;
@@ -51,7 +63,7 @@ export default function App(){
  const a=albums.find(v=>v.title===selectedAlbum)||{title:selectedAlbum,artist:'SONARA Sessions',year:'2026',art:'dark'};
  const pageAlbum=<><div className="featured album-hero"><div className="album-cover"><Art type={a.art}/></div><div className="album-description"><Label>Álbum</Label><h1>{a.title}</h1><h3>{a.artist}</h3><div className="album-stats">{a.artist==='Matuê'?'Trap':'Hip-hop'} · {a.year} · {a.artist==='Matuê'?14:11} faixas · 48 min</div><p>{a.artist==='Matuê'?'Um mergulho sonoro pelo universo do trap nacional, reunindo faixas e momentos que marcaram uma geração.':'Um capítulo marcante da discografia, reunido nesta experiência de homenagem visual.'}</p><div className="hero-actions"><button className="primary" onClick={showDemo}><Play size={18} fill="currentColor"/> Reproduzir</button><IconButton Icon={Heart} title="Favoritar álbum" active={favorites.includes(a.title)} onClick={()=>toggleLike(a.title)}/><IconButton Icon={Shuffle} title="Aleatório" active={shuffle} onClick={()=>setShuffle(s=>!s)}/><IconButton Icon={Download} title="Faixas não disponíveis para download" onClick={()=>{}}/><IconButton Icon={MoreHorizontal} title="Mais opções" onClick={()=>{}}/></div></div><div className="hero-sun"/></div>
  <div className="album-music">{tableX(a.artist==='Matuê'?matueTracks:xTracks)}</div>{info}</>;
- const pageLegacy=<><div className="legacy-banner"><Label>SONARA ECLIPSE / LEGACY</Label><div className="legacy-banner-row"><Art type="legacy"/><div><h1>LEGACY</h1><h2>The Music Lives On.</h2><p>Uma homenagem ao legado artístico de Jahseh Dwayne Ricardo Onfroy.</p><small>1998 — 2018 &nbsp; · &nbsp; LONG LIVE X 🥀</small></div></div></div><div className="forever-panel"><div className="forever-top"><Art type="seventeen"/><div><Label>SONARA ECLIPSE · LEGACY</Label><h2>FOREVER JAHSEH</h2><p>Uma homenagem ao artista e às músicas que permanecem.</p><strong>{legacyTracks.length} músicas · Seleção especial</strong></div></div><div className="forever-list">{legacyTracks.map((title,i)=><div className="forever-line" key={title}><span>{String(i+1).padStart(2,'0')}</span><strong className={title==='Everybody Dies In Their Nightmares'?'forever-favorite':''}>{title}</strong>{title==='Everybody Dies In Their Nightmares'&&<Heart size={21} color="#ff3939"/>}</div>)}</div></div><p className="legacy-footer">A música permanece. O legado vive. 🥀</p></>;
+ const pageLegacy=<><div className="legacy-banner"><Label>SONARA ECLIPSE / LEGACY</Label><div className="legacy-banner-row"><Art type="legacy"/><div><h1>LEGACY</h1><h2>The Music Lives On.</h2><p>Uma homenagem ao legado artístico de Jahseh Dwayne Ricardo Onfroy.</p><small>1998 — 2018 &nbsp; · &nbsp; LONG LIVE X 🥀</small></div></div></div><div className="forever-panel"><div className="forever-top"><Art type="legacy17"/><div><Label>SONARA ECLIPSE · LEGACY</Label><h2>FOREVER JAHSEH</h2><p>Uma homenagem ao artista e às músicas que permanecem.</p><strong>{legacyTracks.length} músicas · Seleção especial</strong></div></div><div className="forever-list">{legacyTracks.map((title,i)=><div className="forever-line" key={title}><span>{String(i+1).padStart(2,'0')}</span><strong className={title==='Everybody Dies In Their Nightmares'?'forever-favorite':''}>{title}</strong>{title==='Everybody Dies In Their Nightmares'&&<Heart size={21} color="#ff3939"/>}</div>)}</div></div><p className="legacy-footer">A música permanece. O legado vive. 🥀</p></>;
  const pageExplore=<><div className="page-heading"><Label>DESCUBRA NOVAS FREQUÊNCIAS</Label><h1>Explorar</h1><p>Encontre a trilha sonora para cada momento.</p></div><PaneTitle>Feito para o seu momento</PaneTitle><div className="mood-grid explore-moods">{[['After Dark','dark'],['Deep Focus','focus'],['Night Drive','drive'],['Energia Total','energy']].map(([n,t])=><button className="mood-tile" key={n} onClick={()=>chooseAlbum(n)}><Art type={t}/><span>{n}</span></button>)}</div><PaneTitle action="Ver artistas" onClick={()=>navigate('Artistas')}>Artistas em destaque</PaneTitle><div className="people-grid"><button onClick={()=>chooseArtist('XXXTENTACION')}><Art type="x"/><b>XXXTENTACION</b><small>LEGACY</small></button><button onClick={()=>chooseArtist('Matuê')}><Art type="trap"/><b>Matuê</b><small>Trap BR</small></button></div><PaneTitle>Álbuns em destaque</PaneTitle><div className="recent-grid">{albums.slice(0,5).map(albumTile)}</div></>;
  const pageLibrary=<><div className="page-heading"><Label>SUA COLEÇÃO</Label><h1>Biblioteca</h1><p>Suas músicas, playlists e descobertas em um só lugar.</p></div><div className="library-stats">{[[demoTracks.length,'Faixas de demonstração'],[favorites.length,'Favoritos'],[playlists.length,'Playlists']].map(([v,l])=><div key={l}><strong>{v}</strong><small>{l}</small></div>)}</div><PaneTitle>Suas playlists</PaneTitle><div className="mood-grid">{playlists.slice(0,4).map((l,i)=><button className="mood-tile" key={l.name} onClick={()=>{setPlaylistSelected(i);navigate('Playlists')}}><Art type={['trap','dark','drive','focus'][i%4]}/><span>{l.name}</span></button>)}</div><PaneTitle>Faixas de demonstração</PaneTitle><div className="demo-list">{demoTracks.map((t,i)=><div key={t.id} className="demo-row"><button onClick={()=>listen(i)}><Art type={t.art}/><span><b>{t.title}</b><small>{t.artist}</small></span></button><IconButton Icon={Heart} title="Favoritar" active={favorites.includes(t.id)} onClick={()=>toggleLike(t.id)}/></div>)}</div></>;
  const pageAlbums=<><div className="page-heading"><Label>SONARA DISCOGRAPHY</Label><h1>Álbuns</h1><p>Descubra histórias por trás de cada capa.</p></div><div className="album-gallery">{albums.map(albumTile)}</div></>;
