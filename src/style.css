@@ -197,3 +197,74 @@
 @media(max-width:1300px){.discography-section .album-gallery{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:820px){.discography-section .album-gallery{grid-template-columns:repeat(3,minmax(0,1fr))}.album-detail-premium{gap:18px}.album-detail-premium .album-cover{width:205px;height:205px;flex-basis:205px}}
 @media(max-width:600px){.discography-heading{padding:25px}.discography-section .album-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.discography-section .record{padding:8px}.discography-section .record b{font-size:12px}.discography-section .record-play{display:none}.discography-section-title h2{font-size:21px}.album-detail-premium{padding:17px;align-items:start;gap:15px;flex-direction:column}.album-detail-premium .album-cover{width:min(62vw,220px);height:auto;aspect-ratio:1;flex-basis:auto}.album-detail-premium .album-description h1{font-size:30px;letter-spacing:-1px}.album-detail-premium .album-description p{font-size:12px}.album-detail-premium .album-stats{gap:5px;font-size:11px}.album-track-panel{padding:15px 11px}.album-track-item{gap:9px;padding:9px 7px}.album-track-heading h2{font-size:19px}.album-track-item>.cover{width:37px;height:37px;flex-basis:37px}.album-track-item strong{font-size:12px}.album-track-heading>small{display:none}}
+
+/* Premium sketch fidelity pass — applied to the live React site */
+:root{--sonara-red:#ff101c;--sonara-panel:#101116}
+.app-shell{background:#06070a;color:#f8f8fa}
+.nav-sidebar{background:linear-gradient(180deg,#050608,#09080b 85%,#18070c);border-right:1px solid #24242b}
+.brand-symbol{text-shadow:0 0 14px #ff0000c0,0 0 34px #ed001177}
+.navigation button{border-radius:12px}
+.navigation button.active{background:linear-gradient(90deg,#780000,#2b0c12 80%,#151218);box-shadow:inset 5px 0 #ff0e18}
+.top-header{background:#07080b}
+.search-box{background:linear-gradient(120deg,#1c1e23,#17191d);border-color:#24252b;border-radius:18px}
+.context-sidebar .aside-panel{background:linear-gradient(145deg,#121317,#0b0c10);border:1px solid #292a30;border-radius:17px;box-shadow:0 10px 24px #0005}
+.aside-title{font-size:16px}.aside-title:before{background:#ff151b}
+.sonara-hero{height:282px;background:#09090d;border:1px solid #313039;box-shadow:0 12px 40px #0007}
+.sonara-hero .hero-person{width:70%;right:-1%;height:110%;top:-4%;opacity:1;mask-image:linear-gradient(90deg,transparent 0%,#000 38%);-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 38%)}
+.sonara-hero .hero-person .cover{height:100%;width:100%;border:0}
+.sonara-hero .hero-person .cover img{object-fit:cover;object-position:50% 28%;filter:grayscale(.64) brightness(.83) contrast(1.2)}
+.sonara-hero:after{background:linear-gradient(90deg,#07080b 0%,#08080bdd 28%,#07080b22 68%,transparent)}
+.sonara-hero .hero-sun{opacity:1;right:24%;top:-52%;filter:drop-shadow(0 0 12px #ff0000aa)}
+.sonara-hero .hero-copy{max-width:58%;padding:35px 39px}
+.sonara-hero .hero-copy h1{font-size:clamp(39px,4vw,56px);font-weight:800;letter-spacing:-1.9px;margin-top:15px}
+.sonara-hero .hero-copy p{color:#c5c4c9;font-size:15px}
+.sonara-hero .primary{padding:13px 24px;font-size:14px;box-shadow:0 7px 20px #d8001742}
+.hero-dots{z-index:6;right:18px;bottom:16px;position:absolute;font-size:12px;color:#67666b;letter-spacing:3px}.hero-dots span.lit{display:inline-block;background:#ff1728;width:9px;height:9px;border-radius:50%;margin-right:5px}
+.pane-title{margin-top:24px;margin-bottom:13px}
+.pane-title h2{font-weight:800}
+.featured-artists{gap:13px}
+.featured-artists .record .cover{aspect-ratio:1;background:#15171d}
+.featured-artists .record .cover img{object-fit:cover;filter:contrast(1.08);width:100%;height:100%}
+.featured-artists .record .record-play{display:grid;bottom:50px;right:9px;top:auto;opacity:1;background:#08080c90}
+.featured-artists .record b{font-size:13px}
+.home-collections{margin-top:3px}
+.home-collection{border-color:#353238;border-radius:14px;box-shadow:0 5px 18px #0005}
+.home-collection>.cover{border:1px solid #464049}
+.home-legacy{min-height:84px;border-color:#4b222d;background:linear-gradient(90deg,#180b12,#0e0e12);box-shadow:0 8px 22px #0005}
+.home-legacy>.cover{width:64px;height:64px;flex:0 0 64px;border-radius:10px}
+.artist-hero{height:250px;background:#08080b}
+.artist-hero .hero-person{right:-2%;width:67%;height:100%;top:0;opacity:1;mask-image:linear-gradient(90deg,transparent,#000 45%);-webkit-mask-image:linear-gradient(90deg,transparent,#000 45%)}
+.artist-hero .hero-person .cover{height:100%;width:100%;border:0}
+.artist-hero .hero-person .cover img{object-fit:cover;object-position:center 24%;filter:grayscale(1) contrast(1.12) brightness(.9)}
+.artist-hero:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#08090b 0%,#08090bc5 29%,transparent 90%);z-index:1;pointer-events:none}
+.artist-hero .hero-copy{max-width:56%;padding:26px 34px;z-index:4}
+.artist-hero .hero-copy h1{font-size:clamp(28px,3vw,43px);letter-spacing:-1px}
+.artist-hero .hero-copy p{font-size:12px}
+.artist-hero .hero-sun{right:15%;opacity:1;z-index:1;filter:drop-shadow(0 0 10px #ee1520)}
+.album-detail-premium{min-height:305px;gap:22px;border-radius:17px}
+.album-detail-premium .album-cover{width:245px;height:245px;flex:0 0 245px}
+.album-detail-premium .album-cover .cover{border-color:#606069}
+.album-detail-premium .album-cover .cover img{width:100%;height:100%;object-fit:cover;filter:none}
+.album-detail-premium>.album-backdrop .cover{filter:blur(9px) saturate(1.05);opacity:.64}
+.album-detail-premium:before{background:linear-gradient(90deg,#05060888,#08080bdc 65%,#070709b8)}
+.album-detail-premium .album-description h1{font-size:clamp(28px,3.3vw,45px);margin:12px 0 9px}
+.album-detail-premium .album-description p{font-size:12px}
+.album-track-panel.sonara-album-table{margin-top:16px;padding:0 0 8px;background:#090a0c;border:0;border-radius:12px}
+.album-track-header,.album-track-item{display:grid;grid-template-columns:36px minmax(0,2fr) minmax(0,1fr) 48px 38px;align-items:center;gap:10px}
+.album-track-header{padding:14px 13px;border-bottom:1px solid #34343b;font-size:12px;color:#a8a9b2}
+.album-track-header>svg{justify-self:center}
+.album-track-item{min-height:48px;padding:10px 13px;border-bottom:1px solid #23252b;background:#0c0d10;border-radius:8px;margin:3px 0}
+.album-track-item:nth-child(odd){background:#141419}
+.album-track-item>.cover{display:none}
+.album-track-name strong{font-size:13px}
+.album-track-name small{display:none}
+.album-row-album,.album-row-time{color:#aaaab4;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.album-row-time{text-align:center}
+.album-track-item button{justify-self:end}
+.discography-section .record .cover img{width:100%;height:100%;object-fit:cover}
+.bottom-player{box-shadow:0 -8px 35px #0008;background:linear-gradient(115deg,#131418,#0b0c10);border:1px solid #36343c!important;border-radius:17px 17px 0 0!important}
+.transport-play{background:#0a0b0d!important;border:3px solid #ff0e19!important;color:#fff!important;box-shadow:0 0 15px #e10018a0}
+.legacy-banner,.forever-panel{background:linear-gradient(145deg,#101015,#09090d);border-color:#25252d}
+.forever-line{border-bottom-color:#29292f}
+@media(max-width:1150px){.sonara-hero .hero-copy{max-width:76%}.artist-hero .hero-copy{max-width:72%}}
+@media(max-width:650px){.sonara-hero{height:250px}.sonara-hero .hero-copy{padding:22px;max-width:93%}.sonara-hero .hero-person{width:92%;opacity:.5}.sonara-hero .hero-copy h1{font-size:38px}.artist-hero .hero-copy{padding:22px;max-width:90%}.artist-hero .hero-person{width:90%;opacity:.45}.album-detail-premium .album-cover{width:min(58vw,218px);height:auto;aspect-ratio:1;flex:0 0 auto}.album-track-header,.album-track-item{grid-template-columns:25px minmax(0,1fr) 40px;gap:6px}.album-track-header>span:nth-child(3),.album-track-header>svg,.album-row-album,.album-row-time{display:none}.album-track-item button{grid-column:3}.home-legacy>.cover{width:52px;height:52px;flex-basis:52px}}
