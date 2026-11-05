@@ -51,3 +51,29 @@
 @media (max-width:760px){.hero-home .hero-person,.artist-hero .hero-person{width:67%}.album-hero:before{width:70%;opacity:.3}}
 
 .brand-symbol{font-size:0;letter-spacing:0;transform:none;background:url('/sonara-eclipse-v2/assets/brand-s.webp') center / contain no-repeat;box-shadow:none;text-shadow:none}
+
+/* Personal playlists — Eclipse refinement */
+.personal-playlists{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:27px 0 30px}
+.personal-playlist{width:100%;min-width:0;text-align:left;display:flex;align-items:center;gap:16px;padding:17px;border-radius:18px;background:linear-gradient(135deg,#17181c,#0e0f13);border:1px solid #303037;transition:transform .2s,border-color .2s,background .2s}
+.personal-playlist:hover{transform:translateY(-3px);border-color:#625158}
+.personal-playlist.selected{border-color:#a6343b;background:linear-gradient(130deg,#22171b,#111216)}
+.personal-playlist>.cover{width:108px;height:108px;flex:0 0 108px;border-radius:12px}
+.personal-playlist-info{min-width:0;flex:1;display:flex;flex-direction:column;gap:9px}
+.personal-playlist-info>small{font-size:10px;color:#f15c62;font-weight:700;letter-spacing:1px}
+.personal-playlist-info>strong{font:800 clamp(17px,1.65vw,24px) Manrope;line-height:1.12}
+.personal-playlist-info>span{font-size:12px;line-height:1.55;color:#a6a7af}
+.personal-playlist>svg:last-child{color:#878992}
+.playlist-detail{border:1px solid #2b2c33;border-radius:17px;background:#121318;padding:27px}
+.playlist-heading h2{font-size:clamp(23px,3vw,34px);margin:11px 0}
+.playlist-heading p{max-width:780px;color:#aaabb4;font-size:13px;line-height:1.8}
+.playlist-legacy-link{display:inline-flex;align-items:center;gap:10px;border:1px solid #4c282e;color:#f1c8cc;border-radius:10px;padding:12px 15px;margin:8px 0 22px;font-size:13px}
+.playlist-legacy-link svg:first-child{color:#f44}
+.playlist-artists{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:13px;margin-top:15px}
+.playlist-artists>div{display:flex;align-items:center;gap:12px;border-radius:12px;border:1px solid #2a2b32;background:#1b1d22;padding:12px}
+.playlist-artists .cover{width:58px;height:58px;flex:0 0 58px;border-radius:10px}
+.playlist-artists strong{display:block;font-size:13px}
+.playlist-artists small{display:block;margin-top:6px;font-size:11px;color:#9a9ca5}
+.playlist-disclaimer{font-size:11px;color:#8c8e98;line-height:1.6;margin-top:15px}
+.library-playlists{margin-top:14px}
+@media(max-width:1100px){.personal-playlists{grid-template-columns:1fr}}
+@media(max-width:480px){.personal-playlist{padding:11px;gap:11px}.personal-playlist>.cover{width:76px;height:76px;flex-basis:76px}.personal-playlist-info>strong{font-size:16px}.personal-playlist-info>span{font-size:10px}.personal-playlist>svg:last-child{display:none}.playlist-detail{padding:17px}.playlist-artists{grid-template-columns:1fr}}
