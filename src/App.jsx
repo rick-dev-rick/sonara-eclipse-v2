@@ -41,7 +41,9 @@ const artURL={
 "album-colapso":`${import.meta.env.BASE_URL}assets/official-album-colapso.jpg`,
 "album-manual":`${import.meta.env.BASE_URL}assets/official-album-manual.jpg`,
 "album-vagabundo":`${import.meta.env.BASE_URL}assets/official-album-vagabundo.jpg`,
-"album-808":`${import.meta.env.BASE_URL}assets/official-album-808.jpg`,initial)=>{try{return JSON.parse(localStorage.getItem(name))??initial}catch{return initial}};
+"album-808":`${import.meta.env.BASE_URL}assets/official-album-808.jpg`
+};
+const remembered=(name,initial)=>{try{return JSON.parse(localStorage.getItem(name))??initial}catch{return initial}};
 function Art({type='dark',className='',children}){return <div className={'cover cover-'+type+' '+className}>
  {artURL[type]&&<img src={artURL[type]} alt="" loading="lazy" onError={e=>{if(!e.currentTarget.dataset.fallback){e.currentTarget.dataset.fallback='1';e.currentTarget.src=`${import.meta.env.BASE_URL}assets/${type}.svg`}else{e.currentTarget.style.display='none'}}}/>}
  {type==='dark'&&<span className="moon-shape"/>}{type==='drive'&&<><span className="road"/><span className="tail-lights"/></>}{type==='focus'&&<AudioLines size={42} strokeWidth={1.5}/>}{type==='energy'&&<AudioLines size={46} strokeWidth={1.5}/>}{type==='three'&&<strong className="cover-label">333</strong>}{type==='time'&&<strong className="cover-label">M</strong>}{type==='trap'&&<strong className="cover-label">TRAP BR</strong>}{type==='eclipse'&&<span className="eclipse-ring"/>}{type==='crown'&&<strong className="cover-label">♛</strong>}{type==='purple'&&<span className="purple-orbit"/>}{children}
