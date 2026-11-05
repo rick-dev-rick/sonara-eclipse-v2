@@ -2,6 +2,7 @@ import React,{useEffect,useRef,useState} from 'react';
 import {AudioLines,Search,House,Compass,Library,Disc3,Users,Heart,ListMusic,Play,Pause,SkipBack,SkipForward,Shuffle,Repeat2,Volume2,Menu,X,Plus,Clock3,Headphones,ChevronRight,Music2,ArrowUpRight,Maximize2,Minimize2,MoreHorizontal} from 'lucide-react';
 import {tracks,legacyTracks} from './data.js';
 const xPhoto='https://commons.wikimedia.org/wiki/Special:FilePath/XXXTentacion_February_2018.png';
+const matuePhoto='https://commons.wikimedia.org/wiki/Special:FilePath/Matu%C3%AA.jpg';
 const albumCover={question:'https://coverartarchive.org/release/1e01d59d-a99f-40b8-8bd6-92d7fd26c309/front-250',seventeen:'https://coverartarchive.org/release/1395477c-a71e-4058-a893-d33dfcad6a4b/front-250',skins:'https://commons.wikimedia.org/wiki/Special:FilePath/XXXTentacion_-_SKINS.png'};
 const nav=[['Início',House],['Explorar',Compass],['Biblioteca',Library],['Álbuns',Disc3],['Artistas',Users],['Favoritos',Heart],['Playlists',ListMusic]];
 const collections=[{name:'After Dark',genre:'Ambient',color:'rose'},{name:'Deep Focus',genre:'Lo-fi',color:'blue'},{name:'Noir CTRL',genre:'Electronic',color:'green'},{name:'Vértice',genre:'Synthwave',color:'orange'},{name:'Astra',genre:'Ambient',color:'purple'}];
@@ -34,7 +35,7 @@ export default function App(){
  if(tab==='Início')page=<>
 <div className="reference-hero home-reference">
   <div className="ref-hero-text"><span className="ref-eyebrow">SONARA EXCLUSIVE</span><h1>Trap BR</h1><p>Os maiores sons do trap nacional<br/>em um só lugar.</p><button className="primary" onClick={()=>playAt(0)}><Play size={17} fill="currentColor"/> Ouvir agora</button></div>
-  <div className="eclipse-circle"/><img className="ref-person" src={xPhoto} alt="Retrato de artista em destaque"/><div className="ref-dots">🔴 ● ● ●</div>
+  <div className="eclipse-circle"/><img className="ref-person" src={matuePhoto} alt="Matuê, artista em destaque"/><div className="ref-dots">🔴 ● ● ●</div>
 </div>
 {section('Tocados recentemente','',()=>go('Biblioteca'))}
 <div className="ref-recent">
@@ -52,7 +53,7 @@ export default function App(){
  else if(tab==='Busca')page=<>{heading('ENCONTRE SUA MÚSICA','Busca',query?'Resultados para “'+query+'”':'Pesquise por música, artista ou álbum.')}{trackRows(filtered)}</>;
  else if(tab==='Álbum'){const isX=['?','17','SKINS'].includes(album);page=<>
 <div className="reference-hero album-reference">
-<div className="ref-cover"><img src={isX?albumCover[album]:xPhoto} alt="Capa do álbum" /></div>
+<div className="ref-cover"><img src={isX?albumCover[album]:matuePhoto} alt="Capa do álbum" /></div>
 <div className="ref-album-info"><span className="ref-eyebrow">Álbum</span><h1>{isX?album:'ÉTERNO'}</h1><h3>{isX?'XXXTENTACION':'Matuê'}</h3><div className="ref-stats">Trap · {isX?'2018':'2024'} · {isX?'11':'14'} faixas · 48 min</div><p>{isX?'Uma seleção visual em homenagem à discografia e ao legado do artista.':'ÉTERNO é um mergulho em memórias, conquistas e conflitos, em uma experiência sonora de trap.'}</p><div className="ref-actions"><button className="primary" onClick={()=>playAt(0)}><Play size={17} fill="currentColor"/> Reproduzir</button><button onClick={()=>toggleFav(album)}><Heart size={20}/></button><button onClick={()=>setShuffle(v=>!v)}><Shuffle size={19}/></button><button title="Download não disponível"><MoreHorizontal size={20}/></button></div></div><div className="eclipse-circle"/></div>
 <div className="ref-album-table"><div className="ref-table-head"><span>#</span><span>Título</span><span>Reproduções</span><span>◷</span></div>{(isX?['SAD!','Moonlight','Jocelyn Flores','Everybody Dies In Their Nightmares','changes','Hope','Carry On']:['Máquina do Tempo','Vampiro','333','Cracolândia','Sem Pressa','Conexões','A Última Dança']).map((name,i)=><div key={name} className="ref-table-row"><span>{i+1}</span><button onClick={()=>playAt(i%tracks.length)}>{name} <small>E</small></button><span>{['28.4M','42.1M','31.7M','25.9M','19.8M','17.6M','22.3M'][i]}</span><span>{['3:21','3:37','3:05','3:46','3:28','3:12','3:40'][i]}</span><button onClick={()=>toggleFav(name)} className={favs.includes(name)?'liked':''}><Heart size={17}/></button></div>)}</div><p className="ref-note">Catálogo ilustrativo. O player reproduz somente áudio demonstrativo autorizado.</p>
 </>}
