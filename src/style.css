@@ -104,3 +104,38 @@
 .playlist-song-row small{font-size:11px;margin-top:5px;color:#a1a3ac}
 .playlist-song-row em{font-style:normal;font-size:12px;color:#9b9ca6}
 .playlist-catalogue-note{font-size:12px;color:#a3a4af;line-height:1.65;margin:17px 0 0}
+
+/* Home curation: XXXTENTACION + 30PRAUM only */
+.hero-home .hero-person{width:56%;right:0;opacity:.72;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 28%)}
+.hero-home .hero-person .cover{width:100%;height:100%}
+.hero-home .hero-person .cover img{height:100%;width:100%;object-fit:cover;object-position:center 28%;filter:contrast(1.12) saturate(.9)}
+.hero-home:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#08090cf5 0%,#08090c65 55%,transparent 100%);pointer-events:none;z-index:1}
+.hero-home .hero-copy{z-index:4;max-width:66%}.hero-home .hero-sun{opacity:.25}
+.featured-artists{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.featured-artists .record .cover{aspect-ratio:1;border:1px solid #34323b;overflow:hidden}
+.featured-artists .record .cover img{width:100%;height:100%;object-fit:cover;object-position:center}
+.featured-artists .record b{font-size:14px;margin-top:10px}.featured-artists .record small{font-size:12px}
+.home-collections{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-bottom:20px}
+.home-collection{display:flex;align-items:center;text-align:left;gap:15px;padding:14px;border-radius:16px;border:1px solid #2f3037;background:linear-gradient(120deg,#16171c,#0c0d11);min-width:0}
+.home-collection:hover{border-color:#8b303b;background:linear-gradient(120deg,#24171c,#101116)}
+.home-collection>.cover{width:96px;height:96px;flex:0 0 96px;border-radius:12px;overflow:hidden}
+.home-collection>span{display:flex;flex:1;min-width:0;flex-direction:column;gap:7px}
+.home-collection>span>small{color:#e6535c;font-size:10px;font-weight:700;letter-spacing:1px}
+.home-collection>span>strong{font:800 18px Manrope;line-height:1.15}
+.home-collection>span>span{font-size:11px;color:#a4a4ad;line-height:1.5}
+.home-collection>svg{color:#9a9aa1}
+.home-legacy{display:flex;align-items:center;width:100%;text-align:left;gap:14px;background:linear-gradient(90deg,#1e1016,#101115);border:1px solid #4b2730;padding:18px 21px;border-radius:15px}
+.home-legacy>svg:first-child{color:#f33}
+.home-legacy span{display:flex;flex:1;flex-direction:column;gap:4px}
+.home-legacy strong{font-size:14px}.home-legacy small{font-size:11px}
+.home-related-artist{display:flex;align-items:center;text-align:left;width:100%;gap:13px;padding:10px 0;border-bottom:1px solid #2c2c33}
+.home-related-artist .cover{height:47px;width:47px;flex:0 0 47px;border-radius:50%;overflow:hidden}
+.home-related-artist span{flex:1;display:flex;flex-direction:column;gap:4px}
+.home-related-artist strong{font-size:13px}.home-related-artist small{font-size:11px;color:#a4a4aa}
+.home-related-artist>svg{color:#9c9ca6}
+.mood-tile .cover:after{z-index:1}.mood-tile .cover>.cover-label{z-index:2}
+.mood-tile>span{font-size:clamp(11px,1.1vw,14px);line-height:1.25;letter-spacing:0;max-width:calc(100% - 24px);bottom:12px;left:12px;text-shadow:0 1px 4px #000}
+.mood-tile .cover .cover-label,.mood-tile .cover .moon-shape,.mood-tile .cover .road,.mood-tile .cover .tail-lights,.mood-tile .cover>svg{display:none}
+@media(max-width:1050px){.home-collections{grid-template-columns:1fr}}
+@media(max-width:700px){.featured-artists{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-home .hero-copy{max-width:80%}.home-collection>.cover{height:78px;width:78px;flex-basis:78px}}
+@media(max-width:480px){.hero-home .hero-person{width:75%;opacity:.42}.hero-home .hero-copy{max-width:94%;padding:23px}.hero-home .hero-copy h1{font-size:39px}.home-collection{padding:11px;gap:10px}.home-collection>span>strong{font-size:15px}.home-legacy{padding:14px}.featured-artists .record b{font-size:12px}}

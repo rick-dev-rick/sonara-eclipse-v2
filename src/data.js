@@ -1,5 +1,5 @@
 export const demoTracks = [
-{id:'demo1',title:'Eclipse',artist:'Nova Aria',album:'SONARA Sessions',length:'0:30',tone:196,art:'eclipse'},
+{id:'demo1',title:'Eclipse (Demo)',artist:'SONARA Sessions',album:'SONARA Sessions',length:'0:30',tone:196,art:'eclipse'},
 {id:'demo2',title:'After Dark',artist:'SONARA Sessions',album:'After Dark',length:'0:30',tone:220,art:'dark'},
 {id:'demo3',title:'Night Drive',artist:'SONARA Sessions',album:'Night Drive',length:'0:30',tone:164.81,art:'drive'},
 {id:'demo4',title:'Deep Focus',artist:'SONARA Sessions',album:'Deep Focus',length:'0:30',tone:246.94,art:'focus'},
