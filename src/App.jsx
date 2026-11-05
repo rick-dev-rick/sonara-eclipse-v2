@@ -4,10 +4,10 @@ import {demoTracks,xTracks,matueTracks,legacyTracks,albums,collections} from './
 const NAV=[['Início',House],['Explorar',Compass],['Biblioteca',Library],['Álbuns',Disc3],['Artistas',UserRound],['Favoritos',Heart],['Playlists',ListMusic]];
 const asset=(name)=>`${import.meta.env.BASE_URL}assets/${name}.webp`;
 const artURL={
-"album-17":"https://coverartarchive.org/release/1395477c-a71e-4058-a893-d33dfcad6a4b/front-500",
-"album-question":"https://coverartarchive.org/release/8c6866b0-cf04-47a2-ab2f-11ff6d51e893/front-500",
-"album-skins":"https://coverartarchive.org/release/e44941d5-47f8-4a41-ae64-05953df0a3b9/front-500",
-"album-look":"https://coverartarchive.org/release/2636ce72-1351-4cf9-80de-f491f129289b/front-500",
+"album-17":`${import.meta.env.BASE_URL}assets/official-album-17.jpg`,
+"album-question":`${import.meta.env.BASE_URL}assets/official-album-question.jpg`,
+"album-skins":`${import.meta.env.BASE_URL}assets/official-album-skins.jpg`,
+"album-look":`${import.meta.env.BASE_URL}assets/official-album-look.jpg`,
 
 "x":asset("legacy-jahseh"),
 "playlist-x":`${import.meta.env.BASE_URL}assets/playlist-jahseh.svg`,
@@ -31,19 +31,17 @@ const artURL={
 
 
 
-"album-bvf":`${import.meta.env.BASE_URL}assets/album-bvf.svg`,
+"album-bvf":`${import.meta.env.BASE_URL}assets/official-album-bvf.jpg`,
 
-"album-revenge":`${import.meta.env.BASE_URL}assets/album-revenge.svg`,
-"album-maquina":`${import.meta.env.BASE_URL}assets/album-maquina.svg`,
-"album-333":`${import.meta.env.BASE_URL}assets/album-333.svg`,
-"album-xtranho":`${import.meta.env.BASE_URL}assets/album-xtranho.svg`,
-"album-maior":`${import.meta.env.BASE_URL}assets/album-maior.svg`,
-"album-colapso":`${import.meta.env.BASE_URL}assets/album-colapso.svg`,
-"album-manual":`${import.meta.env.BASE_URL}assets/album-manual.svg`,
-"album-vagabundo":`${import.meta.env.BASE_URL}assets/album-vagabundo.svg`,
-"album-808":`${import.meta.env.BASE_URL}assets/album-808.svg`
-};
-const remembered=(name,initial)=>{try{return JSON.parse(localStorage.getItem(name))??initial}catch{return initial}};
+"album-revenge":`${import.meta.env.BASE_URL}assets/official-album-revenge.jpg`,
+"album-maquina":`${import.meta.env.BASE_URL}assets/official-album-maquina.jpg`,
+"album-333":`${import.meta.env.BASE_URL}assets/official-album-333.jpg`,
+"album-xtranho":`${import.meta.env.BASE_URL}assets/official-album-xtranho.jpg`,
+"album-maior":`${import.meta.env.BASE_URL}assets/official-album-maior.jpg`,
+"album-colapso":`${import.meta.env.BASE_URL}assets/official-album-colapso.jpg`,
+"album-manual":`${import.meta.env.BASE_URL}assets/official-album-manual.jpg`,
+"album-vagabundo":`${import.meta.env.BASE_URL}assets/official-album-vagabundo.jpg`,
+"album-808":`${import.meta.env.BASE_URL}assets/official-album-808.jpg`,initial)=>{try{return JSON.parse(localStorage.getItem(name))??initial}catch{return initial}};
 function Art({type='dark',className='',children}){return <div className={'cover cover-'+type+' '+className}>
  {artURL[type]&&<img src={artURL[type]} alt="" loading="lazy" onError={e=>{if(!e.currentTarget.dataset.fallback){e.currentTarget.dataset.fallback='1';e.currentTarget.src=`${import.meta.env.BASE_URL}assets/${type}.svg`}else{e.currentTarget.style.display='none'}}}/>}
  {type==='dark'&&<span className="moon-shape"/>}{type==='drive'&&<><span className="road"/><span className="tail-lights"/></>}{type==='focus'&&<AudioLines size={42} strokeWidth={1.5}/>}{type==='energy'&&<AudioLines size={46} strokeWidth={1.5}/>}{type==='three'&&<strong className="cover-label">333</strong>}{type==='time'&&<strong className="cover-label">M</strong>}{type==='trap'&&<strong className="cover-label">TRAP BR</strong>}{type==='eclipse'&&<span className="eclipse-ring"/>}{type==='crown'&&<strong className="cover-label">♛</strong>}{type==='purple'&&<span className="purple-orbit"/>}{children}
