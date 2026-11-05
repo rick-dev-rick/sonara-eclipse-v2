@@ -1,33 +1,10 @@
 export const demoTracks = [
 {id:'demo1',title:'Eclipse (Demo)',artist:'SONARA Sessions',album:'SONARA Sessions',length:'0:30',tone:196,art:'eclipse'},
-{id:'demo2',title:'After Dark',artist:'SONARA Sessions',album:'After Dark',length:'0:30',tone:220,art:'dark'},
-{id:'demo3',title:'Night Drive',artist:'SONARA Sessions',album:'Night Drive',length:'0:30',tone:164.81,art:'drive'},
-{id:'demo4',title:'Deep Focus',artist:'SONARA Sessions',album:'Deep Focus',length:'0:30',tone:246.94,art:'focus'},
-{id:'demo5',title:'Energia Total',artist:'SONARA Sessions',album:'Energia Total',length:'0:30',tone:261.63,art:'energy'},
+{id:'demo2',title:'Nightfall (Demo)',artist:'SONARA Sessions',album:'SONARA Sessions',length:'0:30',tone:220,art:'playlist-x'},
+{id:'demo3',title:'Midnight Drive (Demo)',artist:'SONARA Sessions',album:'SONARA Sessions',length:'0:30',tone:164.81,art:'playlist-trap'}
 ];
-export const xTracks=[
-{title:'SAD!',length:'2:46',plays:'2,3B',cover:'question'},
-{title:'Moonlight',length:'2:15',plays:'1,8B',cover:'question'},
-{title:'Jocelyn Flores',length:'1:59',plays:'1,5B',cover:'seventeen'},
-{title:'Everybody Dies In Their Nightmares',length:'1:35',plays:'—',cover:'seventeen'},
-];
-export const matueTracks=[
-{title:'Máquina do Tempo',length:'3:50',plays:'—'},
-{title:'Vampiro',length:'3:37',plays:'—'},
-{title:'333',length:'3:05',plays:'—'},
-{title:'Cracolândia',length:'3:46',plays:'—'},
-{title:'Sem Pressa',length:'3:28',plays:'—'},
-{title:'Conexões',length:'3:12',plays:'—'},
-{title:'A Última Dança',length:'3:40',plays:'—'},
-];
-export const legacyTracks=['Carry On','Jocelyn Flores','Hope','changes','the remedy for a broken heart (why am I so in love)','Fuck Love','Everybody Dies In Their Nightmares','Save Me','whoa (mind in awe)','Moonlight','Snow','True Love','Guardian angel'];
-export const albums=[
-{title:'?',artist:'XXXTENTACION',year:'2018',art:'question'},
-{title:'17',artist:'XXXTENTACION',year:'2017',art:'seventeen'},
-{title:'SKINS',artist:'XXXTENTACION',year:'2018',art:'skins'},
-{title:'333',artist:'Matuê',year:'2024',art:'three'},
-{title:'Máquina do Tempo',artist:'Matuê',year:'2020',art:'time'},
-{title:'After Dark',artist:'SONARA Sessions',year:'2026',art:'dark'},
-{title:'Night Drive',artist:'SONARA Sessions',year:'2026',art:'drive'},
-];
-export const collections=[{title:'Trap BR',art:'trap',desc:'42 músicas'},{title:'After Dark',art:'dark',desc:'58 músicas'},{title:'Night Drive',art:'drive',desc:'37 músicas'}];
+export const xTracks=[{"title":"SAD!","length":"2:46","cover":"album-question"},{"title":"Moonlight","length":"2:15","cover":"album-question"},{"title":"Jocelyn Flores","length":"1:59","cover":"album-17"},{"title":"Everybody Dies In Their Nightmares","length":"1:35","cover":"album-17"},{"title":"changes","length":"2:02","cover":"album-question"},{"title":"Hope","length":"1:50","cover":"album-question"}];
+export const matueTracks=[{"title":"Máquina do Tempo","cover":"album-maquina"},{"title":"333","cover":"album-333"},{"title":"Castlevania","cover":"album-333"},{"title":"4Tal","cover":"album-333"}];
+export const legacyTracks=["Carry On","Jocelyn Flores","Hope","changes","the remedy for a broken heart (why am I so in love)","Fuck Love","Everybody Dies In Their Nightmares","Save Me","whoa (mind in awe)","Moonlight","Snow","True Love","Guardian angel"];
+export const albums=[{"title":"17","artist":"XXXTENTACION","year":"2017","art":"album-17","kind":"Álbum","desc":"Um registro íntimo e melancólico da obra de Jahseh.","tracks":["Jocelyn Flores","Everybody Dies In Their Nightmares","Revenge","Carry On","Save Me","Fuck Love"]},{"title":"?","artist":"XXXTENTACION","year":"2018","art":"album-question","kind":"Álbum","desc":"Contrastes de rap, rock e melodias que atravessam fases da carreira.","tracks":["SAD!","Moonlight","changes","Hope","the remedy for a broken heart (why am I so in love)"]},{"title":"SKINS","artist":"XXXTENTACION","year":"2018","art":"album-skins","kind":"Álbum","desc":"Uma obra breve e intensa lançada após sua morte.","tracks":["BAD!","whoa (mind in awe)","Guardian angel"]},{"title":"Bad Vibes Forever","artist":"XXXTENTACION","year":"2019","art":"album-bvf","kind":"Álbum","desc":"Lançamento póstumo que reúne diferentes vozes e colaborações.","tracks":["bad vibes forever","HEARTEATER"]},{"title":"LOOK AT ME: THE ALBUM","artist":"XXXTENTACION","year":"2022","art":"album-look","kind":"Compilação","desc":"Coletânea que percorre diferentes momentos da trajetória de Jahseh.","tracks":["Look At Me!","vice city"]},{"title":"Revenge","artist":"XXXTENTACION","year":"2017","art":"album-revenge","kind":"Mixtape","desc":"Um marco inicial do repertório de XXXTENTACION.","tracks":["Look At Me!","Revenge"]},{"title":"Máquina do Tempo","artist":"Matuê","year":"2020","art":"album-maquina","kind":"Álbum","desc":"A estreia de Matuê em formato de álbum.","tracks":["Máquina do Tempo","777-666","Cogulândia"]},{"title":"333","artist":"Matuê","year":"2024","art":"album-333","kind":"Álbum","desc":"Um universo sonoro de identidade visual e musical marcantes.","tracks":["Crack com Mussilon","Imagina esse Cenário","Isso é Sério","1993","4Tal","O Som","04AM","Castlevania","V de Vilão","Maria","333","Like This!"]},{"title":"XTRANHO","artist":"Matuê","year":"2025","art":"album-xtranho","kind":"Álbum","desc":"Mais um capítulo na evolução da sonoridade do artista.","tracks":[]},{"title":"MAIOR QUE O TEMPO","artist":"Teto","year":"2025","art":"album-maior","kind":"Álbum","desc":"Projeto de Teto, parte do universo contemporâneo do trap nacional.","tracks":[]},{"title":"COLAPSO GLOBAL","artist":"Teto","year":"2026","art":"album-colapso","kind":"Álbum · com WIU","desc":"Lançamento colaborativo associado a Teto e WIU.","tracks":[]},{"title":"Manual de Como Amar Errado","artist":"WIU","year":"2022","art":"album-manual","kind":"Álbum","desc":"Um álbum que mistura romance e identidade no trap nacional.","tracks":[]},{"title":"Vagabundo de Luxo","artist":"WIU","year":"2024","art":"album-vagabundo","kind":"Álbum","desc":"Uma fase marcada pelo luxo, pela rua e pela estética de WIU.","tracks":["Medo de quem","Casa do Tio Wiu","Rainha da Finesse","Vidigal","Amor de 1h","Teimosa","Guala"]},{"title":"808 CLUB","artist":"WIU","year":"2025","art":"album-808","kind":"Álbum","desc":"Batidas, colaborações e experimentação no repertório de WIU.","tracks":["MUNDO DO WIU","FREESTYLE DE LUXO","RUAS DE FORTAL","OXIGÊNIO","LUÍSA SONZA","CHICK","PUTO","POUQUINHO DA MINHA VIBE"]}];
+export const collections=[{title:"XXXTENTACION",art:"playlist-x",desc:"Discografia em expansão"},{title:"Trap BR — 30PRAUM",art:"playlist-trap",desc:"Matuê · Teto · WIU"}];
