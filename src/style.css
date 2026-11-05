@@ -393,3 +393,83 @@
 @media(max-width:1120px){.legacy17-sections{gap:9px}.legacy17-feature{gap:8px;padding:7px}.legacy17-feature-art{flex-basis:58px;height:80px}.legacy17-feature>span strong{font-size:18px}.legacy17-feature>span em{font-size:10px}}
 @media(max-width:760px){.legacy17-mode .page-columns{padding:0 12px}.legacy17-topline{padding-top:6px;font-size:9px}.legacy17-topmark{display:none}.legacy17-hero{min-height:570px;height:auto;display:block;margin-top:12px}.legacy17-paper{width:110%;height:58%;right:-5%;top:-6%;transform:rotate(-5deg)}.legacy17-portrait{top:30px;right:10%;width:46%;height:200px;max-width:205px;border-width:8px;border-bottom-width:31px}.legacy17-photo-caption{bottom:-22px;font-size:7px}.legacy17-hero-content{width:100%;padding:252px 22px 25px}.legacy17-kicker{font-size:9px;letter-spacing:1.7px}.legacy17-hero h1{font-size:57px}.legacy17-script{font-size:29px;margin-top:5px}.legacy17-rule{margin:12px 0}.legacy17-actions{gap:8px}.legacy17-sections{grid-template-columns:1fr;gap:9px}.legacy17-feature{min-height:90px;padding:7px 10px}.legacy17-feature-art{height:69px;flex-basis:70px}.legacy17-feature>span strong{font-size:20px}.legacy17-feature>span em{font-size:11px}.legacy17-songs{padding-top:12px}.legacy17-section-heading h2{font-size:29px}.legacy17-count{font-size:9px}.legacy17-track{gap:9px;padding:9px 4px}.legacy17-track-no{flex-basis:25px}.legacy17-track-cover{flex-basis:38px;width:38px;height:38px}.legacy17-story{grid-template-columns:1fr;padding:22px;gap:28px}.legacy17-story-image{height:165px;width:150px;justify-self:center}.legacy17-end{font-size:8px}}
 @media(max-width:380px){.legacy17-hero-content{padding-left:17px;padding-right:17px}.legacy17-primary,.legacy17-secondary{padding:11px 10px;font-size:11px}.legacy17-hero h1{font-size:50px}}
+
+/* LEGACY 17 / editorial refinement v2 — only legacy page */
+.legacy17-mode .page-columns{padding-top:3px}
+.legacy17-page{background:radial-gradient(ellipse at 80% 15%,#77705e16,transparent 35%),#090909}
+.legacy17-topline{border-bottom-color:#6b625677;padding-bottom:20px}
+.legacy17-hero-v2{height:clamp(430px,42vw,570px);border:1px solid #8b7c69a1;border-radius:9px;background:linear-gradient(95deg,#080808 2%,#1b1918 49%,#39332d 100%);box-shadow:0 22px 55px #000b}
+.legacy17-grain{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:.28;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.71' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.31'/%3E%3C/svg%3E")}
+.legacy17-hero-v2 .legacy17-paper{width:58%;right:-13%;top:-9%;height:120%;transform:rotate(-9deg);opacity:.57;background:linear-gradient(142deg,#7f7768,#c0b5a188 70%,#5b564c);clip-path:polygon(7% 0,100% 0,100% 92%,95% 95%,91% 93%,86% 98%,81% 95%,76% 99%,71% 94%,65% 98%,56% 93%,45% 100%,34% 96%,21% 100%,8% 94%,0 90%)}
+.legacy17-hero-v2 .legacy17-scrawl{font:italic clamp(25px,4vw,56px)/1.12 Georgia,serif;text-transform:none;top:12%;right:14%;letter-spacing:-2px;opacity:.38;text-align:left;color:#161411}
+.legacy17-hero-ghost{position:absolute;z-index:1;right:-5%;top:-12%;width:47%;height:122%;overflow:hidden;mix-blend-mode:luminosity;opacity:.25;filter:blur(16px) grayscale(1)}
+.legacy17-hero-ghost .cover{width:100%;height:100%;border-radius:0}
+.legacy17-hero-ghost img{width:100%;height:100%;object-fit:cover}
+.legacy17-photo-stack{position:absolute;z-index:3;right:7%;top:11%;width:31%;height:74%;max-width:360px}
+.legacy17-photo-stack .legacy17-portrait{position:absolute;right:0;top:9%;width:100%;height:88%;max-width:none;transform:rotate(6deg);border:11px solid #c9c1b2;border-bottom-width:43px;filter:sepia(.2) grayscale(.55)}
+.legacy17-photo-stack .legacy17-portrait .cover{height:100%;width:100%}
+.legacy17-photo-caption-top{position:absolute;top:-9%;right:5%;font:10px Georgia,serif;letter-spacing:3px;color:#eee0cf}
+.legacy17-photo-tape{position:absolute;z-index:4;top:-1%;left:38%;transform:rotate(-12deg);width:130px;height:25px;background:#ddd1bc78;border:1px solid #d0c2a566;box-shadow:0 4px 9px #0006;clip-path:polygon(2% 6%,100% 0,96% 97%,0 88%)}
+.legacy17-hero-v2 .legacy17-hero-content{width:65%;padding-left:clamp(26px,4.6vw,74px)}
+.legacy17-hero-v2 .legacy17-hero-content h1{font-size:clamp(67px,8vw,122px);margin:17px 0 8px;letter-spacing:1px;font-weight:400}
+.legacy17-period{color:#8c7b66}
+.legacy17-hero-v2 .legacy17-script{font-family:"Segoe Print","Bradley Hand","Brush Script MT",cursive;font-size:clamp(28px,3.2vw,50px);color:#d3c2ae}
+.legacy17-hero-v2 .legacy17-intro{display:block;font:12px Inter,sans-serif;letter-spacing:.5px;color:#a8a093;margin:-10px 0 20px}
+.legacy17-hero-v2 .legacy17-rule{width:235px;background:linear-gradient(90deg,#d3c5af,#8c7963,transparent)}
+.legacy17-hero-footer{position:absolute;z-index:7;bottom:21px;left:clamp(25px,4.5vw,72px);right:33px;display:flex;justify-content:space-between;align-items:center;gap:12px;color:#c8baa4a1;font-size:9px;letter-spacing:2px}
+.legacy17-hero-footer>span:last-child span{color:#cfc2ad}
+.legacy17-manifesto{display:grid;grid-template-columns:150px minmax(0,1fr) 130px;gap:22px;align-items:center;padding:31px 30px;margin:20px 0 26px;background:linear-gradient(90deg,#1c1a18,#0d0d0c);border:1px solid #5b554c;border-left:3px solid #c5b69e;position:relative;overflow:hidden}
+.legacy17-manifesto:after{content:'17';position:absolute;right:8%;top:-40px;font:150px Georgia,serif;color:#bcb09c0b;pointer-events:none}
+.legacy17-manifesto-index{font-size:10px;color:#a29685;letter-spacing:2px;line-height:1.8}
+.legacy17-manifesto>div{display:flex;align-items:start;gap:14px}
+.legacy17-manifesto-mark{font:85px Georgia,serif;line-height:.8;color:#baa78d}
+.legacy17-manifesto p{font:clamp(17px,1.8vw,24px)/1.45 Georgia,serif;color:#ded3c5}
+.legacy17-manifesto p em{color:#a79a89}
+.legacy17-manifesto-signature{font:italic 17px "Segoe Print",cursive;line-height:1.35;text-align:right;color:#ad9e8b;transform:rotate(-6deg)}
+.legacy17-sections{margin:0 0 36px;gap:15px}
+.legacy17-feature{min-height:140px;padding:13px;background:linear-gradient(130deg,#24201c,#111110);border-color:#62594d}
+.legacy17-feature-art{flex-basis:95px;height:109px;box-shadow:0 8px 20px #0008}
+.legacy17-feature-art.paper-notes{transform:rotate(-4deg);background:none}
+.legacy17-feature-art.paper-notes span{display:none}
+.legacy17-feature-art.paper-notes .cover{width:100%;height:100%;border-radius:0;filter:sepia(.55) grayscale(.75)}
+.legacy17-feature-art.paper-notes img{object-fit:cover;width:100%;height:100%}
+.legacy17-feature-art.photograph{transform:rotate(3deg);filter:grayscale(1)}
+.legacy17-feature>span strong{font-size:27px}
+.legacy17-feature>span small{letter-spacing:1.8px}
+.legacy17-feature>span em{font-size:12px}
+.legacy17-collection{scroll-margin-top:95px;border:1px solid #575148;background:linear-gradient(145deg,#171615,#0a0a0a);border-radius:12px;padding:19px 23px 26px;margin-bottom:34px}
+.legacy17-collection-banner{position:relative;min-height:288px;display:flex;align-items:center;gap:33px;padding:25px 40px;background:radial-gradient(ellipse at 100% 20%,#746c5b53,transparent 58%),linear-gradient(110deg,#35302b,#171513 70%,#0d0c0b);border-radius:10px;overflow:hidden;border:1px solid #64594d}
+.legacy17-collection-cover{position:relative;width:210px;height:210px;flex:0 0 210px;transform:rotate(-4deg);box-shadow:0 19px 30px #0009;border:8px solid #beb5a6;border-bottom-width:26px}
+.legacy17-collection-cover>.cover{width:100%;height:100%;border-radius:0;filter:grayscale(.6) sepia(.3)}
+.legacy17-collection-cover img{width:100%;height:100%;object-fit:cover}
+.legacy17-collection-stamp{position:absolute;left:0;bottom:-20px;right:0;text-align:center;color:#302821;font:8px Georgia,serif;letter-spacing:1px}
+.legacy17-collection-copy{z-index:2;flex:1}
+.legacy17-collection-copy>span{font-size:10px;letter-spacing:3px;color:#d4c4ad}
+.legacy17-collection-copy h2{font:normal clamp(33px,4.2vw,60px)/1.03 Georgia,serif;margin:12px 0 13px;letter-spacing:2px}
+.legacy17-collection-copy h2 em{font:italic clamp(27px,3.8vw,49px) "Segoe Print",cursive;letter-spacing:0;color:#d7c5ac}
+.legacy17-collection-copy p{font-size:13px;line-height:1.75;color:#c1b6a7;max-width:460px}
+.legacy17-collection-meta{display:flex;align-items:center;gap:9px;margin-top:16px;font-size:10px;letter-spacing:1.4px;color:#a99985}
+.legacy17-collection-number{position:absolute;right:22px;bottom:-65px;font:300px Georgia,serif;color:#c9bca011;pointer-events:none}
+.legacy17-collection .legacy17-section-heading{padding:24px 6px 15px}
+.legacy17-collection .legacy17-table-heading{background:#1c1a18;border-top-color:#615748}
+.legacy17-collection .legacy17-track:nth-child(even){background:#1b19171a}
+.legacy17-collection .legacy17-track:hover{background:#8f7f6840}
+.legacy17-collection .legacy17-track-loved{background:linear-gradient(90deg,#4a3d2f65,transparent)}
+.legacy17-collection .legacy17-track-loved .legacy17-track-name strong{color:#e9d3b2}
+.legacy17-collection .legacy17-track-loved .legacy17-track-no{color:#ded0bc}
+.legacy17-story{position:relative;min-height:300px;grid-template-columns:1fr 250px;padding:45px;overflow:hidden;background:linear-gradient(110deg,#221e1a,#100f0e);border-color:#7b6d5d}
+.legacy17-story-number{position:absolute;top:20px;left:45px;color:#ab9a84;font-size:10px;letter-spacing:2px}
+.legacy17-story-body>span{font-size:10px;letter-spacing:2.3px;color:#c2ad90}
+.legacy17-story h2{font-size:clamp(33px,3.5vw,48px);margin:10px 0 15px}
+.legacy17-story h2 em{font-weight:400;color:#b8aa96}
+.legacy17-story p{max-width:550px}
+.legacy17-story-underline{border-top:1px solid #776a5a5e;margin-top:25px;padding-top:12px;font-size:10px;letter-spacing:2px;color:#948874}
+.legacy17-story-image{height:238px;max-width:250px;width:100%;border-color:#c1b7a6}
+.legacy17-impact{position:relative;overflow:hidden;min-height:270px;background:radial-gradient(ellipse at center,#62554150,#13110f 70%);border:1px solid #5a5043;border-radius:9px;padding-top:36px}
+.legacy17-impact-bg{position:absolute;right:7%;top:-40px;font:350px Georgia,serif;color:#ded0bb0b;pointer-events:none}
+.legacy17-impact>*:not(.legacy17-impact-bg){position:relative;z-index:1}
+.legacy17-impact h2{font-size:42px}
+.legacy17-end{padding-top:29px}
+@media(max-width:1100px){.legacy17-manifesto{grid-template-columns:100px 1fr 80px;gap:13px;padding:20px}.legacy17-manifesto-signature{font-size:12px}.legacy17-feature-art{flex-basis:63px;height:90px}.legacy17-feature>span strong{font-size:20px}.legacy17-feature>span em{font-size:11px}.legacy17-photo-stack{right:4%;width:32%}}
+@media(max-width:760px){.legacy17-hero-v2{height:auto;min-height:600px}.legacy17-hero-v2 .legacy17-paper{width:105%;height:58%;right:-10%;top:-10%}.legacy17-photo-stack{right:8%;top:8%;width:47%;height:220px}.legacy17-photo-stack .legacy17-portrait{height:96%;top:5%;border-width:8px;border-bottom-width:32px}.legacy17-photo-caption-top{font-size:7px;top:-9%}.legacy17-photo-tape{width:80px;height:17px;left:35%}.legacy17-hero-v2 .legacy17-hero-content{padding:290px 24px 62px;width:100%}.legacy17-hero-v2 .legacy17-hero-content h1{font-size:65px}.legacy17-hero-v2 .legacy17-script{font-size:33px}.legacy17-hero-v2 .legacy17-kicker{font-size:9px;letter-spacing:1.5px}.legacy17-hero-footer{bottom:20px;left:24px;right:20px;font-size:8px}.legacy17-manifesto{grid-template-columns:1fr;margin:13px 0 20px;padding:20px}.legacy17-manifesto-index{font-size:9px}.legacy17-manifesto-signature{display:none}.legacy17-manifesto-mark{font-size:54px}.legacy17-manifesto p{font-size:18px}.legacy17-sections{margin-bottom:22px}.legacy17-feature{min-height:96px;padding:8px}.legacy17-feature-art{height:78px;flex-basis:78px}.legacy17-collection{padding:11px}.legacy17-collection-banner{padding:20px 15px 23px;min-height:auto;flex-direction:column;align-items:flex-start;gap:19px}.legacy17-collection-cover{height:150px;width:150px;flex-basis:150px;border-width:6px;border-bottom-width:22px}.legacy17-collection-copy h2{font-size:36px}.legacy17-collection-copy h2 em{font-size:32px}.legacy17-collection-copy p{font-size:12px}.legacy17-collection .legacy17-section-heading{padding:20px 0 10px}.legacy17-collection .legacy17-section-heading h2{font-size:25px}.legacy17-story{padding:54px 23px 25px;grid-template-columns:1fr;gap:20px}.legacy17-story-number{left:23px}.legacy17-story h2{font-size:34px}.legacy17-story-image{width:170px;height:174px;justify-self:center}.legacy17-impact h2{font-size:34px}}
+@media(max-width:370px){.legacy17-hero-v2 .legacy17-hero-content h1{font-size:55px}.legacy17-hero-v2 .legacy17-hero-content{padding-left:16px;padding-right:16px}.legacy17-collection-meta{flex-wrap:wrap;letter-spacing:.5px}.legacy17-photo-stack{right:7%;width:53%}}
