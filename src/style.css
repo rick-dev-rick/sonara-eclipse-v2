@@ -305,3 +305,91 @@
 .playlist-song-list{max-height:630px;overflow:auto;scrollbar-width:thin;scrollbar-color:#642b39 #141418}
 .playlist-song-list::-webkit-scrollbar{width:5px}.playlist-song-list::-webkit-scrollbar-thumb{background:#632b36;border-radius:5px}
 @media(max-height:750px) and (min-width:900px){.legacy-spotlight{min-height:84px}.legacy-spotlight>.cover{height:56px;width:46px;flex-basis:46px}.nav-sidebar .my-playlists{margin-top:9px}}
+
+/* ---------------------------------------------------------
+ SONARA / LEGACY 17 — approved graphite & aged-paper direction
+ Scoped to .legacy17-mode and .legacy17-page. The rest of
+ SONARA remains black/red.
+---------------------------------------------------------- */
+.app-shell.legacy17-mode{--legacy-ink:#050505;--legacy-charcoal:#111111;--legacy-panel:#191818;--legacy-stroke:#45413d;--legacy-paper:#d8d2c8;--legacy-mist:#b8b1a6;--legacy-muted:#8e7f6e;color:var(--legacy-paper);background:#080808}
+.legacy17-mode .page-columns{grid-template-columns:minmax(0,1fr);max-width:1640px;padding-right:24px}
+.legacy17-mode .main-content{max-width:none!important;width:100%}
+.legacy17-mode .top-header{background:#080808}
+.legacy17-mode .search-box{background:#1e1d1d;border-color:#36332f}
+.legacy17-mode .notification>span{background:var(--legacy-paper)}
+.legacy17-page{isolation:isolate;position:relative;max-width:1450px;padding:0 0 55px;color:var(--legacy-paper);background:radial-gradient(ellipse at 90% 31%,#4d483b1e,transparent 38%),radial-gradient(ellipse at 7% 85%,#413c3718,transparent 38%),#090909;font-family:Inter,Arial,sans-serif}
+.legacy17-page:before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.2;background-image:repeating-linear-gradient(0deg,transparent 0 3px,#817a6e12 4px 5px),radial-gradient(#ded6c21b .7px,transparent 1px);background-size:auto,7px 7px}
+.legacy17-page button{color:inherit}
+.legacy17-topline{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0 16px;border-bottom:1px solid #4d4a43;color:#a9a59c;font-size:11px;letter-spacing:2px}
+.legacy17-breadcrumb{display:flex;align-items:center;gap:11px}.legacy17-breadcrumb strong{color:#dfd8cb;font-weight:600}
+.legacy17-topmark{font-family:Georgia,serif;font-size:12px;letter-spacing:3px}.legacy17-topmark>span{color:#ada18d}
+.legacy17-hero{height:clamp(340px,36vw,495px);min-height:340px;position:relative;display:flex;align-items:center;overflow:hidden;border-radius:18px;border:1px solid #706b63;margin-top:20px;background:linear-gradient(95deg,#080808ee 0%,#171616e9 42%,#35332f9c 84%),repeating-linear-gradient(-11deg,#5b564b18 0 2px,transparent 3px 8px),#211f1d;box-shadow:inset 0 0 55px #000a,0 21px 45px #0008}
+.legacy17-hero:after{content:'';position:absolute;left:0;right:0;bottom:0;height:50px;opacity:.8;background:linear-gradient(0deg,#070707d0,transparent);z-index:3;pointer-events:none}
+.legacy17-paper{position:absolute;z-index:1;right:-3%;top:-14%;width:54%;height:120%;background:linear-gradient(115deg,#867d714a,#c8c0b15e);transform:rotate(-7deg);filter:grayscale(.65);clip-path:polygon(5% 0,100% 0,100% 96%,96% 99%,88% 96%,80% 100%,70% 96%,60% 100%,50% 98%,40% 100%,24% 97%,8% 100%,0 95%);opacity:.7}
+.legacy17-scrawl{position:absolute;top:17%;right:11%;transform:rotate(9deg);font:italic clamp(11px,1.5vw,22px) "Brush Script MT","Segoe Print",cursive;color:#272522;line-height:1.45;letter-spacing:1px;text-align:right;text-transform:uppercase}
+.legacy17-paper-lines{position:absolute;bottom:0;right:0;width:100%;height:40%;opacity:.2;background:repeating-linear-gradient(0deg,transparent 0 22px,#332f29 23px,#332f29 24px)}
+.legacy17-portrait{position:absolute;z-index:2;right:6%;top:13%;width:30%;height:70%;max-width:330px;transform:rotate(7deg);border:13px solid #c0baae;border-bottom-width:44px;background:#ccc3b8;box-shadow:0 25px 40px #000b;filter:sepia(.25) grayscale(.7)}
+.legacy17-portrait>.cover{height:100%;width:100%;border-radius:0;overflow:hidden}
+.legacy17-portrait>.cover img{height:100%;width:100%;object-fit:cover;object-position:center 20%;filter:grayscale(1) contrast(1.25)}
+.legacy17-photo-caption{position:absolute;bottom:-31px;left:0;right:0;text-align:center;color:#282625;font:9px Georgia,serif;letter-spacing:2px}
+.legacy17-hero-content{position:relative;z-index:5;width:65%;padding:clamp(20px,4vw,57px)}
+.legacy17-kicker{font-size:10px;font-weight:700;letter-spacing:3px;color:#c6c0b5}.legacy17-kicker span{margin:0 7px;color:#8e7f6e}
+.legacy17-hero h1{font:normal clamp(56px,7vw,106px)/.98 Georgia,"Times New Roman",serif;letter-spacing:4px;margin:23px 0 0;color:#e5ded2;text-shadow:0 6px 22px #000b}
+.legacy17-script{font:italic clamp(23px,3vw,43px)/1.2 "Segoe Print","Bradley Hand","Brush Script MT",cursive;color:#c2b5a4;transform:rotate(-3deg);transform-origin:left;margin:7px 0 7px;letter-spacing:2px}
+.legacy17-rule{width:210px;height:1px;background:linear-gradient(90deg,#ded5c6,transparent);margin:20px 0}
+.legacy17-hero-content>p{font:16px Georgia,serif;letter-spacing:2px;color:#bcb5aa;margin-bottom:22px}
+.legacy17-actions{display:flex;gap:11px;flex-wrap:wrap}
+.legacy17-primary,.legacy17-secondary{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid #9b9181;border-radius:8px;padding:12px 17px;font-size:12px;letter-spacing:.2px;transition:background .2s,transform .2s}
+.legacy17-primary{background:#d8d2c8;color:#141414!important;font-weight:800}
+.legacy17-primary:hover{background:#f0e9dc;transform:translateY(-2px)}
+.legacy17-secondary{background:#111c;border-color:#69645e}.legacy17-secondary:hover{background:#3b3630}
+.legacy17-sections{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin:20px 0 29px}
+.legacy17-feature{display:flex;align-items:center;min-width:0;text-align:left;gap:13px;min-height:119px;padding:9px;border:1px solid #514d47;border-radius:12px;background:linear-gradient(140deg,#282624,#111);box-shadow:0 7px 15px #0005;transition:border-color .2s,transform .2s}
+.legacy17-feature:hover{transform:translateY(-3px);border-color:#cec1af}
+.legacy17-feature-art{position:relative;flex:0 0 83px;height:96px;border-radius:8px;overflow:hidden;background:linear-gradient(135deg,#b9afa0,#756a5e)}
+.legacy17-feature-art.paper-notes{background:repeating-linear-gradient(0deg,#b9ad9d 0 17px,#7d7669 18px,#baa99b 19px);transform:rotate(-2deg)}
+.legacy17-feature-art.paper-notes span{display:grid;place-items:center;font:italic 47px Georgia,serif;color:#393330;height:100%}
+.legacy17-feature-art.photograph>.cover{width:100%;height:100%;filter:grayscale(1);border-radius:0}
+.legacy17-feature-art.photograph img{width:100%;height:100%;object-fit:cover}
+.legacy17-feature-art.paper-heart{display:grid;place-items:center;color:#352f2c;transform:rotate(3deg)}
+.legacy17-feature>span{flex:1;display:flex;flex-direction:column;gap:7px;min-width:0}
+.legacy17-feature>span small{font-size:9px;letter-spacing:1.2px;color:#bdb0a0}
+.legacy17-feature>span strong{font:24px Georgia,serif;color:#e0d8cd}
+.legacy17-feature>span em{font-size:11px;font-style:normal;color:#a9a197;line-height:1.45}
+.legacy17-feature>svg{flex:0 0 16px;color:#aaa092;margin-right:5px}
+.legacy17-songs{scroll-margin-top:95px;padding:14px 0 12px}
+.legacy17-section-heading{display:flex;justify-content:space-between;gap:16px;align-items:end;margin:6px 0 19px}
+.legacy17-section-heading>div>span,.legacy17-story>div>span,.legacy17-impact>span{font-size:10px;letter-spacing:3px;color:#ac9f8c}
+.legacy17-section-heading h2,.legacy17-story h2,.legacy17-impact h2{font:normal clamp(28px,3vw,40px) Georgia,serif;color:#e4dccc;margin:9px 0}
+.legacy17-section-heading p{color:#a89e93;font-size:13px}
+.legacy17-count{font:11px Inter,Arial,sans-serif;letter-spacing:2px;color:#b8b1a6;padding:9px 12px;border:1px solid #504c44;border-radius:99px}
+.legacy17-table-heading{display:grid;grid-template-columns:36px 1fr 65px;gap:18px;padding:12px 18px;border-top:1px solid #615b50;border-bottom:1px solid #34312e;color:#89847c;font-size:10px;letter-spacing:2px}
+.legacy17-table-heading>span:last-child{text-align:center}
+.legacy17-tracklist{padding:0 6px}
+.legacy17-track{display:flex;align-items:center;gap:16px;padding:10px 12px;min-height:66px;border-bottom:1px solid #34322e;transition:background .2s}
+.legacy17-track:hover{background:#ffffff0a}
+.legacy17-track-no{color:#867e72;font:15px Georgia,serif;flex:0 0 29px}
+.legacy17-track-cover{flex:0 0 44px;width:44px;height:44px;filter:grayscale(.9)}
+.legacy17-track-cover>.cover{width:100%;height:100%;border-radius:6px;overflow:hidden;border:1px solid #71695e}
+.legacy17-track-cover img{width:100%;height:100%;object-fit:cover}
+.legacy17-track-name{flex:1;display:flex;flex-direction:column;min-width:0;gap:4px}
+.legacy17-track-name strong{font-size:13px;color:#e2ddd6;font-weight:600;line-height:1.35;overflow-wrap:anywhere}
+.legacy17-track-name small{font-size:10px;color:#958f88}
+.legacy17-track-loved .legacy17-track-name strong{color:#d6c0aa}
+.legacy17-track-heart{display:grid;place-items:center;padding:11px;color:#aea397!important}
+.legacy17-track-heart.active,.legacy17-track-heart:hover{color:#f0dfc9!important}
+.legacy17-catalogue-note{font-size:11px;color:#867f75;padding:16px 10px 0;line-height:1.6}
+.legacy17-story{scroll-margin-top:95px;display:grid;grid-template-columns:1fr 210px;gap:35px;align-items:center;padding:35px;margin:32px 0 25px;border:1px solid #585046;border-radius:13px;background:linear-gradient(95deg,#141312,#27231e)}
+.legacy17-story p{max-width:700px;color:#b9b0a4;font-size:14px;line-height:1.9}
+.legacy17-story-image{position:relative;transform:rotate(4deg);border:10px solid #c2b9a9;border-bottom-width:27px;height:205px;background:#ada596;box-shadow:0 13px 30px #0009}
+.legacy17-story-image>.cover{height:100%;width:100%;border-radius:0}
+.legacy17-story-image img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
+.legacy17-story-image>span{position:absolute;bottom:-20px;left:0;right:0;text-align:center;color:#28241f;font:8px Georgia,serif;letter-spacing:1.5px}
+.legacy17-impact{scroll-margin-top:95px;text-align:center;padding:32px 22px 42px;border-block:1px solid #4d4840;background:radial-gradient(ellipse at bottom,#61574830,transparent 55%)}
+.legacy17-handheart{font:normal 65px "Segoe Print",cursive;color:#ae9b88;margin-bottom:5px}
+.legacy17-impact p{color:#c3bbae;font-size:14px;margin-bottom:17px}
+.legacy17-impact small{font-size:10px;letter-spacing:3px;color:#8e7f6e}
+.legacy17-end{display:flex;justify-content:space-between;gap:10px;padding:23px 8px 0;color:#847e74;font:10px Georgia,serif;letter-spacing:2px}
+@media(max-width:1120px){.legacy17-sections{gap:9px}.legacy17-feature{gap:8px;padding:7px}.legacy17-feature-art{flex-basis:58px;height:80px}.legacy17-feature>span strong{font-size:18px}.legacy17-feature>span em{font-size:10px}}
+@media(max-width:760px){.legacy17-mode .page-columns{padding:0 12px}.legacy17-topline{padding-top:6px;font-size:9px}.legacy17-topmark{display:none}.legacy17-hero{min-height:570px;height:auto;display:block;margin-top:12px}.legacy17-paper{width:110%;height:58%;right:-5%;top:-6%;transform:rotate(-5deg)}.legacy17-portrait{top:30px;right:10%;width:46%;height:200px;max-width:205px;border-width:8px;border-bottom-width:31px}.legacy17-photo-caption{bottom:-22px;font-size:7px}.legacy17-hero-content{width:100%;padding:252px 22px 25px}.legacy17-kicker{font-size:9px;letter-spacing:1.7px}.legacy17-hero h1{font-size:57px}.legacy17-script{font-size:29px;margin-top:5px}.legacy17-rule{margin:12px 0}.legacy17-actions{gap:8px}.legacy17-sections{grid-template-columns:1fr;gap:9px}.legacy17-feature{min-height:90px;padding:7px 10px}.legacy17-feature-art{height:69px;flex-basis:70px}.legacy17-feature>span strong{font-size:20px}.legacy17-feature>span em{font-size:11px}.legacy17-songs{padding-top:12px}.legacy17-section-heading h2{font-size:29px}.legacy17-count{font-size:9px}.legacy17-track{gap:9px;padding:9px 4px}.legacy17-track-no{flex-basis:25px}.legacy17-track-cover{flex-basis:38px;width:38px;height:38px}.legacy17-story{grid-template-columns:1fr;padding:22px;gap:28px}.legacy17-story-image{height:165px;width:150px;justify-self:center}.legacy17-end{font-size:8px}}
+@media(max-width:380px){.legacy17-hero-content{padding-left:17px;padding-right:17px}.legacy17-primary,.legacy17-secondary{padding:11px 10px;font-size:11px}.legacy17-hero h1{font-size:50px}}
