@@ -285,3 +285,7 @@
 /* Correct song-specific cover-art in the Trap BR preview */
 .playlist-song-row>.cover{overflow:hidden;isolation:isolate;position:relative}
 .playlist-song-row>.cover img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+
+/* The bottom player shows catalog metadata, not fictitious tracks. */
+.transport-play.is-unavailable{cursor:not-allowed;opacity:.7}
+.transport-play.is-unavailable:hover{transform:none}

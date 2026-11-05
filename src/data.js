@@ -1,7 +1,9 @@
+// Metadados editoriais; nenhuma gravação comercial é reproduzida pela SONARA.
 export const demoTracks = [
-{id:'demo1',title:'Eclipse (Demo)',artist:'SONARA Sessions',album:'SONARA Sessions',length:'0:30',tone:196,art:'eclipse'},
-{id:'demo2',title:'Nightfall (Demo)',artist:'SONARA Sessions',album:'SONARA Sessions',length:'0:30',tone:220,art:'playlist-x'},
-{id:'demo3',title:'Midnight Drive (Demo)',artist:'SONARA Sessions',album:'SONARA Sessions',length:'0:30',tone:164.81,art:'playlist-trap'}
+ {id:'matue-maquina',title:'Máquina do Tempo',artist:'Matuê',album:'Máquina do Tempo',length:'3:50',tone:0,art:'album-maquina'},
+ {id:'xxx-sad',title:'SAD!',artist:'XXXTENTACION',album:'?',length:'2:46',tone:0,art:'album-question'},
+ {id:'teto-maior',title:'MAIOR QUE O TEMPO',artist:'Teto',album:'MAIOR QUE O TEMPO',length:'—',tone:0,art:'album-maior'},
+ {id:'wiu-808',title:'808 CLUB',artist:'WIU',album:'808 CLUB',length:'—',tone:0,art:'album-808'}
 ];
 export const xTracks=[{"title":"SAD!","length":"2:46","cover":"album-question"},{"title":"Moonlight","length":"2:15","cover":"album-question"},{"title":"Jocelyn Flores","length":"1:59","cover":"album-17"},{"title":"Everybody Dies In Their Nightmares","length":"1:35","cover":"album-17"},{"title":"changes","length":"2:02","cover":"album-question"},{"title":"Hope","length":"1:50","cover":"album-question"}];
 export const matueTracks=[{"title":"Máquina do Tempo","cover":"album-maquina"},{"title":"333","cover":"album-333"},{"title":"Castlevania","cover":"album-333"},{"title":"4Tal","cover":"album-333"}];
