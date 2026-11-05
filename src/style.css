@@ -289,3 +289,19 @@
 /* The bottom player shows catalog metadata, not fictitious tracks. */
 .transport-play.is-unavailable{cursor:not-allowed;opacity:.7}
 .transport-play.is-unavailable:hover{transform:none}
+
+/* LEGACY receives a prominent dedicated sidebar card */
+.legacy-spotlight{position:relative;overflow:hidden;width:100%;min-height:108px;display:flex;align-items:center;text-align:left;gap:11px;margin:17px 0 4px;padding:11px 10px;border-radius:14px;border:1px solid #6b2732;background:radial-gradient(ellipse at right bottom,#7a132753,transparent 64%),linear-gradient(120deg,#211018,#100d11);box-shadow:inset 3px 0 #ff2338,0 11px 25px #0007}
+.legacy-spotlight:hover,.legacy-spotlight.active{border-color:#f1364b;background:linear-gradient(120deg,#35131c,#120e14)}
+.legacy-spotlight>.cover{flex:0 0 59px;width:59px;height:75px;border-radius:9px;overflow:hidden;border:1px solid #663741;box-shadow:0 7px 16px #0007}
+.legacy-spotlight>.cover img{width:100%;height:100%;object-fit:cover;object-position:center}
+.legacy-spotlight-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:3px}
+.legacy-spotlight-copy>small{font-size:8px;font-weight:800;color:#ff6570;letter-spacing:1px}
+.legacy-spotlight-copy>strong{font:900 20px Manrope;letter-spacing:1px;line-height:1.1}
+.legacy-spotlight-copy>span{font-size:10px;color:#f7e2e5;font-weight:700;letter-spacing:.4px}
+.legacy-spotlight-copy>em{font-size:9px;color:#af9199;font-style:normal}
+.legacy-spotlight>svg{flex:0 0 15px;color:#f4b1bb}
+.nav-sidebar .my-playlists{margin-top:15px}
+.playlist-song-list{max-height:630px;overflow:auto;scrollbar-width:thin;scrollbar-color:#642b39 #141418}
+.playlist-song-list::-webkit-scrollbar{width:5px}.playlist-song-list::-webkit-scrollbar-thumb{background:#632b36;border-radius:5px}
+@media(max-height:750px) and (min-width:900px){.legacy-spotlight{min-height:84px}.legacy-spotlight>.cover{height:56px;width:46px;flex-basis:46px}.nav-sidebar .my-playlists{margin-top:9px}}
