@@ -10,7 +10,7 @@ const sourceArt={
 'XXXTENTACION|LOOK AT ME: THE ALBUM':'https://coverartarchive.org/release/2636ce72-1351-4cf9-80de-f491f129289b/front-500'
 };
 const normalize=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
-const isMatch=(album,item)=>normalize(item.collectionName)===normalize(album.title)&&normalize(item.artistName).includes(normalize(album.artist).split(' ')[0]);
+const isMatch=(album,item)=>{const target=normalize(album.title),actual=normalize(item.collectionName),artist=normalize(item.artistName);return (actual===target||actual.startsWith(target+' ')||target.startsWith(actual+' '))&&artist.includes(normalize(album.artist).split(' ')[0])};
 async function get(url,ms=9000){const c=new AbortController();const t=setTimeout(()=>c.abort(),ms);try{return await fetch(url,{signal:c.signal,headers:{'User-Agent':'SONARA-Eclipse-Portfolio/1.0 (album artwork metadata)',Accept:'application/json,image/*'}})}finally{clearTimeout(t)}}
 let obtained=0,missing=[];
 for(const album of albums){
@@ -31,6 +31,16 @@ for(const album of albums){
     if(hit?.artworkUrl100)urls.push(hit.artworkUrl100.replace(/\d+x\d+bb/,'1200x1200bb'));
   }
  }catch(err){console.log('Search unavailable:',album.title,String(err.message||err))}
+ // Deezer lists official-label album artwork where iTunes editions differ.
+ try{
+   const q='https://api.deezer.com/search/album?q='+encodeURIComponent(album.artist+' '+album.title)+'&limit=40';
+   const res=await get(q,8000);
+   if(res.ok){
+     const js=await res.json();
+     const hit=(js.data||[]).find(x=>{const title=normalize(x.title),target=normalize(album.title),artist=normalize(x.artist?.name||'');return (title===target||title.startsWith(target+' ')||target.startsWith(title+' '))&&artist.includes(normalize(album.artist).split(' ')[0])});
+     if(hit?.cover_xl)urls.push(hit.cover_xl);
+   }
+ }catch(e){console.log('Second catalog unavailable:',album.title)}
  let success=false;
  for(const url of urls){
    try{const response=await get(url);if(!response.ok)continue;const type=response.headers.get('content-type')||'';if(!type.includes('image/'))continue;const bytes=Buffer.from(await response.arrayBuffer());if(bytes.length<4000)continue;await writeFile(dest,bytes);success=true;obtained++;break}catch{}
