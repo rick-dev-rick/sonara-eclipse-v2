@@ -77,3 +77,14 @@
 .library-playlists{margin-top:14px}
 @media(max-width:1100px){.personal-playlists{grid-template-columns:1fr}}
 @media(max-width:480px){.personal-playlist{padding:11px;gap:11px}.personal-playlist>.cover{width:76px;height:76px;flex-basis:76px}.personal-playlist-info>strong{font-size:16px}.personal-playlist-info>span{font-size:10px}.personal-playlist>svg:last-child{display:none}.playlist-detail{padding:17px}.playlist-artists{grid-template-columns:1fr}}
+
+/* Playlist art fidelity: intrinsic 1200x1200 scalable illustrations, never upscale small WebP thumbnails */
+.cover-playlist-x,.cover-playlist-trap{background:#090a0d!important;isolation:isolate}
+.cover-playlist-x img,.cover-playlist-trap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:1}
+.personal-playlist>.cover{box-shadow:0 16px 28px #0008;border:1px solid #50434a;overflow:hidden}
+.personal-playlist{min-height:152px;position:relative;overflow:hidden}
+.personal-playlist::after{content:'';position:absolute;right:-65px;bottom:-118px;width:200px;height:200px;background:radial-gradient(circle,#d8002230,transparent 68%);pointer-events:none}
+.personal-playlist.selected{box-shadow:inset 0 0 0 1px #ff30401a,0 10px 34px #0006}
+.sidebar-playlist .cover{border:1px solid #424047;box-shadow:0 5px 13px #0008}
+.library-playlists .personal-playlist{min-height:145px}
+@media(max-width:480px){.personal-playlist{min-height:104px}}
