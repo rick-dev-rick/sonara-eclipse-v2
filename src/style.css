@@ -88,3 +88,19 @@
 .sidebar-playlist .cover{border:1px solid #424047;box-shadow:0 5px 13px #0008}
 .library-playlists .personal-playlist{min-height:145px}
 @media(max-width:480px){.personal-playlist{min-height:104px}}
+
+/* Curated track previews inside personal playlists */
+.playlist-song-section{margin-top:27px;padding-top:20px;border-top:1px solid #2f3036}
+.playlist-song-section>h3{font-size:19px;margin:0 0 5px}
+.playlist-song-section>span{font-size:12px;color:#9b9da7}
+.playlist-song-list{display:flex;flex-direction:column;margin-top:16px}
+.playlist-song-row{display:flex;align-items:center;gap:15px;padding:10px 13px;min-height:67px;border-bottom:1px solid #292a30;border-radius:9px}
+.playlist-song-row:nth-child(odd){background:linear-gradient(90deg,#191a20,#0c0d10)}
+.playlist-song-row>span{width:25px;color:#85858e;font-size:12px}
+.playlist-song-row>.cover{height:43px;width:43px;flex:0 0 43px;border-radius:7px}
+.playlist-song-row>div:not(.cover){flex:1;min-width:0}
+.playlist-song-row strong,.playlist-song-row small{display:block}
+.playlist-song-row strong{font-size:13px;overflow-wrap:anywhere}
+.playlist-song-row small{font-size:11px;margin-top:5px;color:#a1a3ac}
+.playlist-song-row em{font-style:normal;font-size:12px;color:#9b9ca6}
+.playlist-catalogue-note{font-size:12px;color:#a3a4af;line-height:1.65;margin:17px 0 0}
