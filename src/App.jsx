@@ -1,5 +1,5 @@
 import React,{useEffect,useRef,useState} from 'react';
-import {AudioLines,Search,House,Compass,Library,Disc3,Users,Heart,ListMusic,Play,Pause,SkipBack,SkipForward,Shuffle,Repeat2,Volume2,Menu,X,Plus,Clock3,Headphones,ChevronRight,Music2,ArrowUpRight,Maximize2,Minimize2} from 'lucide-react';
+import {AudioLines,Search,House,Compass,Library,Disc3,Users,Heart,ListMusic,Play,Pause,SkipBack,SkipForward,Shuffle,Repeat2,Volume2,Menu,X,Plus,Clock3,Headphones,ChevronRight,Music2,ArrowUpRight,Maximize2,Minimize2,MoreHorizontal} from 'lucide-react';
 import {tracks,legacyTracks} from './data.js';
 const xPhoto='https://commons.wikimedia.org/wiki/Special:FilePath/XXXTentacion_February_2018.png';
 const albumCover={question:'https://coverartarchive.org/release/1e01d59d-a99f-40b8-8bd6-92d7fd26c309/front-250',seventeen:'https://coverartarchive.org/release/1395477c-a71e-4058-a893-d33dfcad6a4b/front-250',skins:'https://commons.wikimedia.org/wiki/Special:FilePath/XXXTentacion_-_SKINS.png'};
