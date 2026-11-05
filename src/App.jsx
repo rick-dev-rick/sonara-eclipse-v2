@@ -2,7 +2,6 @@ import React,{useState,useRef,useEffect} from 'react';
 import {House,Compass,Library,Disc3,UserRound,Heart,ListMusic,Search,Bell,ChevronDown,ChevronRight,Play,Pause,SkipBack,SkipForward,Shuffle,Repeat2,Volume2,Maximize,Minimize,Plus,MoreHorizontal,Music2,Clock3,Menu,X,Check,ArrowUpRight,AudioLines,Headphones,Download,CalendarDays,Tag,Users,SlidersHorizontal} from 'lucide-react';
 import {demoTracks,xTracks,matueTracks,legacyTracks,albums,collections} from './data.js';
 const NAV=[['Início',House],['Explorar',Compass],['Biblioteca',Library],['Álbuns',Disc3],['Artistas',UserRound],['Favoritos',Heart],['Playlists',ListMusic]];
-const asset=name=>`${import.meta.env.BASE_URL}assets/${name}.webp`;
 const asset=(name)=>`${import.meta.env.BASE_URL}assets/${name}.webp`;
 const artURL={
 "x":asset("legacy-jahseh"),
