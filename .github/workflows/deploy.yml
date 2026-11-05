@@ -26,6 +26,8 @@ jobs:
         run: npm install
       - name: Retrieve original album artwork
         run: node scripts/sync-cover-art.mjs
+      - name: Fetch artist photographs
+        run: node scripts/sync-artist-photos.mjs
       - name: Build
         run: npm run build
       - name: Upload Pages artifact

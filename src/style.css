@@ -268,3 +268,16 @@
 .forever-line{border-bottom-color:#29292f}
 @media(max-width:1150px){.sonara-hero .hero-copy{max-width:76%}.artist-hero .hero-copy{max-width:72%}}
 @media(max-width:650px){.sonara-hero{height:250px}.sonara-hero .hero-copy{padding:22px;max-width:93%}.sonara-hero .hero-person{width:92%;opacity:.5}.sonara-hero .hero-copy h1{font-size:38px}.artist-hero .hero-copy{padding:22px;max-width:90%}.artist-hero .hero-person{width:90%;opacity:.45}.album-detail-premium .album-cover{width:min(58vw,218px);height:auto;aspect-ratio:1;flex:0 0 auto}.album-track-header,.album-track-item{grid-template-columns:25px minmax(0,1fr) 40px;gap:6px}.album-track-header>span:nth-child(3),.album-track-header>svg,.album-row-album,.album-row-time{display:none}.album-track-item button{grid-column:3}.home-legacy>.cover{width:52px;height:52px;flex-basis:52px}}
+
+/* Real artist photography, preserving approved SONARA dark/red layout */
+.cover-artist-x,.cover-artist-matue,.cover-artist-teto,.cover-artist-wiu,.cover-artist-trio{background:linear-gradient(130deg,#190b12,#08080b)!important;overflow:hidden}
+.cover-artist-x img,.cover-artist-matue img,.cover-artist-teto img,.cover-artist-wiu img,.cover-artist-trio img{width:100%;height:100%;object-fit:cover;object-position:center 31%;display:block;filter:grayscale(.3) contrast(1.13)}
+.cover-artist-x img{filter:grayscale(1) contrast(1.15)}
+.cover-artist-matue img{object-position:center 26%}
+.cover-artist-wiu img{object-position:center 15%}
+.cover-artist-trio img{object-position:center 25%;filter:grayscale(.36) contrast(1.2)}
+.sidebar-playlist .cover img{width:100%;height:100%;object-fit:cover}
+.personal-playlist .cover img,.home-collection .cover img{width:100%;height:100%;object-fit:cover}
+.featured-artists .record .cover img{width:100%;height:100%;object-fit:cover}
+.home-related-artist .cover img,.playlist-artists .cover img{width:100%;height:100%;object-fit:cover}
+.sonara-hero .hero-person .cover img{object-fit:cover;object-position:50% 35%;filter:grayscale(.68) contrast(1.1) brightness(.84)}
