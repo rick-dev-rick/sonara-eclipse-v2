@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="750" viewBox="0 0 1440 750">
+<defs>
+<filter id="noise"><feTurbulence type="fractalNoise" baseFrequency=".6" numOctaves="3" seed="17" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+<radialGradient id="shade"><stop stop-color="#6e6354"/><stop offset="1" stop-color="#171513"/></radialGradient>
+<linearGradient id="sheet" x1="0" x2="1" y2="1"><stop stop-color="#c8beb0"/><stop offset=".56" stop-color="#a79b89"/><stop offset="1" stop-color="#6c6155"/></linearGradient>
+<pattern id="rule" width="32" height="36" patternUnits="userSpaceOnUse"><path d="M0 34 H32" stroke="#524b42" stroke-opacity=".38" stroke-width="1.2"/></pattern>
+<filter id="shadow"><feGaussianBlur stdDeviation="18"/></filter>
+</defs>
+<rect width="1440" height="750" fill="url(#shade)"/>
+<rect width="1440" height="750" filter="url(#noise)" opacity=".28" style="mix-blend-mode:overlay"/>
+<path d="M750 -70 L1490 -40 1480 755 1300 720 1240 748 1160 715 1070 753 1000 720 932 752 853 722 796 745 730 690 760 610 722 536 762 465 726 379 756 293 729 203Z" transform="rotate(-8 1110 350)" fill="#050505" opacity=".35" filter="url(#shadow)"/>
+<g transform="translate(730 -88) rotate(-8 340 360)">
+<path d="M24 0 L694 0 710 96 678 165 709 257 679 340 702 418 687 521 717 610 678 688 722 752 645 730 585 754 518 730 455 756 373 733 302 755 234 728 175 760 102 738 15 760 39 680 9 591 40 514 17 420 37 351 11 270 38 177 5 81Z" fill="url(#sheet)"/>
+<rect x="75" y="60" width="580" height="635" fill="url(#rule)"/>
+<path d="M146 53 V691" stroke="#4d4238" stroke-width="3" opacity=".6"/>
+<g font-family="Georgia,serif" font-style="italic" fill="#2c2824">
+<text x="191" y="128" font-size="29" opacity=".8">there is no end</text>
+<text x="201" y="169" font-size="32" opacity=".76">to the pain</text>
+<text x="198" y="209" font-size="30" opacity=".7">you must be numb</text>
+<text x="213" y="378" font-size="80" opacity=".31">17</text>
+<text x="214" y="450" font-size="30" opacity=".67">The music lives on.</text>
+<text x="222" y="534" font-size="35" opacity=".47">forever Jahseh</text>
+</g>
+<path d="M210 590 Q265 520 335 591 Q408 515 451 590 L335 672Z" stroke="#3a342e" stroke-width="6" fill="none" opacity=".32"/>
+</g>
+<path d="M0 666 L55 647 99 657 166 632 210 654 258 637 294 659 350 637 405 664 450 645 502 664 560 640 613 666 668 632 719 663 764 636 808 655 854 639 898 653 959 638 1001 666 1067 639 1100 662 1163 639 1200 661 1260 630 1305 659 1370 640 1440 660 V750 H0Z" fill="#11100f" opacity=".8"/>
+</svg>
