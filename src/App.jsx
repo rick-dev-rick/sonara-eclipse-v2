@@ -4,9 +4,9 @@ import {demoTracks,xTracks,matueTracks,legacyTracks,albums,collections} from './
 const NAV=[['Início',House],['Explorar',Compass],['Biblioteca',Library],['Álbuns',Disc3],['Artistas',UserRound],['Favoritos',Heart],['Playlists',ListMusic]];
 const asset=(name)=>`${import.meta.env.BASE_URL}assets/${name}.webp`;
 const artURL={
-"album-17":asset("cover-17"),
-"album-question":asset("cover-question"),
-"album-skins":asset("cover-skins"),
+"album-17":asset("x-seventeen"),
+"album-question":asset("x-question"),
+"album-skins":asset("x-skins"),
 "album-look":`${import.meta.env.BASE_URL}assets/official-album-look.jpg`,
 
 "artist-x":asset("legacy-portrait"),
@@ -70,7 +70,8 @@ export default function App(){
  const audio=useRef(null),osc=useRef(null),gain=useRef(null);
  useEffect(()=>{localStorage.setItem('sonara-v2-faves',JSON.stringify(favorites))},[favorites]);
  // O player mantém a identidade visual, sem áudio fictício ou reprodução comercial.
- const navigate=p=>{setPage(p);setMobileNav(false);window.scrollTo({top:0,behavior:'instant'})};
+ const navigate=p=>{setPage(p);setMobileNav(false);window.scrollTo(0,0)};
+ useEffect(()=>{window.scrollTo(0,0)},[page]);
  const chooseAlbum=a=>{setSelectedAlbum(a);navigate('Detalhe Álbum')};const chooseArtist=a=>{setSelectedArtist(a);navigate('Detalhe Artista')};
  const listen=i=>{setSong((i+demoTracks.length)%demoTracks.length);setTime(0);setPlaying(false)};
  const toggleLike=id=>setFavorites(s=>s.includes(id)?s.filter(t=>t!==id):[...s,id]);
