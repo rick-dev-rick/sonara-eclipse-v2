@@ -4,7 +4,7 @@ import {demoTracks,xTracks,matueTracks,legacyTracks,albums,collections} from './
 const NAV=[['Início',House],['Explorar',Compass],['Biblioteca',Library],['Álbuns',Disc3],['Artistas',UserRound],['Favoritos',Heart],['Playlists',ListMusic]];
 const asset=(name)=>`${import.meta.env.BASE_URL}assets/${name}.webp`;
 const artURL={
-"album-17":asset("x-seventeen"),
+"album-17":`${import.meta.env.BASE_URL}assets/official-album-17.jpg`,
 "album-question":asset("x-question"),
 "album-skins":asset("x-skins"),
 "album-look":`${import.meta.env.BASE_URL}assets/official-album-look.jpg`,
@@ -50,7 +50,7 @@ const artURL={
 };
 const remembered=(name,initial)=>{try{return JSON.parse(localStorage.getItem(name))??initial}catch{return initial}};
 function Art({type='dark',className='',children}){return <div className={'cover cover-'+type+' '+className}>
- {artURL[type]&&<img src={artURL[type]} alt="" loading={['artist-x','album-17','album-question','x','legacy'].includes(type)?'eager':'lazy'} decoding="async" onError={e=>{if(!e.currentTarget.dataset.fallback){e.currentTarget.dataset.fallback='1';e.currentTarget.src=`${import.meta.env.BASE_URL}assets/${type}.svg`}else{e.currentTarget.style.display='none'}}}/>}
+ {artURL[type]&&<img src={artURL[type]} alt="" loading={['artist-x','album-17','album-question','x','legacy'].includes(type)?'eager':'lazy'} decoding="async" onError={e=>{if(!e.currentTarget.dataset.fallback){e.currentTarget.dataset.fallback='1';e.currentTarget.src=type==='album-17'?asset('x-seventeen'):`${import.meta.env.BASE_URL}assets/${type}.svg`}else{e.currentTarget.style.display='none'}}}/>}
  {type==='dark'&&<span className="moon-shape"/>}{type==='drive'&&<><span className="road"/><span className="tail-lights"/></>}{type==='focus'&&<AudioLines size={42} strokeWidth={1.5}/>}{type==='energy'&&<AudioLines size={46} strokeWidth={1.5}/>}{type==='three'&&<strong className="cover-label">333</strong>}{type==='time'&&<strong className="cover-label">M</strong>}{type==='trap'&&<strong className="cover-label">TRAP BR</strong>}{type==='eclipse'&&<span className="eclipse-ring"/>}{type==='crown'&&<strong className="cover-label">♛</strong>}{type==='purple'&&<span className="purple-orbit"/>}{children}
  </div>}
 function Brand(){return <div className="brand"><div className="brand-symbol">S</div><div className="brand-words"><strong>SONARA</strong><span>ECLIPSE</span></div></div>}
