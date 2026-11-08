@@ -9,7 +9,7 @@ const files = {
   legacy: "legacy-portrait.webp",
   "artist-matue": "artist-matue.jpg",
   "artist-teto": "artist-teto.jpg",
-  "artist-wiu": "artist-wiu.jpg",
+  "artist-wiu": "artist-wiu-verified.webp",
   "artist-trio": "artist-trio.jpg",
   "playlist-x": "playlist-jahseh.svg",
   "playlist-trap": "playlist-trap-br.svg",

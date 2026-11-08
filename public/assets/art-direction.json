@@ -113,5 +113,13 @@
     "sha256": "9710d874a5e2431dbd15af1cb52e63267f610cb9d63384367825a1d82ab851f7",
     "type": "AI-assisted composite based on credited artist photograph",
     "reference": "artist-wiu.jpg"
+  },
+  {
+    "file": "hero-wiu-verified-portrait.webp",
+    "width": 2172,
+    "height": 724,
+    "sha256": "ce758cbf7434adc8c14c4bca77ad53f8d6bf1366384d340ced33c4c8d2800e4a",
+    "type": "AI-assisted editorial composite from individually credited WIU photograph",
+    "reference": "artist-wiu-verified.webp"
   }
 ]

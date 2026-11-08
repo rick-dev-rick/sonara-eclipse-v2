@@ -8,7 +8,7 @@ export default function Hero({
   children,
 }) {
   const artwork = kind === "home"
-    ? { file: "hero-trap-cinematic.webp", alt: "" }
+    ? artistHeroes["Matuê"]
     : artistHeroes[artist];
   return (
     <section

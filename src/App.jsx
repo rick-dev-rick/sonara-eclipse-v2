@@ -32,9 +32,6 @@ import {
   ChevronDown,
   Moon,
   Headphones,
-  Waves,
-  CarFront,
-  AudioLines,
 } from "lucide-react";
 import { demoTracks, xTracks, matueTracks, albums } from "./data.js";
 const NAV = [
@@ -98,28 +95,6 @@ function IconButton({ Icon, active = false, onClick, title, fill = false }) {
     >
       <Icon size={19} fill={fill ? "currentColor" : "none"} />
     </button>
-  );
-}
-function MoodGrid({ onSelect }) {
-  return (
-    <div className="mood-grid">
-      {[
-        ["After Dark", "dark", "XXXTENTACION", Moon],
-        ["Deep Focus", "focus", "17", Waves],
-        ["Night Drive", "drive", "Matuê", CarFront],
-        ["Energia Total", "energy", "WIU", AudioLines],
-      ].map(([title, art, query, Icon]) => (
-        <button
-          className="mood-tile"
-          key={title}
-          onClick={() => onSelect(query)}
-        >
-          <Art type={art} />
-          <Icon size={24} />
-          <span>{title}</span>
-        </button>
-      ))}
-    </div>
   );
 }
 function StatCard({ title, children }) {
@@ -377,13 +352,6 @@ export default function App() {
           albumTile,
         )}
       </div>
-      <PaneTitle>Feito para o seu momento</PaneTitle>
-      <MoodGrid
-        onSelect={(query) => {
-          setSearch(query);
-          navigate("Buscar");
-        }}
-      />
       <PaneTitle action="Ver artistas" onClick={() => navigate("Artistas")}>
         Em destaque
       </PaneTitle>
@@ -511,13 +479,6 @@ export default function App() {
             </button>
           ))}
       </div>
-      <PaneTitle>Continue explorando</PaneTitle>
-      <MoodGrid
-        onSelect={(query) => {
-          setSearch(query);
-          navigate("Buscar");
-        }}
-      />
       <PaneTitle action="Ver álbuns" onClick={() => navigate("Álbuns")}>
         Outros projetos de {selectedArtist}
       </PaneTitle>
