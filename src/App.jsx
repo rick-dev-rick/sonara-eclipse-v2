@@ -1,3 +1,4 @@
+import SectionHeader from "./SectionHeader.jsx";
 import Hero from "./Hero.jsx";
 import {
   trackId,
@@ -630,11 +631,7 @@ export default function App() {
   );
   const pageExplore = (
     <>
-      <div className="page-heading">
-        <Label>SONARA ECLIPSE · DESCUBRA</Label>
-        <h1>Explorar</h1>
-        <p>O universo de XXXTENTACION e dos artistas da 30PRAUM.</p>
-      </div>
+      <SectionHeader kind="explore" />
       <PaneTitle>Artistas</PaneTitle>
       <div className="recent-grid featured-artists">
         {[
@@ -686,11 +683,7 @@ export default function App() {
   );
   const pageLibrary = (
     <>
-      <div className="page-heading">
-        <Label>SUA COLEÇÃO</Label>
-        <h1>Biblioteca</h1>
-        <p>Suas músicas, playlists e descobertas em um só lugar.</p>
-      </div>
+      <SectionHeader kind="library" />
       <div className="library-stats">
         {[
           [albums.length, "Álbuns catalogados"],
@@ -728,14 +721,7 @@ export default function App() {
   );
   const pageAlbums = (
     <>
-      <div className="page-heading discography-heading">
-        <Label>SONARA ECLIPSE · DISCOGRAFIA</Label>
-        <h1>Álbuns & projetos</h1>
-        <p>Quatro artistas. Histórias diferentes. Um universo musical.</p>
-        <div className="discography-count">
-          <Disc3 size={17} /> {albums.length} lançamentos catalogados
-        </div>
-      </div>
+      <SectionHeader kind="albums" count={albums.length} />
       {["XXXTENTACION", "Matuê", "Teto", "WIU"].map((artist) => (
         <section className="discography-section" key={artist}>
           <div className="discography-section-title">
@@ -758,11 +744,7 @@ export default function App() {
   );
   const pageArtists = (
     <>
-      <div className="page-heading">
-        <Label>QUEM FAZ A MÚSICA</Label>
-        <h1>Artistas</h1>
-        <p>Conheça os artistas em destaque na SONARA.</p>
-      </div>
+      <SectionHeader kind="artists" />
       <div className="recent-grid featured-artists">
         {[
           ["XXXTENTACION", "artist-x"],
@@ -790,11 +772,7 @@ export default function App() {
   );
   const pageFavorites = (
     <>
-      <div className="page-heading">
-        <Label>SUAS ESCOLHAS</Label>
-        <h1>Favoritos</h1>
-        <p>Tudo aquilo que merece ficar com você.</p>
-      </div>
+      <SectionHeader kind="favorites" />
       <PaneTitle>Salvos na SONARA</PaneTitle>
       {favorites.length ? (
         <div className="favorites-stack">
@@ -817,11 +795,7 @@ export default function App() {
   );
   const pagePlaylists = (
     <>
-      <div className="page-heading">
-        <Label>SUAS PLAYLISTS · SONARA ECLIPSE</Label>
-        <h1>Minhas Playlists</h1>
-        <p>Duas coleções pessoais. Mais playlists só quando fizer sentido.</p>
-      </div>
+      <SectionHeader kind="playlists" />
       <div className="personal-playlists">
         {playlists.map((l, i) => (
           <button
