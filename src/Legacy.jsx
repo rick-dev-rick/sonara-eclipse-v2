@@ -24,6 +24,15 @@ const coverFor = (name) =>
       : ["whoa (mind in awe)", "Guardian angel"].includes(name)
         ? "album-skins"
         : "artist-x";
+function ArchiveQuote({ children, placement }) {
+  return (
+    <figure className={`archive-quote archive-quote-${placement}`}>
+      <blockquote>“{children}”</blockquote>
+      <figcaption>XXXTENTACION <span>· tradução livre</span></figcaption>
+    </figure>
+  );
+}
+
 export default function Legacy({
   favorites,
   toggleLike,
@@ -121,6 +130,7 @@ export default function Legacy({
           </button>
         ))}
       </nav>
+      <ArchiveQuote placement="opening">Sua mente é ilimitada.</ArchiveQuote>
       <section
         id="legacy-songs"
         className="memorial-collection"
@@ -203,15 +213,7 @@ export default function Legacy({
           reproduzidas nesta versão.
         </p>
       </section>
-      <blockquote className="memorial-note">
-        <span className="archive-label">A NOTE FROM SONARA</span>
-        <p>
-          Algumas músicas se tornam parte de quem somos.
-          <br />
-          <em>O tempo passa. O significado permanece.</em>
-        </p>
-        <span className="note-signature">Forever Jahseh</span>
-      </blockquote>
+      <ArchiveQuote placement="margin">Você vale mais do que consegue acreditar.</ArchiveQuote>
       <section id="legacy-story" className="memorial-story">
         <div>
           <span className="archive-label">02 / THE STORY</span>
@@ -243,6 +245,7 @@ export default function Legacy({
           <figcaption>THE HUMAN BEHIND THE MUSIC.</figcaption>
         </figure>
       </section>
+      <ArchiveQuote placement="pause">Não deixe seu corpo definir sua alma.</ArchiveQuote>
       <section id="legacy-impact" className="memorial-impact">
         <Art type="artist-x" eager />
         <div>
@@ -263,12 +266,24 @@ export default function Legacy({
           </span>
         </div>
       </section>
+      <ArchiveQuote placement="believe">Eu acredito em todos vocês.</ArchiveQuote>
       <footer className="memorial-end">
         <span>SONARA ECLIPSE / LEGACY</span>
         <a href={`${import.meta.env.BASE_URL}credits.html`}>
           CRÉDITOS & FONTES ↗
         </a>
       </footer>
+      <section className="legacy-dedication" aria-labelledby="dedication-title">
+        <span className="archive-label">DE RICK_DEV, PARA JAHSEH</span>
+        <span className="dedication-seventeen" aria-hidden="true">17</span>
+        <h2 id="dedication-title">O que o X representa pra mim.</h2>
+        <blockquote>
+          <p>Pra mim o X foi Alguém muito especial pra minha vida como pessoa e extremamente como artista suas músicas suas frases motivacionais a forma como ele tratava seus fãs me fez sentir admiração pelo artista que ele foi e ainda é alguém tão grande como ele nunca vai morrer em nossos corações</p>
+          <p>Ele merece essa página só pra ele isso é um pouquinho por tudo aquilo que ele fez na minha vida</p>
+          <p className="dedication-long-live">“LLJ”🥀🖤🥀🖤 LONG LIVE X você sempre estará vivo em nossos corações 🖤🖤</p>
+          <p className="dedication-dates">23/01/98&nbsp; 18/06/18 <span>🕊️ 🕊️ 🖤🖤</span></p>
+        </blockquote>
+      </section>
     </article>
   );
 }

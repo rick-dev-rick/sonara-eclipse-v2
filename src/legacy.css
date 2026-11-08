@@ -423,29 +423,6 @@
   color: #b2a38c;
   padding-top: 17px;
 }
-.memorial-note {
-  display: grid;
-  grid-template-columns: 115px minmax(0, 1fr);
-  gap: 24px;
-  align-items: center;
-  border-block: 1px solid #71685b;
-  padding: 25px 24px;
-  margin: 15px 25px 25px;
-  background: #151515 url("/assets/archive-paper-texture.webp") center/512px
-    512px;
-}
-.memorial-note p {
-  font:
-    400 22px/1.6 "Cormorant Garamond",
-    Georgia,
-    serif;
-}
-.memorial-note p em {
-  color: #b4a58f;
-}
-.note-signature {
-  display: none;
-}
 .memorial-story {
   scroll-margin-top: 20px;
   display: grid;
@@ -797,18 +774,6 @@
   .archive-disclaimer {
     font-size: 9px;
   }
-  .memorial-note {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    margin: 12px 14px 24px;
-    padding: 19px 15px;
-  }
-  .memorial-note p {
-    font-size: 21px;
-  }
-  .memorial-note .archive-label {
-    font-size: 6px;
-  }
   .memorial-story {
     grid-template-columns: 1fr;
     margin: 20px 14px;
@@ -1013,5 +978,137 @@
 @media (min-width: 761px) and (max-width: 1100px) {
   .legacy17-mode {
     --sidebar: 190px;
+  }
+}
+
+/* Loose editorial annotations remain in document flow, never scroll overlays. */
+.archive-quote {
+  max-width: 560px;
+  padding: 0 24px;
+  margin-block: 42px;
+  color: #d5c7b1;
+}
+.archive-quote blockquote {
+  margin: 0;
+  font: 400 clamp(21px, 2.5vw, 31px)/1.65 "Nothing You Could Do", cursive;
+  overflow-wrap: anywhere;
+}
+.archive-quote figcaption {
+  margin-top: 12px;
+  font: 8px/1.8 Inter, sans-serif;
+  letter-spacing: 1.6px;
+  color: #baae9b;
+}
+.archive-quote figcaption span {
+  letter-spacing: 0.4px;
+  color: #a59a8a;
+}
+.archive-quote-opening {
+  margin-left: auto;
+  margin-right: 7%;
+  text-align: right;
+}
+.archive-quote-margin {
+  margin-left: 5%;
+  margin-right: auto;
+  max-width: 470px;
+}
+.archive-quote-pause {
+  margin: 68px auto;
+  max-width: 650px;
+  text-align: center;
+}
+.archive-quote-pause blockquote {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(28px, 3vw, 43px);
+  line-height: 1.3;
+  color: #e3d7c5;
+}
+.archive-quote-believe {
+  margin-left: auto;
+  margin-right: 4%;
+  text-align: right;
+}
+.legacy-dedication {
+  margin: 72px 25px 0;
+  padding: 52px 38px 38px;
+  border-top: 1px solid #7f7463;
+  text-align: center;
+  color: #dfd5c5;
+}
+.dedication-seventeen {
+  display: block;
+  margin: 24px 0 14px;
+  color: #bca98b;
+  font: 400 72px/1 "Cormorant Garamond", Georgia, serif;
+}
+.legacy-dedication h2 {
+  max-width: 680px;
+  margin: 0 auto 34px;
+  font: 400 clamp(30px, 3.2vw, 44px)/1.2 "Cormorant Garamond", Georgia, serif;
+}
+.legacy-dedication blockquote {
+  max-width: 730px;
+  margin: 0 auto;
+}
+.legacy-dedication blockquote p {
+  margin: 0 0 26px;
+  font: 400 clamp(21px, 2.2vw, 26px)/1.65 "Cormorant Garamond", Georgia, serif;
+  overflow-wrap: anywhere;
+}
+.legacy-dedication blockquote .dedication-long-live {
+  color: #e8d4b3;
+  margin-top: 38px;
+}
+.legacy-dedication blockquote .dedication-dates {
+  margin: 40px 0 0;
+  font: 11px/2 Inter, sans-serif;
+  letter-spacing: 2px;
+  color: #c2b59f;
+}
+.dedication-dates span {
+  display: block;
+  margin-top: 10px;
+  font-size: 19px;
+  letter-spacing: 3px;
+}
+@media (max-width: 760px) {
+  .archive-quote {
+    max-width: 100%;
+    padding-inline: 22px;
+    margin-block: 34px;
+  }
+  .archive-quote-opening {
+    margin-right: 0;
+    margin-left: 32px;
+  }
+  .archive-quote-margin {
+    margin-left: 0;
+    margin-right: 35px;
+  }
+  .archive-quote-pause {
+    margin: 52px 8px;
+  }
+  .archive-quote-believe {
+    margin-left: 25px;
+    margin-right: 0;
+  }
+  .legacy-dedication {
+    margin: 55px 14px 0;
+    padding: 36px 10px 28px;
+  }
+  .legacy-dedication h2 {
+    font-size: 31px;
+  }
+  .legacy-dedication blockquote p {
+    font-size: 22px;
+    line-height: 1.6;
+  }
+  .legacy-dedication .archive-label {
+    font-size: 7px;
+  }
+  .legacy-dedication blockquote .dedication-dates {
+    font-size: 10px;
+    letter-spacing: 1.7px;
   }
 }
