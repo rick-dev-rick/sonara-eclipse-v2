@@ -27,8 +27,8 @@ const coverFor = (name) =>
 function ArchiveQuote({ children, placement }) {
   return (
     <figure className={`archive-quote archive-quote-${placement}`}>
-      <blockquote>“{children}”</blockquote>
-      <figcaption>XXXTENTACION <span>· tradução livre</span></figcaption>
+      <blockquote lang="en">“{children}”</blockquote>
+      <figcaption>XXXTENTACION</figcaption>
     </figure>
   );
 }
@@ -130,7 +130,7 @@ export default function Legacy({
           </button>
         ))}
       </nav>
-      <ArchiveQuote placement="opening">Sua mente é ilimitada.</ArchiveQuote>
+      <ArchiveQuote placement="opening">Your mind is limitless.</ArchiveQuote>
       <section
         id="legacy-songs"
         className="memorial-collection"
@@ -213,7 +213,7 @@ export default function Legacy({
           reproduzidas nesta versão.
         </p>
       </section>
-      <ArchiveQuote placement="margin">Você vale mais do que consegue acreditar.</ArchiveQuote>
+      <ArchiveQuote placement="margin">You are worth more than you can believe.</ArchiveQuote>
       <section id="legacy-story" className="memorial-story">
         <div>
           <span className="archive-label">02 / THE STORY</span>
@@ -245,7 +245,7 @@ export default function Legacy({
           <figcaption>THE HUMAN BEHIND THE MUSIC.</figcaption>
         </figure>
       </section>
-      <ArchiveQuote placement="pause">Não deixe seu corpo definir sua alma.</ArchiveQuote>
+      <ArchiveQuote placement="pause">Do not let your body define your soul.</ArchiveQuote>
       <section id="legacy-impact" className="memorial-impact">
         <Art type="artist-x" eager />
         <div>
@@ -266,7 +266,7 @@ export default function Legacy({
           </span>
         </div>
       </section>
-      <ArchiveQuote placement="believe">Eu acredito em todos vocês.</ArchiveQuote>
+      <ArchiveQuote placement="believe">I believe in you all.</ArchiveQuote>
       <footer className="memorial-end">
         <span>SONARA ECLIPSE / LEGACY</span>
         <a href={`${import.meta.env.BASE_URL}credits.html`}>
