@@ -3,3 +3,6 @@ dist/
 .openai/
 .superpowers/
 qa.html
+
+# Generated source PNGs are retained by the image workflow; ship WebP renditions.
+public/assets/*.png

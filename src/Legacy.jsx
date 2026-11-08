@@ -44,12 +44,23 @@ export default function Legacy({
         <span>IN MEMORY OF JAHSEH</span>
       </div>
       <section className="memorial-hero" aria-labelledby="legacy-title">
+        <picture className="archive-picture">
+          <source
+            media="(max-width:760px)"
+            srcSet={`${import.meta.env.BASE_URL}assets/legacy-archive-mobile.webp`}
+          />
+          <img
+            className="archive-hero-image"
+            src={`${import.meta.env.BASE_URL}assets/legacy-archive-final.webp`}
+            alt="Composição artística de arquivo com retrato de Jahseh, fotografia antiga e papel de caderno"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
         <div className="memorial-copy">
           <span className="archive-label">1998 — 2018 / FOREVER</span>
-          <h1 id="legacy-title">
-            LEGACY<span>.</span>
-          </h1>
-          <p className="memorial-script">Forever Jahseh</p>
+          <h1 id="legacy-title">LEGACY</h1>
+          <p className="memorial-script">FOREVER JAHSEH</p>
           <div className="memorial-rule" />
           <p className="memorial-tagline">The Music Lives On.</p>
           <p className="memorial-intro">
@@ -74,31 +85,7 @@ export default function Legacy({
             </button>
           </div>
         </div>
-        <figure className="memorial-photo">
-          <div className="archive-photo-label">PORTRAIT / JAHSEH ONFROY</div>
-          <Art
-            type="artist-x"
-            alt="Retrato em preto e branco de XXXTENTACION"
-            eager
-          />
-          <figcaption>
-            JAHSEH DWAYNE RICARDO ONFROY <span>17</span>
-          </figcaption>
-        </figure>
-        <div className="memorial-hero-foot">
-          <span>01 — THE ARCHIVE</span>
-          <span>LONG LIVE JAHSEH ✦</span>
-        </div>
       </section>
-      <blockquote className="memorial-note">
-        <span className="archive-label">A NOTE FROM SONARA</span>
-        <p>
-          Algumas músicas se tornam parte de quem somos.
-          <br />
-          <em>O tempo passa. O significado permanece.</em>
-        </p>
-        <span className="note-signature">Forever Jahseh</span>
-      </blockquote>
       <nav className="memorial-chapters" aria-label="Capítulos da homenagem">
         {[
           [
@@ -112,14 +99,14 @@ export default function Legacy({
             "02",
             "A história",
             "A pessoa por trás da voz.",
-            "artist-x",
+            "archive-palms",
             "legacy-story",
           ],
           [
             "03",
             "O legado",
             "Uma memória que continua viva.",
-            "x",
+            "archive-impact",
             "legacy-impact",
           ],
         ].map(([n, title, desc, art, id]) => (
@@ -216,6 +203,15 @@ export default function Legacy({
           reproduzidas nesta versão.
         </p>
       </section>
+      <blockquote className="memorial-note">
+        <span className="archive-label">A NOTE FROM SONARA</span>
+        <p>
+          Algumas músicas se tornam parte de quem somos.
+          <br />
+          <em>O tempo passa. O significado permanece.</em>
+        </p>
+        <span className="note-signature">Forever Jahseh</span>
+      </blockquote>
       <section id="legacy-story" className="memorial-story">
         <div>
           <span className="archive-label">02 / THE STORY</span>

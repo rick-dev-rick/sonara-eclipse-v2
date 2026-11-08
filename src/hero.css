@@ -1,0 +1,336 @@
+.cinematic-hero {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #2c2d32;
+  border-radius: 16px;
+  background: #08090b;
+  min-height: 264px;
+  display: flex;
+  align-items: center;
+}
+.cinematic-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+.cinematic-portrait {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 48%;
+}
+.cinematic-portrait > .cover {
+  height: 100%;
+  aspect-ratio: auto;
+  border-radius: 0;
+}
+.cinematic-portrait img {
+  object-position: center 20%;
+}
+.cinematic-hero > .hero-copy {
+  position: relative;
+  z-index: 1;
+  padding: 28px 30px;
+  width: 63%;
+}
+.cinematic-hero .eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.1px;
+  color: #e2e0e4;
+  gap: 10px;
+}
+.cinematic-hero .eyebrow > span {
+  height: 18px;
+  width: 4px;
+}
+.cinematic-hero h1 {
+  font-size: clamp(27px, 3.15vw, 47px);
+  line-height: 1.08;
+  letter-spacing: -1.2px;
+  margin: 13px 0 10px;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+.cinematic-home h1 {
+  font-size: clamp(36px, 3.6vw, 52px);
+}
+.cinematic-hero p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: #c3c3cb;
+  max-width: 365px;
+  margin-bottom: 20px;
+}
+.cinematic-home p {
+  font-size: 16px;
+  max-width: 310px;
+}
+.cinematic-hero .hero-actions {
+  gap: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.cinematic-hero .outline {
+  border-radius: 30px;
+  padding: 10px 20px;
+  background: #08090b77;
+  font-size: 12px;
+}
+.cinematic-hero .icon-button {
+  border: 1px solid #6665;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  flex-basis: 36px;
+}
+.cinematic-album {
+  min-height: 280px;
+  gap: 24px;
+  padding: 20px;
+}
+.cinematic-album .cinematic-backdrop {
+  object-position: center;
+  opacity: 0.62;
+}
+.cinematic-album > .album-cover {
+  position: relative;
+  z-index: 1;
+  width: 225px;
+  flex: 0 0 225px;
+}
+.cinematic-album .album-cover .cover {
+  border: 1px solid #75757b;
+  border-radius: 11px;
+}
+.cinematic-album > .album-description {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-width: 0;
+}
+.cinematic-album h1 {
+  font-size: clamp(28px, 3.5vw, 50px);
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  margin: 12px 0 7px;
+}
+.cinematic-album .album-description p {
+  max-width: 510px;
+  font-size: 12px;
+  margin-bottom: 18px;
+}
+.cinematic-album .eyebrow {
+  font-size: 11px;
+}
+.cinematic-album .album-artist-link {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+.cinematic-album .album-stats {
+  margin-bottom: 13px;
+}
+.cinematic-edition {
+  position: absolute;
+  right: 20px;
+  bottom: 16px;
+  font-size: 8px;
+  color: #bfbfc4;
+  letter-spacing: 1.5px;
+}
+@media (min-width: 1500px) {
+  .cinematic-hero {
+    min-height: 280px;
+  }
+  .cinematic-hero > .hero-copy {
+    padding: 30px 34px;
+  }
+  .cinematic-album {
+    min-height: 290px;
+  }
+}
+@media (max-width: 1100px) {
+  .cinematic-hero h1 {
+    font-size: 34px;
+  }
+  .cinematic-home h1 {
+    font-size: 44px;
+  }
+  .cinematic-hero > .hero-copy {
+    width: 66%;
+  }
+  .cinematic-album > .album-cover {
+    width: 190px;
+    flex-basis: 190px;
+  }
+  .cinematic-album h1 {
+    font-size: 35px;
+  }
+}
+@media (max-width: 760px) {
+  .cinematic-hero {
+    min-height: 330px;
+    align-items: flex-end;
+    border-radius: 12px;
+  }
+  .cinematic-hero > .hero-copy {
+    padding: 25px 22px;
+    width: 100%;
+  }
+  .cinematic-backdrop {
+    object-position: 72% center;
+  }
+  .cinematic-hero .hero-copy {
+    background: #0304078c;
+  }
+  .cinematic-hero h1 {
+    font-size: clamp(23px, 6.3vw, 34px);
+    line-height: 1.1;
+    letter-spacing: -0.6px;
+    margin: 12px 0;
+  }
+  .cinematic-home h1 {
+    font-size: 42px;
+  }
+  .cinematic-hero p {
+    font-size: 12px;
+    max-width: 100%;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .cinematic-home p {
+    font-size: 14px;
+    max-width: 230px;
+  }
+  .cinematic-hero .eyebrow {
+    font-size: 10px;
+  }
+  .cinematic-hero .hero-actions {
+    gap: 10px;
+  }
+  .cinematic-hero .primary {
+    padding: 11px 18px;
+    font-size: 12px;
+  }
+  .cinematic-edition {
+    display: none;
+  }
+  .portrait-hero .cinematic-portrait {
+    width: 100%;
+    opacity: 0.7;
+  }
+  .cinematic-album {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+    align-items: center;
+    gap: 18px;
+    min-height: 280px;
+  }
+  .cinematic-album > .album-cover {
+    width: 110px;
+    flex: none;
+  }
+  .cinematic-album > .album-description {
+    width: 100%;
+  }
+  .cinematic-album h1 {
+    font-size: clamp(22px, 6vw, 29px);
+    overflow-wrap: anywhere;
+  }
+  .cinematic-album .album-description > p {
+    display: none;
+  }
+  .cinematic-album .album-description .eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.8px;
+  }
+  .cinematic-album .album-description .album-stats {
+    font-size: 9px;
+  }
+  .cinematic-album .album-artist-link {
+    font-size: 12px;
+  }
+  .cinematic-album .hero-actions {
+    gap: 7px;
+  }
+  .cinematic-album .hero-actions .primary {
+    padding: 9px 11px;
+    font-size: 10px;
+  }
+  .cinematic-album .hero-actions .icon-button {
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+  }
+}
+@media (max-width: 360px) {
+  .cinematic-hero > .hero-copy {
+    padding: 24px 18px;
+  }
+  .cinematic-hero h1 {
+    font-size: 23px;
+  }
+  .cinematic-home h1 {
+    font-size: 38px;
+  }
+  .cinematic-album {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .cinematic-album > .album-cover {
+    width: 145px;
+    justify-self: center;
+  }
+  .cinematic-album .album-description h1 {
+    font-size: 28px;
+  }
+  .cinematic-album .hero-actions {
+    flex-wrap: wrap;
+  }
+}
+.cinematic-home {
+  min-height: 248px;
+}
+.cinematic-home > .hero-copy {
+  padding: 24px 28px;
+}
+.cinematic-artist {
+  min-height: 232px;
+}
+.cinematic-artist > .hero-copy {
+  padding: 22px 28px;
+}
+.cinematic-artist h1 {
+  margin: 10px 0 8px;
+}
+.cinematic-artist p {
+  font-size: 12px;
+  line-height: 1.45;
+  margin-bottom: 14px;
+}
+@media (min-width: 1500px) {
+  .cinematic-home {
+    min-height: 264px;
+  }
+  .cinematic-artist {
+    min-height: 240px;
+  }
+}
+@media (max-width: 760px) {
+  .cinematic-home,
+  .cinematic-artist {
+    min-height: 330px;
+  }
+  .cinematic-home > .hero-copy,
+  .cinematic-artist > .hero-copy {
+    padding: 25px 22px;
+  }
+  .cinematic-artist p {
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+}

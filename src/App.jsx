@@ -1,3 +1,4 @@
+import Hero from "./Hero.jsx";
 import {
   trackId,
   migrateFavorites,
@@ -27,6 +28,13 @@ import {
   X,
   CalendarDays,
   Tag,
+  Bell,
+  ChevronDown,
+  Moon,
+  Headphones,
+  Waves,
+  CarFront,
+  AudioLines,
 } from "lucide-react";
 import { demoTracks, xTracks, matueTracks, albums } from "./data.js";
 const NAV = [
@@ -48,7 +56,12 @@ const remembered = (name, initial) => {
 function Brand() {
   return (
     <div className="brand">
-      <div className="brand-symbol">S</div>
+      <img
+        className="brand-symbol"
+        src={`${import.meta.env.BASE_URL}assets/brand-s.webp`}
+        alt=""
+      />
+      <Moon className="brand-crescent" size={31} />
       <div className="brand-words">
         <strong>SONARA</strong>
         <span>ECLIPSE</span>
@@ -85,6 +98,28 @@ function IconButton({ Icon, active = false, onClick, title, fill = false }) {
     >
       <Icon size={19} fill={fill ? "currentColor" : "none"} />
     </button>
+  );
+}
+function MoodGrid({ onSelect }) {
+  return (
+    <div className="mood-grid">
+      {[
+        ["After Dark", "dark", "XXXTENTACION", Moon],
+        ["Deep Focus", "focus", "17", Waves],
+        ["Night Drive", "drive", "Matuê", CarFront],
+        ["Energia Total", "energy", "WIU", AudioLines],
+      ].map(([title, art, query, Icon]) => (
+        <button
+          className="mood-tile"
+          key={title}
+          onClick={() => onSelect(query)}
+        >
+          <Art type={art} />
+          <Icon size={24} />
+          <span>{title}</span>
+        </button>
+      ))}
+    </div>
   );
 }
 function StatCard({ title, children }) {
@@ -312,13 +347,14 @@ export default function App() {
   );
   const pageHome = (
     <>
-      <div className="featured hero-home sonara-hero">
+      <Hero kind="home" artist="Matuê">
         <div className="hero-copy">
           <Label>SONARA EXCLUSIVE</Label>
           <h1>Trap BR</h1>
           <p>
-            Matuê · Teto · WIU
-            <br />O universo 30PRAUM em um só lugar.
+            O universo de Matuê, Teto e WIU.
+            <br />
+            Encontre a sua próxima descoberta.
           </p>
           <button
             className="primary"
@@ -327,15 +363,27 @@ export default function App() {
               navigate("Playlists");
             }}
           >
-            <Play size={18} fill="currentColor" /> Explorar coleção
+            <Play size={17} fill="currentColor" />
+            Explorar coleção
           </button>
         </div>
-        <div className="hero-sun" />
-        <div className="hero-person">
-          <Art type="artist-trio" />
-        </div>
-        <span className="hero-edition">CURADORIA SONARA / VOL. 01</span>
+        <span className="cinematic-edition">CURADORIA SONARA / VOL. 02</span>
+      </Hero>
+      <PaneTitle action="Ver discografia" onClick={() => navigate("Álbuns")}>
+        Álbuns em destaque
+      </PaneTitle>
+      <div className="recent-grid home-records">
+        {[albums[6], albums[7], albums[0], albums[1], albums[11]].map(
+          albumTile,
+        )}
       </div>
+      <PaneTitle>Feito para o seu momento</PaneTitle>
+      <MoodGrid
+        onSelect={(query) => {
+          setSearch(query);
+          navigate("Buscar");
+        }}
+      />
       <PaneTitle action="Ver artistas" onClick={() => navigate("Artistas")}>
         Em destaque
       </PaneTitle>
@@ -396,8 +444,8 @@ export default function App() {
     </>
   );
   const pageArtist = (
-    <>
-      <div className="featured artist-hero">
+    <div className="artist-page">
+      <Hero artist={selectedArtist}>
         <div className="hero-copy">
           <Label>Artista</Label>
           <h1>{selectedArtist}</h1>
@@ -424,21 +472,7 @@ export default function App() {
             />
           </div>
         </div>
-        <div className="hero-sun" />
-        <div className="hero-person">
-          <Art
-            type={
-              selectedArtist === "XXXTENTACION"
-                ? "artist-x"
-                : selectedArtist === "Matuê"
-                  ? "artist-matue"
-                  : selectedArtist === "Teto"
-                    ? "artist-teto"
-                    : "artist-wiu"
-            }
-          />
-        </div>
-      </div>
+      </Hero>
       <PaneTitle action="Ver todas" onClick={() => navigate("Biblioteca")}>
         Músicas populares
       </PaneTitle>
@@ -458,7 +492,7 @@ export default function App() {
       <div className="album-strips">
         {albums
           .filter((album) => album.artist === selectedArtist)
-          .slice(0, 5)
+          .slice(0, 3)
           .map((a) => (
             <button
               className="album-strip"
@@ -477,6 +511,13 @@ export default function App() {
             </button>
           ))}
       </div>
+      <PaneTitle>Continue explorando</PaneTitle>
+      <MoodGrid
+        onSelect={(query) => {
+          setSearch(query);
+          navigate("Buscar");
+        }}
+      />
       <PaneTitle action="Ver álbuns" onClick={() => navigate("Álbuns")}>
         Outros projetos de {selectedArtist}
       </PaneTitle>
@@ -486,7 +527,7 @@ export default function App() {
           .slice(0, 4)
           .map(albumTile)}
       </div>
-    </>
+    </div>
   );
   const a = albums.find((v) => v.title === selectedAlbum) || {
     title: selectedAlbum,
@@ -505,10 +546,7 @@ export default function App() {
   const albumVerified = !!albumEntry?.complete;
   const pageAlbum = (
     <>
-      <div className="featured album-hero album-detail-premium">
-        <div className="album-backdrop">
-          <Art type={a.art} />
-        </div>
+      <Hero kind="album" artist={a.artist}>
         <div className="album-cover">
           <Art type={a.art} />
         </div>
@@ -552,7 +590,7 @@ export default function App() {
             />
           </div>
         </div>
-      </div>
+      </Hero>
       <div className="album-track-panel sonara-album-table">
         <div className="album-track-header">
           <span>#</span>
@@ -1109,10 +1147,12 @@ export default function App() {
           </span>
         </div>
       </StatCard>
-      <StatCard title="Ouvintes mensais">
+      <StatCard title="O universo do artista">
         <div className="metric">
-          <strong>—</strong>
-          <span>Dados não disponíveis nesta demonstração</span>
+          <strong>
+            <Headphones size={28} />
+          </strong>
+          <span>Conheça os álbuns e as histórias de {selectedArtist}.</span>
         </div>
       </StatCard>
       <StatCard title="Artistas relacionados">
@@ -1236,6 +1276,20 @@ export default function App() {
           <ChevronRight size={17} />
         </button>
       </StatCard>
+      <StatCard title="SELEÇÃO SONARA">
+        <div className="editorial-picks">
+          {[albums[0], albums[7], albums[3]].map((v) => (
+            <button key={v.title} onClick={() => chooseAlbum(v.title)}>
+              <Art type={v.art} />
+              <span>
+                <strong>{v.title}</strong>
+                <small>{v.artist}</small>
+              </span>
+              <ChevronRight size={16} />
+            </button>
+          ))}
+        </div>
+      </StatCard>
     </>
   ) : (
     <>
@@ -1357,6 +1411,11 @@ export default function App() {
           >
             <Menu size={25} />
           </button>
+          <div className="legacy-header-trail">
+            <button onClick={() => navigate("Início")}>Eclipse</button>
+            <ChevronRight size={13} />
+            <span>Legacy</span>
+          </div>
           <div className="search-box">
             <Search size={23} />
             <input
@@ -1369,7 +1428,26 @@ export default function App() {
               }}
             />
           </div>
-          <span className="header-edition">ECLIPSE / VOL. 02</span>
+          <span className="mobile-legacy-brand">
+            SONARA <Moon size={22} />
+          </span>
+          <div className="header-tools">
+            <button
+              className="header-bell"
+              aria-label="Explorar novidades"
+              onClick={() => navigate("Explorar")}
+            >
+              <Bell size={22} />
+            </button>
+            <button
+              className="header-profile"
+              aria-label="Abrir biblioteca"
+              onClick={() => navigate("Biblioteca")}
+            >
+              <Art type="eclipse" />
+              <ChevronDown size={15} />
+            </button>
+          </div>
         </header>
         <div className="page-columns">
           <main id="main-content" className="main-content">

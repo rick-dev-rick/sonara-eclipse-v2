@@ -1,0 +1,9 @@
+# SONARA — faithful reference styling
+
+The user's six supplied images are the selected, approved visual target. They explicitly authorize changes throughout the existing project and want execution, preserving current functionality. No new design exploration gate is needed.
+
+Direction: preserve catalogue data, identity migration, routes and real unavailable-audio state. Match reference density and proportions: compact black/glass panels; vivid red pill CTAs and control ring; pale outline icons; cinematic photographic heroes with integrated smoke/red eclipse; compact album rows and contextual side panels. Home retains the same artists and playlists, adding catalogue shortcuts with the reference's layout rhythm rather than importing fictional music data.
+
+Legacy target: charcoal #050505/#111111/#2a2a2a, paper #d8d2c8, gray #b8b1a6 and restrained aged-paper #8e7f6e; archival notebook collage, photograph integrated into background, slender serif display title, handwritten uppercase signature, textured cards and restrained borders. Compact hero and chapters directly above the collection. Keep 17 source intact and square. No full-document pseudo-element images, filters, animated reveal, backdrop effects or blend modes. Decorative textures are pre-rendered raster assets with finite bounds/repeat tiles.
+
+Implementation: generate original art-directed assets from supplied visual references; retain native text and controls, existing Lucide outline icon system (visually matches supplied interface), Inter body/display UI, Cormorant Garamond editorial text, and Nothing You Could Do signature. Refactor hero component rules rather than stacking incompatible styles. Compare source and implementation side by side in same viewport/state, iterate, then retest widths 320/375/390/430/768/1024/1440 and publish to existing GitHub Pages.

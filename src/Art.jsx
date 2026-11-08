@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 const base = `${import.meta.env.BASE_URL}assets/`;
 const files = {
+  "archive-palms": "archive-palms.webp",
+  "archive-impact": "legacy-archive-hero.webp",
   "artist-x": "legacy-portrait.webp",
   x: "legacy-jahseh.webp",
   legacy: "legacy-portrait.webp",
@@ -11,10 +13,11 @@ const files = {
   "artist-trio": "artist-trio.jpg",
   "playlist-x": "playlist-jahseh.svg",
   "playlist-trap": "playlist-trap-br.svg",
-  dark: "cover-after-dark.webp",
-  focus: "cover-deep-focus.webp",
-  drive: "cover-night-drive.webp",
-  energy: "cover-energy.webp",
+  eclipse: "eclipse-avatar.webp",
+  dark: "mood-after-dark-art.webp",
+  focus: "mood-deep-focus-art.webp",
+  drive: "mood-night-drive-art.webp",
+  energy: "mood-energy-art.webp",
   time: "album-eterno.webp",
 };
 export default function Art({
