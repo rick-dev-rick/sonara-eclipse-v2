@@ -89,5 +89,29 @@
     "height": 724,
     "sha256": "5bde87f751dcee66f8888ec2c10c753a2668e2eb0eb4ea68f760976727d92d42",
     "type": "AI-created editorial artwork"
+  },
+  {
+    "file": "hero-matue-portrait.webp",
+    "width": 2172,
+    "height": 724,
+    "sha256": "954e817dd1ca31504decf9b48c88219b4b061d4b47cfc8000f34fa40ea2ad954",
+    "type": "AI-assisted composite based on credited artist photograph",
+    "reference": "artist-matue.jpg"
+  },
+  {
+    "file": "hero-teto-portrait.webp",
+    "width": 2172,
+    "height": 724,
+    "sha256": "4c8896403842656e9fd8241a98365cc1a874c5e47b24f88d1e64e4b249197d42",
+    "type": "AI-assisted composite based on credited artist photograph",
+    "reference": "artist-teto.jpg"
+  },
+  {
+    "file": "hero-wiu-portrait.webp",
+    "width": 2172,
+    "height": 724,
+    "sha256": "9710d874a5e2431dbd15af1cb52e63267f610cb9d63384367825a1d82ab851f7",
+    "type": "AI-assisted composite based on credited artist photograph",
+    "reference": "artist-wiu.jpg"
   }
 ]

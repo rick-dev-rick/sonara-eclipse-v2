@@ -17,19 +17,6 @@
   object-position: center;
   pointer-events: none;
 }
-.cinematic-portrait {
-  position: absolute;
-  inset: 0 0 0 auto;
-  width: 48%;
-}
-.cinematic-portrait > .cover {
-  height: 100%;
-  aspect-ratio: auto;
-  border-radius: 0;
-}
-.cinematic-portrait img {
-  object-position: center 20%;
-}
 .cinematic-hero > .hero-copy {
   position: relative;
   z-index: 1;
@@ -183,6 +170,9 @@
   .cinematic-backdrop {
     object-position: 72% center;
   }
+  .artist-photo-backdrop {
+    object-position: 84% center;
+  }
   .cinematic-hero .hero-copy {
     background: #0304078c;
   }
@@ -217,10 +207,6 @@
   }
   .cinematic-edition {
     display: none;
-  }
-  .portrait-hero .cinematic-portrait {
-    width: 100%;
-    opacity: 0.7;
   }
   .cinematic-album {
     padding: 20px;

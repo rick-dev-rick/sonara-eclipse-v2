@@ -1,5 +1,5 @@
 import React from "react";
-import Art from "./Art.jsx";
+import { artistHeroes } from "./artist-heroes.mjs";
 import "./hero.css";
 
 export default function Hero({
@@ -7,28 +7,21 @@ export default function Hero({
   artist = "XXXTENTACION",
   children,
 }) {
-  const file =
-    artist === "XXXTENTACION"
-      ? "hero-x-cinematic.webp"
-      : artist === "Matuê"
-        ? "hero-trap-cinematic.webp"
-        : null;
+  const artwork = kind === "home"
+    ? { file: "hero-trap-cinematic.webp", alt: "" }
+    : artistHeroes[artist];
   return (
     <section
-      className={`featured cinematic-hero cinematic-${kind} ${file ? "" : "portrait-hero"}`}
+      className={`featured cinematic-hero cinematic-${kind}`}
     >
-      {file ? (
+      {artwork && (
         <img
-          className="cinematic-backdrop"
-          src={`${import.meta.env.BASE_URL}assets/${file}`}
-          alt=""
+          className={`cinematic-backdrop ${artwork.file.endsWith("-portrait.webp") ? "artist-photo-backdrop" : ""}`}
+          src={`${import.meta.env.BASE_URL}assets/${artwork.file}`}
+          alt={artwork.alt}
           decoding="async"
           fetchPriority="high"
         />
-      ) : (
-        <div className="cinematic-portrait">
-          <Art type={artist === "Teto" ? "artist-teto" : "artist-wiu"} eager />
-        </div>
       )}
       {children}
     </section>
