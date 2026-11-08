@@ -751,3 +751,77 @@
  .legacy17-collection-copy p{font-size:10px!important}
  .legacy17-collection-meta{font-size:8px!important}
 }
+
+/* LEGACY / Safari iOS stability pass — keep editorial artwork, avoid
+   oversized document-wide textures and expensive scrolling compositing. */
+@media (max-width: 760px){
+  .legacy17-mode,
+  .legacy17-mode .main-area,
+  .legacy17-mode .main-content,
+  .legacy17-mode .page-columns{
+    background-color:#0d0c0b!important;
+    min-height:0!important;
+  }
+  .legacy17-mode .legacy17-page{
+    isolation:auto!important;
+    background:#14110f!important;
+    overflow:visible!important;
+    transform:none!important;
+    filter:none!important;
+    contain:none!important;
+    content-visibility:visible!important;
+  }
+  /* The old ::before painted a full-document image with blend and cover,
+     which was especially expensive while swiping in the iOS webview. */
+  .legacy17-mode .legacy17-page::before,
+  .legacy17-mode .legacy17-page::after{
+    content:none!important;
+    display:none!important;
+  }
+  .legacy17-mode .legacy17-hero-v2,
+  .legacy17-mode .legacy17-manifesto,
+  .legacy17-mode .legacy17-feature,
+  .legacy17-mode .legacy17-collection,
+  .legacy17-mode .legacy17-story,
+  .legacy17-mode .legacy17-impact{
+    background-color:#191511!important;
+    background-blend-mode:normal!important;
+    opacity:1!important;
+    visibility:visible!important;
+    content-visibility:visible!important;
+    contain:none!important;
+    backface-visibility:visible!important;
+    -webkit-backface-visibility:visible!important;
+  }
+  .legacy17-mode .legacy17-hero-v2 .legacy17-grain,
+  .legacy17-mode .legacy17-hero-ghost,
+  .legacy17-mode .legacy17-impact-writings{
+    display:none!important;
+  }
+  .legacy17-mode .legacy17-hero-v2 .legacy17-hero-content,
+  .legacy17-mode .legacy17-hero-v2 .legacy17-photo-stack,
+  .legacy17-mode .legacy17-collection-cover{
+    filter:none!important;
+  }
+  .legacy17-mode .legacy17-feature:hover{
+    transform:none!important;
+  }
+  .legacy17-mode .legacy17-photo-tape,
+  .legacy17-mode .legacy17-story-tape{
+    mix-blend-mode:normal!important;
+  }
+  .legacy17-mode .legacy17-feature,
+  .legacy17-mode .legacy17-collection,
+  .legacy17-mode .legacy17-story,
+  .legacy17-mode .legacy17-impact{
+    box-shadow:0 6px 18px #0005!important;
+  }
+  .legacy17-mode .bottom-player{
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+    background:#111116!important;
+  }
+  .legacy17-mode .legacy17-collection-banner{
+    background:#24201c!important;
+  }
+}
