@@ -1,3 +1,4 @@
+import LegacySoundtrack from "./LegacySoundtrack.jsx";
 import { trackId } from "./catalog.js";
 import React from "react";
 import { ArrowUpRight, Disc3, Heart, ListMusic } from "lucide-react";
@@ -48,6 +49,7 @@ export default function Legacy({
     });
   return (
     <article className="memorial">
+      <LegacySoundtrack />
       <div className="archive-line">
         <span>SONARA / THE ARCHIVE</span>
         <span>IN MEMORY OF JAHSEH</span>
@@ -209,8 +211,8 @@ export default function Legacy({
           })}
         </ol>
         <p className="archive-disclaimer">
-          Coleção editorial. As gravações originais não estão hospedadas nem são
-          reproduzidas nesta versão.
+          Coleção editorial. As faixas listadas não são reproduzidas pelo player.
+          Trilha de fundo: Hope instrumental.
         </p>
       </section>
       <ArchiveQuote placement="margin">You are worth more than you can believe.</ArchiveQuote>
