@@ -1,131 +1,1394 @@
-import React,{useState,useRef,useEffect} from 'react';
-import {House,Compass,Library,Disc3,UserRound,Heart,ListMusic,Search,Bell,ChevronDown,ChevronRight,Play,Pause,SkipBack,SkipForward,Shuffle,Repeat2,Volume2,Maximize,Minimize,Plus,MoreHorizontal,Music2,Clock3,Menu,X,Check,ArrowUpRight,AudioLines,Headphones,Download,CalendarDays,Tag,Users,SlidersHorizontal} from 'lucide-react';
-import {demoTracks,xTracks,matueTracks,legacyTracks,albums,collections} from './data.js';
-const NAV=[['Início',House],['Explorar',Compass],['Biblioteca',Library],['Álbuns',Disc3],['Artistas',UserRound],['Favoritos',Heart],['Playlists',ListMusic]];
-const asset=(name)=>`${import.meta.env.BASE_URL}assets/${name}.webp`;
-const artURL={
-"album-17":`${import.meta.env.BASE_URL}assets/official-album-17.jpg`,
-"album-question":asset("x-question"),
-"album-skins":asset("x-skins"),
-"album-look":`${import.meta.env.BASE_URL}assets/official-album-look.jpg`,
-
-"artist-x":asset("legacy-portrait"),
-"artist-matue":`${import.meta.env.BASE_URL}assets/artist-matue.jpg`,
-"artist-teto":`${import.meta.env.BASE_URL}assets/artist-teto.jpg`,
-"artist-wiu":`${import.meta.env.BASE_URL}assets/artist-wiu.jpg`,
-"artist-trio":`${import.meta.env.BASE_URL}assets/artist-trio.jpg`,
-"x":asset("legacy-jahseh"),
-"playlist-x":`${import.meta.env.BASE_URL}assets/playlist-jahseh.svg`,
-"playlist-trap":`${import.meta.env.BASE_URL}assets/playlist-trap-br.svg`,
-"home-hero":asset("hero-trap"),
-"x-hero":asset("hero-xxxtentacion"),
-"question":asset("cover-question"),
-"seventeen":asset("cover-17"),
-"skins":asset("cover-skins"),
-"rec-paz":asset("cover-paz"),
-"rec-little":asset("cover-little"),
-"rec-og":asset("cover-og"),
-"rec-hseh":asset("cover-hseh"),
-"rec-djonga":asset("cover-djonga"),
-"dark":asset("cover-after-dark"),
-"focus":asset("cover-deep-focus"),
-"drive":asset("cover-night-drive"),
-"energy":asset("cover-energy"),
-"time":asset("album-eterno"),
-"legacy":asset("legacy-jahseh"),
-
-
-
-"album-bvf":`${import.meta.env.BASE_URL}assets/official-album-bvf.jpg`,
-
-"album-revenge":`${import.meta.env.BASE_URL}assets/official-album-revenge.jpg`,
-"album-maquina":`${import.meta.env.BASE_URL}assets/official-album-maquina.jpg`,
-"album-333":`${import.meta.env.BASE_URL}assets/official-album-333.jpg`,
-"album-xtranho":`${import.meta.env.BASE_URL}assets/official-album-xtranho.jpg`,
-"album-maior":`${import.meta.env.BASE_URL}assets/official-album-maior.jpg`,
-"album-colapso":`${import.meta.env.BASE_URL}assets/official-album-colapso.jpg`,
-"album-manual":`${import.meta.env.BASE_URL}assets/official-album-manual.jpg`,
-"album-vagabundo":`${import.meta.env.BASE_URL}assets/official-album-vagabundo.jpg`,
-"album-808":`${import.meta.env.BASE_URL}assets/official-album-808.jpg`
+import {
+  trackId,
+  migrateFavorites,
+  queueWithTrack,
+  favoriteLabel,
+} from "./catalog.js";
+import Art from "./Art.jsx";
+import Legacy from "./Legacy.jsx";
+import Player from "./Player.jsx";
+import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
+import {
+  House,
+  Compass,
+  Library,
+  Disc3,
+  UserRound,
+  Heart,
+  ListMusic,
+  Search,
+  ChevronRight,
+  Play,
+  Shuffle,
+  Plus,
+  Music2,
+  Clock3,
+  Menu,
+  X,
+  CalendarDays,
+  Tag,
+} from "lucide-react";
+import { demoTracks, xTracks, matueTracks, albums } from "./data.js";
+const NAV = [
+  ["Início", House],
+  ["Explorar", Compass],
+  ["Biblioteca", Library],
+  ["Álbuns", Disc3],
+  ["Artistas", UserRound],
+  ["Favoritos", Heart],
+  ["Playlists", ListMusic],
+];
+const remembered = (name, initial) => {
+  try {
+    return JSON.parse(localStorage.getItem(name)) ?? initial;
+  } catch {
+    return initial;
+  }
 };
-const remembered=(name,initial)=>{try{return JSON.parse(localStorage.getItem(name))??initial}catch{return initial}};
-function Art({type='dark',className='',children}){return <div className={'cover cover-'+type+' '+className}>
- {artURL[type]&&<img src={artURL[type]} alt="" loading={['artist-x','album-17','album-question','x','legacy'].includes(type)?'eager':'lazy'} decoding="async" onError={e=>{if(!e.currentTarget.dataset.fallback){e.currentTarget.dataset.fallback='1';e.currentTarget.src=type==='album-17'?asset('x-seventeen'):`${import.meta.env.BASE_URL}assets/${type}.svg`}else{e.currentTarget.style.display='none'}}}/>}
- {type==='dark'&&<span className="moon-shape"/>}{type==='drive'&&<><span className="road"/><span className="tail-lights"/></>}{type==='focus'&&<AudioLines size={42} strokeWidth={1.5}/>}{type==='energy'&&<AudioLines size={46} strokeWidth={1.5}/>}{type==='three'&&<strong className="cover-label">333</strong>}{type==='time'&&<strong className="cover-label">M</strong>}{type==='trap'&&<strong className="cover-label">TRAP BR</strong>}{type==='eclipse'&&<span className="eclipse-ring"/>}{type==='crown'&&<strong className="cover-label">♛</strong>}{type==='purple'&&<span className="purple-orbit"/>}{children}
- </div>}
-function Brand(){return <div className="brand"><div className="brand-symbol">S</div><div className="brand-words"><strong>SONARA</strong><span>ECLIPSE</span></div></div>}
-function Label({children}){return <div className="eyebrow"><span/> {children}</div>}
-function PaneTitle({children,action,onClick}){return <div className="pane-title"><h2>{children}</h2>{action&&<button onClick={onClick}>{action} <span>→</span></button>}</div>}
-function IconButton({Icon,active=false,onClick,title,fill=false}){return <button title={title||''} aria-label={title||''} className={'icon-button '+(active?'red':'')} onClick={onClick}><Icon size={19} fill={fill?'currentColor':'none'}/></button>}
-function StatCard({title,children}){return <section className="aside-panel"><h3 className="aside-title">{title}</h3>{children}</section>}
-export default function App(){
- const [page,setPage]=useState('Início'),[search,setSearch]=useState(''),[selectedAlbum,setSelectedAlbum]=useState('Máquina do Tempo'),[selectedArtist,setSelectedArtist]=useState('XXXTENTACION'),[mobileNav,setMobileNav]=useState(false);
- const [favorites,setFavorites]=useState(()=>remembered('sonara-v2-faves',[]));
- const [albumCatalog,setAlbumCatalog]=useState({});
- useEffect(()=>{let cancelled=false;fetch(`${import.meta.env.BASE_URL}album-tracklists.json`).then(r=>r.ok?r.json():{}).then(j=>{if(!cancelled)setAlbumCatalog(j||{})}).catch(()=>{});return()=>{cancelled=true}},[]);
+function Brand() {
+  return (
+    <div className="brand">
+      <div className="brand-symbol">S</div>
+      <div className="brand-words">
+        <strong>SONARA</strong>
+        <span>ECLIPSE</span>
+      </div>
+    </div>
+  );
+}
+function Label({ children }) {
+  return (
+    <div className="eyebrow">
+      <span /> {children}
+    </div>
+  );
+}
+function PaneTitle({ children, action, onClick }) {
+  return (
+    <div className="pane-title">
+      <h2>{children}</h2>
+      {action && (
+        <button onClick={onClick}>
+          {action} <span>→</span>
+        </button>
+      )}
+    </div>
+  );
+}
+function IconButton({ Icon, active = false, onClick, title, fill = false }) {
+  return (
+    <button
+      title={title || ""}
+      aria-label={title || ""}
+      className={"icon-button " + (active ? "red" : "")}
+      onClick={onClick}
+    >
+      <Icon size={19} fill={fill ? "currentColor" : "none"} />
+    </button>
+  );
+}
+function StatCard({ title, children }) {
+  return (
+    <section className="aside-panel">
+      <h3 className="aside-title">{title}</h3>
+      {children}
+    </section>
+  );
+}
+export default function App() {
+  const initialRoute = () => {
+    try {
+      return decodeURIComponent(location.hash.slice(1)).split("/");
+    } catch {
+      return ["Início"];
+    }
+  };
+  const [page, setPage] = useState(() => initialRoute()[0] || "Início"),
+    [search, setSearch] = useState(""),
+    [selectedAlbum, setSelectedAlbum] = useState(
+      () => initialRoute()[1] || "Máquina do Tempo",
+    ),
+    [selectedArtist, setSelectedArtist] = useState(
+      () => initialRoute()[1] || "XXXTENTACION",
+    ),
+    [mobileNav, setMobileNav] = useState(false);
+  const navRef = useRef(null);
+  useEffect(() => {
+    if (!mobileNav) return;
+    const previous = document.activeElement,
+      old = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const links = () =>
+      [...navRef.current.querySelectorAll("button,a")].filter(
+        (n) => !n.disabled,
+      );
+    links()[0]?.focus();
+    const trap = (e) => {
+      if (e.key !== "Tab") return;
+      const a = links(),
+        first = a[0],
+        last = a[a.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", trap);
+    return () => {
+      document.body.style.overflow = old;
+      document.removeEventListener("keydown", trap);
+      previous?.focus();
+    };
+  }, [mobileNav]);
+  const [favorites, setFavorites] = useState(() =>
+    migrateFavorites(
+      Array.isArray(remembered("sonara-v2-faves", []))
+        ? remembered("sonara-v2-faves", [])
+        : [],
+    ),
+  );
+  const [albumCatalog, setAlbumCatalog] = useState({});
+  useEffect(() => {
+    let cancelled = false;
+    fetch(`${import.meta.env.BASE_URL}album-tracklists.json`)
+      .then((r) => (r.ok ? r.json() : {}))
+      .then((j) => {
+        if (!cancelled) setAlbumCatalog(j || {});
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
- const [playlists,setPlaylists]=useState([{name:'XXXTENTACION',ids:[],art:'artist-x',note:'Discografia de Jahseh · catálogo em expansão'},{name:'Trap BR — 30PRAUM',ids:[],art:'artist-trio',note:'Matuê, Teto e WIU · catálogo em expansão'}]);
- const [playlistSelected,setPlaylistSelected]=useState(0),[newPlaylist,setNewPlaylist]=useState('');
- const [song,setSong]=useState(0),[playing,setPlaying]=useState(false),[time,setTime]=useState(0),[volume,setVolume]=useState(.58),[shuffle,setShuffle]=useState(false),[repeat,setRepeat]=useState(false),[expanded,setExpanded]=useState(false);
- const audio=useRef(null),osc=useRef(null),gain=useRef(null);
- useEffect(()=>{localStorage.setItem('sonara-v2-faves',JSON.stringify(favorites))},[favorites]);
- // O player mantém a identidade visual, sem áudio fictício ou reprodução comercial.
- const navigate=p=>{setPage(p);setMobileNav(false);window.scrollTo(0,0)};
- useEffect(()=>{window.scrollTo(0,0)},[page]);
- const chooseAlbum=a=>{setSelectedAlbum(a);navigate('Detalhe Álbum')};const chooseArtist=a=>{setSelectedArtist(a);navigate('Detalhe Artista')};
- const listen=i=>{setSong((i+demoTracks.length)%demoTracks.length);setTime(0);setPlaying(false)};
- const toggleLike=id=>setFavorites(s=>s.includes(id)?s.filter(t=>t!==id):[...s,id]);
- const showDemo=()=>listen(0);
- const info=<div className="demo-disclaimer">Informações artísticas e capas são composições demonstrativas, não lançamentos oficiais. Catálogo visual demonstrativo. As gravações comerciais citadas não estão hospedadas nem são reproduzidas pela SONARA.</div>;
- const tile=(title,type,artist='SONARA Sessions',onClick=()=>chooseAlbum(title))=><button key={title} className="record" onClick={onClick}><Art type={type}/><span className="record-play"><Play size={16} fill="currentColor"/></span><b>{title}</b><small>{artist}</small></button>;
- const albumTile=a=>tile(a.title,a.art,a.artist,()=>chooseAlbum(a.title));
- const tableX=(items=xTracks)=> <div className="music-table"><div className="music-table-header"><span>#</span><span>Título</span><span>Reproduções</span><Clock3 size={16}/><span/></div>{items.map((t,i)=><div className="music-row" key={t.title}><button className="track-num" onClick={showDemo}>{i===0?<AudioLines size={18}/>:i+1}</button><button className="row-track" onClick={showDemo}><Art type={t.cover||'three'}/><strong>{t.title}</strong><small className="explicit">E</small></button><span className="plays">{t.plays||'—'}</span><span className="duration">{t.length}</span><IconButton Icon={Heart} title="Favoritar faixa" active={favorites.includes(t.title)} fill={favorites.includes(t.title)} onClick={()=>toggleLike(t.title)}/></div>)}</div>;
- const pageHome=<>
- <div className="featured hero-home sonara-hero"><div className="hero-copy"><Label>SONARA EXCLUSIVE</Label><h1>Trap BR</h1><p>Matuê · Teto · WIU<br/>O universo 30PRAUM em um só lugar.</p><button className="primary" onClick={()=>{setPlaylistSelected(1);navigate('Playlists')}}><Play size={18} fill="currentColor"/> Explorar coleção</button></div><div className="hero-sun"/><div className="hero-person"><Art type="artist-trio"/></div><div className="hero-dots"><span className="lit"/>● ● ●</div></div>
- <PaneTitle action="Ver artistas" onClick={()=>navigate('Artistas')}>Em destaque</PaneTitle><div className="recent-grid featured-artists">{[['XXXTENTACION','artist-x','LEGACY'],['Matuê','artist-matue','30PRAUM'],['Teto','artist-teto','30PRAUM'],['WIU','artist-wiu','30PRAUM']].map(([name,type,label])=><button className="record" key={name} onClick={()=>chooseArtist(name)}><Art type={type}/><b>{name}</b><small>{label}</small><span className="record-play"><ChevronRight size={17}/></span></button>)}</div>
- <PaneTitle action="Ver todas" onClick={()=>navigate('Playlists')}>Coleções em destaque</PaneTitle><div className="home-collections">{playlists.map((l,i)=><button key={l.name} className="home-collection" onClick={()=>{setPlaylistSelected(i);navigate('Playlists')}}><Art type={l.art}/><span><small>{i===0?'SONARA · LEGACY':'SONARA · 30PRAUM'}</small><strong>{l.name}</strong><span>{i===0?'O legado musical de Jahseh.':'Matuê, Teto e WIU.'}</span></span><ChevronRight size={20}/></button>)}</div>
- <button className="home-legacy" onClick={()=>navigate('LEGACY')}><Art type="artist-x"/><span><strong>FOREVER JAHSEH</strong><small>Uma homenagem especial. The Music Lives On.</small></span><ChevronRight size={20}/></button>
- </>;
- const pageArtist=<><div className="featured artist-hero"><div className="hero-copy"><Label>Artista</Label><h1>{selectedArtist}</h1><p>{selectedArtist==='XXXTENTACION'?'Artista que transformou dor, solidão e reflexão em música, marcando uma geração com sua autenticidade e vulnerabilidade.':'Trap brasileiro, identidade sonora marcante e uma trajetória de grandes lançamentos.'}</p><div className="hero-actions"><button className="primary" onClick={showDemo}><Play size={18} fill="currentColor"/> Reproduzir</button><button className="outline" onClick={()=>toggleLike(selectedArtist)}>{favorites.includes(selectedArtist)?'Seguindo':'Seguir'}</button><IconButton Icon={Heart} title="Favoritar artista" active={favorites.includes(selectedArtist)} onClick={()=>toggleLike(selectedArtist)}/><IconButton Icon={Shuffle} title="Aleatório" onClick={()=>setShuffle(s=>!s)} active={shuffle}/></div></div><div className="hero-sun"/><div className="hero-person"><Art type={selectedArtist==='XXXTENTACION'?'artist-x':selectedArtist==='Matuê'?'artist-matue':selectedArtist==='Teto'?'artist-teto':'artist-wiu'}/></div></div>
- <PaneTitle action="Ver todas" onClick={()=>navigate('Biblioteca')}>Músicas populares</PaneTitle>{selectedArtist==='XXXTENTACION'?tableX(xTracks.slice(0,3)):selectedArtist==='Matuê'?tableX(matueTracks.slice(0,3)):<div className="playlist-disclaimer">O catálogo de {selectedArtist} será incorporado após a conferência das faixas. A playlist Trap BR já está disponível.</div>}
- <PaneTitle action="Ver discografia" onClick={()=>navigate('Álbuns')}>Álbuns em destaque</PaneTitle><div className="album-strips">{albums.filter(album=>album.artist===selectedArtist).slice(0,5).map(a=><button className="album-strip" key={a.title} onClick={()=>chooseAlbum(a.title)}><Art type={a.art}/><span><b>{a.title}</b><small>{a.artist}</small><small>{a.year} · Álbum</small></span><span className="record-play"><Play size={15} fill="currentColor"/></span></button>)}</div>
- <PaneTitle action="Ver álbuns" onClick={()=>navigate('Álbuns')}>Outros projetos de {selectedArtist}</PaneTitle><div className="recent-grid artist-discography">{albums.filter(album=>album.artist===selectedArtist).slice(0,4).map(albumTile)}</div></>;
- const a=albums.find(v=>v.title===selectedAlbum)||{title:selectedAlbum,artist:'SONARA Sessions',year:'2026',art:'dark'};
- const albumEntry=albumCatalog[a.art];
- const albumTracks=albumEntry?.tracks?.length?albumEntry.tracks:(a.tracks||[]).map(title=>({title,duration:null,number:null}));
- const albumVerified=!!albumEntry?.complete;
- const pageAlbum=<><div className="featured album-hero album-detail-premium"><div className="album-backdrop"><Art type={a.art}/></div><div className="album-cover"><Art type={a.art}/></div><div className="album-description"><Label>{a.kind||'Álbum'} · SONARA DISCOGRAPHY</Label><h1>{a.title}</h1><button className="album-artist-link" onClick={()=>chooseArtist(a.artist)}>{a.artist} <ChevronRight size={16}/></button><div className="album-stats">{a.year} <span>·</span> {a.kind||'Álbum'} <span>·</span> {albumTracks.length?albumTracks.length+(albumVerified?' faixas':' faixas catalogadas até agora'):'Faixas em catalogação'}</div><p>{a.desc}</p><div className="hero-actions"><button className="primary" onClick={()=>{if(a.artist==='XXXTENTACION'){setPlaylistSelected(0)}else{setPlaylistSelected(1)}navigate('Playlists')}}><ListMusic size={18}/> Ver na playlist</button><IconButton Icon={Heart} title="Favoritar álbum" active={favorites.includes(a.title)} fill={favorites.includes(a.title)} onClick={()=>toggleLike(a.title)}/></div></div></div>
- <div className="album-track-panel sonara-album-table"><div className="album-track-header"><span>#</span><span>Título</span><span>Álbum</span><Clock3 size={16}/><span/></div>{albumTracks.length?<div className="album-track-list">{albumTracks.map((track,i)=><div className="album-track-item" key={track.title+'-'+i}><span className="album-track-index">{String(track.number||i+1).padStart(2,'0')}</span><span className="album-track-name"><strong>{track.title}</strong><small className="track-artist">{a.artist}</small></span><span className="album-row-album">{a.title}</span><span className="album-row-time">{track.duration||'—'}</span><button title="Favoritar faixa" className={favorites.includes(a.title+'|'+track.title)?'favored':''} onClick={()=>toggleLike(a.title+'|'+track.title)}><Heart size={18} fill={favorites.includes(a.title+'|'+track.title)?'currentColor':'none'}/></button></div>)}</div>:<div className="album-empty"><Disc3 size={29}/><strong>Repertório em catalogação</strong><p>As músicas deste projeto serão adicionadas após conferência.</p></div>}</div>
- <div className="album-note">{albumVerified?'Lista de faixas do lançamento consultada em '+albumEntry.source+'.':'Catálogo em expansão: a lista ainda pode estar incompleta.'} A SONARA não hospeda gravações comerciais.</div></>;
- const pageLegacy=<div className="legacy17-page">
- <div className="legacy17-topline"><span className="legacy17-breadcrumb"><span>SONARA ECLIPSE</span><ChevronRight size={14}/><strong>LEGACY</strong></span><span className="legacy17-topmark">EST. 1998 <span>✦</span> THE MUSIC LIVES ON</span></div>
- <section className="legacy17-hero legacy17-hero-v2">
-  <div className="legacy17-grain" aria-hidden="true"/><div className="legacy17-edge-scrawl" aria-hidden="true"><span>17</span><span>everything has meaning</span><span>FOREVER / JAHSEH</span></div><div className="legacy17-background-archive" aria-hidden="true"><span className="legacy17-archive-hand">FOREVER<br/>JAHSEH</span><span className="legacy17-archive-no">17.</span></div><div className="legacy17-paper" aria-hidden="true"><span className="legacy17-scrawl">17<br/>a world of<br/>emotions</span><div className="legacy17-paper-lines"/></div>
-  <div className="legacy17-hero-ghost" aria-hidden="true"><Art type="artist-x"/></div>
-  <div className="legacy17-photo-stack"><div className="legacy17-photo-caption-top">ARCHIVE / 1998—2018</div><div className="legacy17-portrait"><Art type="artist-x"/><span className="legacy17-photo-caption">JAHSEH · FOREVER</span></div><div className="legacy17-photo-tape" aria-hidden="true"/><span className="legacy17-photo-seal">17</span></div>
-  <div className="legacy17-hero-content"><div className="legacy17-kicker">THE SONARA ARCHIVE <span>✦</span> IN MEMORY OF JAHSEH</div><h1>LEGACY<span className="legacy17-period">.</span></h1><div className="legacy17-script">Forever Jahseh</div><div className="legacy17-rule"/><p>The Music Lives On.</p><span className="legacy17-intro">Uma história que continua através da música.</span><div className="legacy17-actions"><button className="legacy17-primary" onClick={()=>document.getElementById('legacy17-songs')?.scrollIntoView({behavior:'smooth',block:'start'})}><ListMusic size={18}/> Explorar músicas</button><button className="legacy17-secondary" onClick={()=>{setPlaylistSelected(0);navigate('Playlists')}}><Disc3 size={17}/> Ver discografia</button></div></div>
-  <div className="legacy17-hero-footer"><span>01 / 03 — THE ARCHIVE</span><span>LONG LIVE JAHSEH <span>✦</span></span></div><div className="legacy17-hero-rip" aria-hidden="true"/>
- </section>
- <div className="legacy17-manifesto"><div className="legacy17-pressed-flower" aria-hidden="true"><span>✳</span><span>✦</span><span>✳</span></div><span className="legacy17-manifesto-index">A NOTE FROM SONARA / 001</span><div><span className="legacy17-manifesto-mark">“</span><p>Algumas músicas se tornam parte de quem somos.<br/><em>O tempo passa. O significado permanece.</em></p></div><span className="legacy17-manifesto-signature">FOREVER<br/>JAHSEH ♡</span></div>
- <div className="legacy17-intertitle"><span>CHAPTERS OF A LEGACY</span><i/></div><div className="legacy17-sections"><button className="legacy17-feature" onClick={()=>document.getElementById('legacy17-songs')?.scrollIntoView({behavior:'smooth',block:'start'})}><div className="legacy17-feature-art paper-notes"><Art type="album-17"/><span className="legacy17-feature-sticker">THE MUSIC</span></div><span><small>01 / THE MUSIC</small><strong>A música</strong><em>As canções que permanecem.</em></span><ArrowUpRight size={19}/></button><button className="legacy17-feature" onClick={()=>document.getElementById('legacy17-story')?.scrollIntoView({behavior:'smooth',block:'start'})}><div className="legacy17-feature-art photograph"><Art type="artist-x"/><span className="legacy17-feature-sticker">MEMORIES</span></div><span><small>02 / THE STORY</small><strong>A história</strong><em>Uma voz que marcou uma geração.</em></span><ArrowUpRight size={19}/></button><button className="legacy17-feature" onClick={()=>document.getElementById('legacy17-impact')?.scrollIntoView({behavior:'smooth',block:'start'})}><div className="legacy17-feature-art legacy17-impact-art"><Art type="x"/><span className="legacy17-impact-art-vignette" aria-hidden="true"/><span className="legacy17-impact-art-number" aria-hidden="true">17</span><span className="legacy17-feature-sticker">LONG LIVE X</span></div><span><small>03 / THE IMPACT</small><strong>O legado</strong><em>Uma memória que continua viva.</em></span><ArrowUpRight size={19}/></button></div>
- <section className="legacy17-collection" id="legacy17-songs"><div className="legacy17-collection-banner"><div className="legacy17-collection-cover"><Art type="album-17"/><span className="legacy17-collection-stamp">SONARA EXCLUSIVE</span></div><div className="legacy17-collection-copy"><span>01 / A PERSONAL COLLECTION</span><h2>FOREVER<br/><em>JAHSEH</em></h2><p>A música permanece. Uma seleção dedicada às canções que deixaram marcas e atravessam o tempo.</p><div className="legacy17-collection-meta"><Heart size={15}/><span>{legacyTracks.length} FAIXAS SELECIONADAS</span><span>·</span><span>LONG LIVE X</span></div></div><span className="legacy17-collection-number">17</span><div className="legacy17-collection-tape" aria-hidden="true"/><span className="legacy17-collection-written">music is memory.</span></div>
- <div className="legacy17-section-heading"><div><span>FOREVER JAHSEH / THE MUSIC</span><h2>Every song tells a story.</h2><p>As faixas que fazem parte desta homenagem.</p></div><span className="legacy17-count">{legacyTracks.length} MÚSICAS</span></div><div className="legacy17-table-heading"><span>#</span><span>MÚSICA</span><span>♡</span></div><div className="legacy17-tracklist">{legacyTracks.map((name,i)=><div className={'legacy17-track '+(name==='Everybody Dies In Their Nightmares'?'legacy17-track-loved':'')} key={name}><span className="legacy17-track-no">{String(i+1).padStart(2,'0')}</span><div className="legacy17-track-cover"><Art type={name==='Jocelyn Flores'||name==='Everybody Dies In Their Nightmares'||name==='Carry On'||name==='Save Me'?'album-17':name==='Moonlight'||name==='changes'||name==='Hope'||name==='the remedy for a broken heart (why am I so in love)'?'album-question':'artist-x'}/></div><span className="legacy17-track-name"><strong>{name}</strong><small>XXXTENTACION {name==='Everybody Dies In Their Nightmares'&&<span className="legacy17-curated-tag">✦ SELEÇÃO ESPECIAL</span>}</small></span><button className={'legacy17-track-heart '+(favorites.includes('legacy-'+name)?'active':'')} title="Adicionar ou remover dos favoritos" onClick={()=>toggleLike('legacy-'+name)}><Heart size={19} fill={favorites.includes('legacy-'+name)?'currentColor':'none'}/></button></div>)}</div><div className="legacy17-catalogue-note">Homenagem editorial. O áudio das gravações originais não está disponível nesta versão.</div></section>
- <section id="legacy17-story" className="legacy17-story"><div className="legacy17-story-number">02 / THE STORY</div><div className="legacy17-story-body"><span>THE HUMAN BEHIND THE MUSIC</span><h2>Uma voz que<br/><em>permanece.</em></h2><p>Jahseh Dwayne Ricardo Onfroy (1998–2018) deixou uma obra marcada por vulnerabilidade, intensidade e busca por compreensão. Sua música continua atravessando gerações e acompanhando momentos que nem sempre encontramos palavras para descrever.</p><div className="legacy17-story-underline">IN MEMORY OF JAHSEH — 1998 / 2018</div></div><div className="legacy17-story-image"><Art type="artist-x"/><span>IN MEMORY OF JAHSEH</span><div className="legacy17-story-tape" aria-hidden="true"/></div></section>
- <section id="legacy17-impact" className="legacy17-impact"><div className="legacy17-impact-bg">17</div><div className="legacy17-impact-writings" aria-hidden="true">forever in our hearts · forever in our hearts · forever in our hearts</div><div className="legacy17-handheart">♡</div><span>03 / THE IMPACT</span><h2>O legado vive.</h2><p>A música permanece. A memória continua.</p><small>LONG LIVE JAHSEH · 1998 — 2018</small></section>
- <footer className="legacy17-end"><span>SONARA ECLIPSE / LEGACY</span><span>FOREVER JAHSEH ♡</span></footer>
- </div>;
- const pageExplore=<><div className="page-heading"><Label>SONARA ECLIPSE · DESCUBRA</Label><h1>Explorar</h1><p>O universo de XXXTENTACION e dos artistas da 30PRAUM.</p></div><PaneTitle>Artistas</PaneTitle><div className="recent-grid featured-artists">{[['XXXTENTACION','artist-x'],['Matuê','artist-matue'],['Teto','artist-teto'],['WIU','artist-wiu']].map(([name,type])=><button className="record" key={name} onClick={()=>chooseArtist(name)}><Art type={type}/><b>{name}</b><small>{name==='XXXTENTACION'?'LEGACY':'30PRAUM'}</small></button>)}</div><PaneTitle>Playlists em destaque</PaneTitle><div className="home-collections">{playlists.map((l,i)=><button className="home-collection" key={l.name} onClick={()=>{setPlaylistSelected(i);navigate('Playlists')}}><Art type={l.art}/><span><small>{i===0?'JAHSEH':'30PRAUM'}</small><strong>{l.name}</strong><span>{l.note}</span></span><ChevronRight size={20}/></button>)}</div><PaneTitle>Álbuns</PaneTitle><div className="recent-grid">{albums.filter(a=>a.artist==='XXXTENTACION'||a.artist==='Matuê').slice(0,5).map(albumTile)}</div></>;
- const pageLibrary=<><div className="page-heading"><Label>SUA COLEÇÃO</Label><h1>Biblioteca</h1><p>Suas músicas, playlists e descobertas em um só lugar.</p></div><div className="library-stats">{[[albums.length,'Álbuns catalogados'],[favorites.length,'Favoritos'],[playlists.length,'Playlists']].map(([v,l])=><div key={l}><strong>{v}</strong><small>{l}</small></div>)}</div><PaneTitle>Suas playlists</PaneTitle><div className="personal-playlists library-playlists">{playlists.map((l,i)=><button className="personal-playlist" key={l.name} onClick={()=>{setPlaylistSelected(i);navigate('Playlists')}}><Art type={l.art}/><span className="personal-playlist-info"><small>{i===0?'LEGADO · JAHSEH':'TRAP BR · 30PRAUM'}</small><strong>{l.name}</strong><span>{l.note}</span></span><ChevronRight size={19}/></button>)}</div></>;
- const pageAlbums=<><div className="page-heading discography-heading"><Label>SONARA ECLIPSE · DISCOGRAFIA</Label><h1>Álbuns & projetos</h1><p>Quatro artistas. Histórias diferentes. Um universo musical.</p><div className="discography-count"><Disc3 size={17}/> {albums.length} lançamentos catalogados</div></div>{['XXXTENTACION','Matuê','Teto','WIU'].map(artist=><section className="discography-section" key={artist}><div className="discography-section-title"><div><span className="discography-number">0{['XXXTENTACION','Matuê','Teto','WIU'].indexOf(artist)+1}</span><h2>{artist}</h2></div><small>{albums.filter(a=>a.artist===artist).length} projetos</small></div><div className="album-gallery">{albums.filter(a=>a.artist===artist).map(albumTile)}</div></section>)}</>;
- const pageArtists=<><div className="page-heading"><Label>QUEM FAZ A MÚSICA</Label><h1>Artistas</h1><p>Conheça os artistas em destaque na SONARA.</p></div><div className="recent-grid featured-artists">{[['XXXTENTACION','artist-x'],['Matuê','artist-matue'],['Teto','artist-teto'],['WIU','artist-wiu']].map(([name,type])=><button className="record" key={name} onClick={()=>chooseArtist(name)}><Art type={type}/><b>{name}</b><small>{name==='XXXTENTACION'?'LEGACY':'30PRAUM'}</small></button>)}</div><PaneTitle>Homenagem especial</PaneTitle><button className="legacy-invite" onClick={()=>navigate('LEGACY')}><strong>LEGACY — The Music Lives On.</strong><span>Conhecer FOREVER JAHSEH →</span></button></>;
- const pageFavorites=<><div className="page-heading"><Label>SUAS ESCOLHAS</Label><h1>Favoritos</h1><p>Tudo aquilo que merece ficar com você.</p></div><PaneTitle>Salvos na SONARA</PaneTitle>{favorites.length?<div className="favorites-stack">{favorites.map(id=><div key={id}><Heart size={18} fill="#ff0000" color="#ff0000"/><strong>{demoTracks.find(t=>t.id===id)?.title||id}</strong><button onClick={()=>toggleLike(id)}>Remover</button></div>)}</div>:<div className="empty-state"><Heart size={36}/><h3>Seu universo começa aqui</h3><p>Favorite músicas, álbuns e artistas para encontrá-los depois.</p></div>}</>;
- const pagePlaylists=<><div className="page-heading"><Label>SUAS PLAYLISTS · SONARA ECLIPSE</Label><h1>Minhas Playlists</h1><p>Duas coleções pessoais. Mais playlists só quando fizer sentido.</p></div><div className="personal-playlists">{playlists.map((l,i)=><button className={'personal-playlist '+(playlistSelected===i?'selected':'')} key={l.name} onClick={()=>setPlaylistSelected(i)}><Art type={l.art}/><span className="personal-playlist-info"><small>{i===0?'LEGADO · JAHSEH':'TRAP NACIONAL · 30PRAUM'}</small><strong>{l.name}</strong><span>{l.note}</span></span><ChevronRight size={21}/></button>)}</div>{playlistSelected===0?<div className="playlist-detail"><div className="playlist-heading"><Label>DISCOGRAFIA · XXXTENTACION</Label><h2>XXXTENTACION</h2><p>Uma coleção dedicada à obra de Jahseh. A meta é catalogar todas as faixas, incluindo álbuns, singles e participações. O catálogo completo e o streaming autorizado serão integrados em etapas.</p><button className="playlist-legacy-link" onClick={()=>navigate('LEGACY')}><Heart size={17}/> Conhecer FOREVER JAHSEH na LEGACY <ChevronRight size={18}/></button></div><div className="playlist-artists"><div><Art type="artist-x"/><span><strong>XXXTENTACION</strong><small>Artista da coleção · catálogo em expansão</small></span></div></div><div className="playlist-song-section"><h3>Faixas em destaque</h3><span>Discografia catalogada · sem reprodução comercial</span><div className="playlist-song-list">{(albums.filter(v=>v.artist==='XXXTENTACION').flatMap(v=>(albumCatalog[v.art]?.tracks||[]).map(t=>({...t,cover:v.art,album:v.title}))).length?albums.filter(v=>v.artist==='XXXTENTACION').flatMap(v=>(albumCatalog[v.art]?.tracks||[]).map(t=>({...t,cover:v.art,album:v.title}))):xTracks).map((t,i)=><div className="playlist-song-row" key={t.title+'-'+i}><span>{String(i+1).padStart(2,'0')}</span><Art type={t.cover||'album-17'}/><div><strong>{t.title}</strong><small>{t.album||'XXXTENTACION'}</small></div>{(t.duration||t.length)&&<em>{t.duration||t.length}</em>}</div>)}</div></div></div>:<div className="playlist-detail"><div className="playlist-heading"><Label>TRAP BR · 30PRAUM</Label><h2>Matuê · Teto · WIU</h2><p>Uma coleção para reunir as discografias dos três artistas, incluindo álbuns, singles e participações. Vamos ampliar e conferir o catálogo antes de marcar a playlist como completa.</p></div><div className="playlist-artists">{['Matuê','Teto','WIU'].map((name,i)=><div key={name}><Art type={name==='Matuê'?'artist-matue':name==='Teto'?'artist-teto':'artist-wiu'}/><span><strong>{name}</strong><small>30PRAUM · catálogo em expansão</small></span></div>)}</div><div className="playlist-song-section"><h3>Faixas em destaque</h3><span>Discografias · Matuê, Teto e WIU</span><div className="playlist-song-list">{(albums.filter(v=>['Matuê','Teto','WIU'].includes(v.artist)).flatMap(v=>(albumCatalog[v.art]?.tracks||[]).map(t=>({...t,cover:v.art,artist:v.artist}))).length?albums.filter(v=>['Matuê','Teto','WIU'].includes(v.artist)).flatMap(v=>(albumCatalog[v.art]?.tracks||[]).map(t=>({...t,cover:v.art,artist:v.artist}))):matueTracks.map(t=>({...t,artist:'Matuê'}))).map((t,i)=><div className="playlist-song-row" key={t.title+'-'+i}><span>{String(i+1).padStart(2,'0')}</span><Art type={t.cover||'album-maquina'}/><div><strong>{t.title}</strong><small>{t.artist}</small></div>{(t.duration||t.length)&&<em>{t.duration||t.length}</em>}</div>)}</div><p className="playlist-catalogue-note">Músicas organizadas por lançamento e artista. Álbuns não encontrados nos catálogos continuam em conferência.</p></div></div>}<p className="playlist-disclaimer">As coleções representam os artistas e o repertório planejado. A reprodução de gravações comerciais depende de integrações licenciadas.</p></>; const results=albums.filter(a=>[a.title,a.artist,a.year].join(' ').toLocaleLowerCase('pt-BR').includes(search.trim().toLocaleLowerCase('pt-BR')));
- const pageSearch=<><div className="page-heading"><Label>RESULTADOS DA BUSCA</Label><h1>Buscar</h1><p>{search?'Resultados para “'+search+'”':'Pesquise músicas, álbuns e artistas.'}</p></div><div className="album-gallery">{results.length?results.map(albumTile):<div className="empty-state">Nenhum resultado encontrado.</div>}</div></>;
- let main={'Início':pageHome,'Explorar':pageExplore,'Biblioteca':pageLibrary,'Álbuns':pageAlbums,'Artistas':pageArtists,'Favoritos':pageFavorites,'Playlists':pagePlaylists,'Detalhe Álbum':pageAlbum,'Detalhe Artista':pageArtist,'LEGACY':pageLegacy,'Buscar':pageSearch}[page]||pageHome;
- const isArtist=page==='Detalhe Artista',isAlbum=page==='Detalhe Álbum';
- const sidebarRight=isArtist?<><StatCard title="Sobre o artista"><p>{selectedArtist==='XXXTENTACION'?'XXXTENTACION foi um artista e compositor cuja obra marcou uma geração pela mistura de rap, rock e R&B e pela intensidade emocional.':selectedArtist==='Matuê'?'Matuê é um artista brasileiro de trap, conhecido por sua sonoridade e estética marcantes.':selectedArtist+' integra o universo do trap brasileiro e da 30PRAUM.'}</p><div className="facts"><span><CalendarDays size={16}/> {selectedArtist==='XXXTENTACION'?'Nascimento: 23 jan. 1998':'Artista brasileiro'}</span><span><Music2 size={16}/> Gêneros: Rap, Hip-hop</span><span><Tag size={16}/> Perfil demonstrativo</span></div></StatCard><StatCard title="Ouvintes mensais"><div className="metric"><strong>—</strong><span>Dados não disponíveis nesta demonstração</span></div></StatCard><StatCard title="Artistas relacionados"><div className="relation-list">{['XXXTENTACION','Matuê','Teto','WIU'].filter(name=>name!==selectedArtist).map(name=><button className="home-related-artist" key={name} onClick={()=>chooseArtist(name)}><Art type={name==='XXXTENTACION'?'artist-x':name==='Matuê'?'artist-matue':name==='Teto'?'artist-teto':'artist-wiu'}/><span><strong>{name}</strong><small>{name==='XXXTENTACION'?'LEGACY':'30PRAUM'}</small></span><ChevronRight size={15}/></button>)}</div></StatCard></>:
- isAlbum?<><StatCard title="Sobre o álbum"><div className="facts"><span><CalendarDays size={16}/> Lançamento: {a.year}</span><span><Disc3 size={16}/> Tipo: {a.kind||'Álbum'}</span><span><Music2 size={16}/> {a.tracks?.length?a.tracks.length+' faixas na prévia':'Repertório em catalogação'}</span><span><Tag size={16}/> {a.artist==='XXXTENTACION'?'Hip-hop / Emo Rap':'Trap brasileiro'}</span></div></StatCard><StatCard title={'Mais de '+a.artist}><div className="side-album-grid">{albums.filter(v=>v.artist===a.artist&&v.title!==a.title).slice(0,3).map(v=><button onClick={()=>chooseAlbum(v.title)} key={v.title}><Art type={v.art}/><b>{v.title}</b><small>{v.year}</small></button>)}</div></StatCard><StatCard title="Outros lançamentos"><div className="side-album-grid">{albums.filter(v=>v.artist!==a.artist).slice(0,3).map(v=><button onClick={()=>chooseAlbum(v.title)} key={v.title}><Art type={v.art}/><b>{v.title}</b><small>{v.artist}</small></button>)}</div></StatCard></>:
- page==='Início'?<><StatCard title="ARTISTAS EM DESTAQUE"><div className="relation-list">{[['XXXTENTACION','artist-x'],['Matuê','artist-matue'],['Teto','artist-teto'],['WIU','artist-wiu']].map(([name,type])=><button className="home-related-artist" key={name} onClick={()=>chooseArtist(name)}><Art type={type}/><span><strong>{name}</strong><small>{name==='XXXTENTACION'?'LEGACY':'30PRAUM'}</small></span><ChevronRight size={16}/></button>)}</div></StatCard><StatCard title="LEGACY · FOREVER JAHSEH"><button className="legacy-aside" onClick={()=>navigate('LEGACY')}><Art type="artist-x"/><span><b>The Music Lives On.</b><small>Homenagem especial ao Jahseh</small></span><ChevronRight size={17}/></button></StatCard></>:
- <><StatCard title="SONARA EXCLUSIVE"><Art className="aside-feature" type="dark"/><strong className="side-feature-name">Sua música, seu universo.</strong><p>Explore, salve e organize tudo o que inspira você.</p></StatCard><StatCard title="LEGACY"><button className="legacy-aside" onClick={()=>navigate('LEGACY')}><Art type="x"/><span><b>FOREVER JAHSEH</b><small>The Music Lives On.</small></span><ChevronRight size={17}/></button></StatCard></>;
- return <div className={'app-shell '+(page==='LEGACY'?'legacy17-mode':'')}><aside className={'nav-sidebar '+(mobileNav?'open':'')}><div className="brand-area"><Brand/><button className="mobile-x" onClick={()=>setMobileNav(false)}><X/></button></div><div className="navigation">{NAV.map(([name,Icon])=><button key={name} className={(page===name||(page==='Detalhe Álbum'&&name==='Álbuns')||(page==='Detalhe Artista'&&name==='Artistas'))?'active':''} onClick={()=>navigate(name)}><Icon size={23} strokeWidth={1.8}/><span>{name}</span></button>)}</div><button className={'legacy-spotlight '+(page==='LEGACY'?'active':'')} onClick={()=>navigate('LEGACY')} aria-label="Abrir LEGACY — FOREVER JAHSEH"><Art type="artist-x"/><span className="legacy-spotlight-copy"><small>SONARA EXCLUSIVE</small><strong>LEGACY</strong><span>FOREVER JAHSEH</span><em>The Music Lives On.</em></span><ChevronRight size={19}/></button><div className="my-playlists"><div className="sidebar-section-title">Minhas Playlists <button onClick={()=>navigate('Playlists')}><Plus size={21}/></button></div>{playlists.map((l,i)=><button className="sidebar-playlist" key={l.name} onClick={()=>{setPlaylistSelected(i);navigate('Playlists')}}><Art type={l.art}/><span><b>{l.name}</b><small>{i===0?'Jahseh · discografia':'Matuê · Teto · WIU'}</small></span></button>)}</div><div className="sidebar-wave"/></aside>{mobileNav&&<div className="screen-shade" onClick={()=>setMobileNav(false)}/>}<div className="main-area"><header className="top-header"><button className="mobile-menu" onClick={()=>setMobileNav(true)}><Menu size={25}/></button><div className="search-box"><Search size={23}/><input placeholder="Buscar músicas, artistas, álbuns..." value={search} onChange={e=>{setSearch(e.target.value);setPage('Buscar')}}/></div><button className="notification" title="Notificações ilustrativas"><Bell size={24}/><span/></button><button className="profile" title="Perfil demonstrativo"><Art type="eclipse"/><ChevronDown size={17}/></button></header><div className="page-columns"><main className="main-content">{main}</main>{page!=='LEGACY'&&<aside className="context-sidebar">{sidebarRight}</aside>}</div></div><footer className="bottom-player"><div className="now-song"><button className="now-cover" onClick={()=>setExpanded(true)}><Art type={demoTracks[song].art}/></button><div><b>{demoTracks[song].title}</b><small>{demoTracks[song].artist}</small></div><IconButton Icon={Heart} title="Favoritar música" active={favorites.includes(demoTracks[song].id)} fill={favorites.includes(demoTracks[song].id)} onClick={()=>toggleLike(demoTracks[song].id)}/></div><div className="transport"><div className="transport-buttons"><IconButton Icon={Shuffle} title="Aleatório" active={shuffle} onClick={()=>setShuffle(s=>!s)}/><IconButton Icon={SkipBack} title="Anterior" onClick={()=>listen((song-1+demoTracks.length)%demoTracks.length)}/><button className="transport-play is-unavailable" disabled title="Reprodução comercial indisponível nesta demonstração">{playing?<Pause size={20} fill="currentColor"/>:<Play size={20} fill="currentColor"/>}</button><IconButton Icon={SkipForward} title="Próxima" onClick={()=>listen((song+1)%demoTracks.length)}/><IconButton Icon={Repeat2} title="Repetir" active={repeat} onClick={()=>setRepeat(s=>!s)}/></div><div className="progress"><span>—</span><input type="range" min="0" max="30" value={time} onChange={e=>setTime(Number(e.target.value))}/><span>—</span></div></div><div className="volume-area"><Volume2 size={21}/><input type="range" min="0" max="1" step=".05" value={volume} onChange={e=>setVolume(Number(e.target.value))}/><IconButton Icon={ListMusic} title="Fila" onClick={()=>setExpanded(true)}/><IconButton Icon={Maximize} title="Expandir player" onClick={()=>setExpanded(true)}/></div></footer>{expanded&&<div className="expanded-player"><button className="expand-close" onClick={()=>setExpanded(false)}><Minimize size={22}/></button><div className="expand-body"><Label>SONARA ECLIPSE · NOW PLAYING</Label><Art type={demoTracks[song].art}/><h1>{demoTracks[song].title}</h1><p>{demoTracks[song].artist}</p><div className="progress"><span>0:{String(time).padStart(2,'0')}</span><input type="range" min="0" max="30" value={time} onChange={e=>setTime(Number(e.target.value))}/><span>—</span></div><div className="transport-buttons"><IconButton Icon={SkipBack} onClick={()=>listen((song-1+demoTracks.length)%demoTracks.length)}/><button className="transport-play is-unavailable" disabled title="Reprodução comercial indisponível nesta demonstração">{playing?<Pause fill="currentColor"/>:<Play fill="currentColor"/>}</button><IconButton Icon={SkipForward} onClick={()=>listen((song+1)%demoTracks.length)}/></div><small>Catálogo editorial · Reprodução comercial indisponível nesta versão.</small></div></div>}</div>;
+  const [playlists] = useState([
+    {
+      name: "XXXTENTACION",
+      ids: [],
+      art: "artist-x",
+      note: "Discografia de Jahseh · catálogo em expansão",
+    },
+    {
+      name: "Trap BR — 30PRAUM",
+      ids: [],
+      art: "artist-trio",
+      note: "Matuê, Teto e WIU · catálogo em expansão",
+    },
+  ]);
+  const [playlistSelected, setPlaylistSelected] = useState(0);
+  const [currentTrack, setCurrentTrack] = useState({
+      ...demoTracks[0],
+      id: trackId(demoTracks[0]),
+    }),
+    [currentQueue, setCurrentQueue] = useState(
+      demoTracks.map((t) => ({ ...t, id: trackId(t) })),
+    );
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("sonara-v2-faves", JSON.stringify(favorites));
+    } catch {
+      /* In-memory favourites remain usable if browser storage is unavailable. */
+    }
+  }, [favorites]);
+  // O player mantém a identidade visual, sem áudio fictício ou reprodução comercial.
+  const navigate = (p, detail) => {
+    setPage(p);
+    setMobileNav(false);
+    const hash =
+      encodeURIComponent(p) + (detail ? "/" + encodeURIComponent(detail) : "");
+    if (location.hash.slice(1) !== hash) location.hash = hash;
+  };
+  useEffect(() => {
+    const route = () => {
+      const [p, d] = initialRoute();
+      setPage(p || "Início");
+      if (p === "Detalhe Álbum" && d) setSelectedAlbum(d);
+      if (p === "Detalhe Artista" && d) setSelectedArtist(d);
+      setMobileNav(false);
+    };
+    window.addEventListener("hashchange", route);
+    return () => window.removeEventListener("hashchange", route);
+  }, []);
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    document.title =
+      page === "Início" ? "SONARA Eclipse" : page + " · SONARA Eclipse";
+  }, [page, selectedAlbum, selectedArtist]);
+  useEffect(() => {
+    const escape = (e) => {
+      if (e.key === "Escape") setMobileNav(false);
+    };
+    window.addEventListener("keydown", escape);
+    return () => window.removeEventListener("keydown", escape);
+  }, []);
+  const chooseAlbum = (a) => {
+    setSelectedAlbum(a);
+    navigate("Detalhe Álbum", a);
+  };
+  const chooseArtist = (a) => {
+    setSelectedArtist(a);
+    navigate("Detalhe Artista", a);
+  };
+  const selectTrack = (t, artist = selectedArtist) => {
+    const normalized = { ...t, artist: t.artist || artist };
+    const queue = queueWithTrack(normalized, demoTracks);
+    setCurrentTrack(queue[0]);
+    setCurrentQueue(queue);
+  };
+  const toggleLike = (id) =>
+    setFavorites((s) =>
+      s.includes(id) ? s.filter((t) => t !== id) : [...s, id],
+    );
+  const showDemo = () =>
+    selectTrack(
+      selectedArtist === "XXXTENTACION"
+        ? { ...xTracks[0], artist: "XXXTENTACION" }
+        : selectedArtist === "Matuê"
+          ? { ...matueTracks[0], artist: "Matuê" }
+          : demoTracks.find((t) => t.artist === selectedArtist),
+    );
+  const tile = (
+    title,
+    type,
+    artist = "SONARA Sessions",
+    onClick = () => chooseAlbum(title),
+  ) => (
+    <button key={title} className="record" onClick={onClick}>
+      <Art type={type} />
+      <span className="record-play">
+        <Play size={16} fill="currentColor" />
+      </span>
+      <b>{title}</b>
+      <small>{artist}</small>
+    </button>
+  );
+  const albumTile = (a) =>
+    tile(a.title, a.art, a.artist, () => chooseAlbum(a.title));
+  const tableX = (items = xTracks) => (
+    <div className="music-table">
+      <div className="music-table-header">
+        <span>#</span>
+        <span>Título</span>
+        <span>Reproduções</span>
+        <Clock3 size={16} />
+        <span />
+      </div>
+      {items.map((t, i) => (
+        <div className="music-row" key={t.id || t.title}>
+          <button
+            className="track-num"
+            onClick={() => selectTrack(t)}
+            aria-label={"Selecionar " + t.title}
+          >
+            {i + 1}
+          </button>
+          <button className="row-track" onClick={() => selectTrack(t)}>
+            <Art type={t.cover || "three"} />
+            <strong>{t.title}</strong>
+            <small className="explicit">E</small>
+          </button>
+          <span className="plays">{t.plays || "—"}</span>
+          <span className="duration">{t.length}</span>
+          <IconButton
+            Icon={Heart}
+            title="Favoritar faixa"
+            active={favorites.includes(
+              trackId({ ...t, artist: t.artist || selectedArtist }),
+            )}
+            fill={favorites.includes(
+              trackId({ ...t, artist: t.artist || selectedArtist }),
+            )}
+            onClick={() =>
+              toggleLike(trackId({ ...t, artist: t.artist || selectedArtist }))
+            }
+          />
+        </div>
+      ))}
+    </div>
+  );
+  const pageHome = (
+    <>
+      <div className="featured hero-home sonara-hero">
+        <div className="hero-copy">
+          <Label>SONARA EXCLUSIVE</Label>
+          <h1>Trap BR</h1>
+          <p>
+            Matuê · Teto · WIU
+            <br />O universo 30PRAUM em um só lugar.
+          </p>
+          <button
+            className="primary"
+            onClick={() => {
+              setPlaylistSelected(1);
+              navigate("Playlists");
+            }}
+          >
+            <Play size={18} fill="currentColor" /> Explorar coleção
+          </button>
+        </div>
+        <div className="hero-sun" />
+        <div className="hero-person">
+          <Art type="artist-trio" />
+        </div>
+        <span className="hero-edition">CURADORIA SONARA / VOL. 01</span>
+      </div>
+      <PaneTitle action="Ver artistas" onClick={() => navigate("Artistas")}>
+        Em destaque
+      </PaneTitle>
+      <div className="recent-grid featured-artists">
+        {[
+          ["XXXTENTACION", "artist-x", "LEGACY"],
+          ["Matuê", "artist-matue", "30PRAUM"],
+          ["Teto", "artist-teto", "30PRAUM"],
+          ["WIU", "artist-wiu", "30PRAUM"],
+        ].map(([name, type, label]) => (
+          <button
+            className="record"
+            key={name}
+            onClick={() => chooseArtist(name)}
+          >
+            <Art type={type} />
+            <b>{name}</b>
+            <small>{label}</small>
+            <span className="record-play">
+              <ChevronRight size={17} />
+            </span>
+          </button>
+        ))}
+      </div>
+      <PaneTitle action="Ver todas" onClick={() => navigate("Playlists")}>
+        Coleções em destaque
+      </PaneTitle>
+      <div className="home-collections">
+        {playlists.map((l, i) => (
+          <button
+            key={l.name}
+            className="home-collection"
+            onClick={() => {
+              setPlaylistSelected(i);
+              navigate("Playlists");
+            }}
+          >
+            <Art type={l.art} />
+            <span>
+              <small>{i === 0 ? "SONARA · LEGACY" : "SONARA · 30PRAUM"}</small>
+              <strong>{l.name}</strong>
+              <span>
+                {i === 0 ? "O legado musical de Jahseh." : "Matuê, Teto e WIU."}
+              </span>
+            </span>
+            <ChevronRight size={20} />
+          </button>
+        ))}
+      </div>
+      <button className="home-legacy" onClick={() => navigate("LEGACY")}>
+        <Art type="artist-x" />
+        <span>
+          <strong>FOREVER JAHSEH</strong>
+          <small>Uma homenagem especial. The Music Lives On.</small>
+        </span>
+        <ChevronRight size={20} />
+      </button>
+    </>
+  );
+  const pageArtist = (
+    <>
+      <div className="featured artist-hero">
+        <div className="hero-copy">
+          <Label>Artista</Label>
+          <h1>{selectedArtist}</h1>
+          <p>
+            {selectedArtist === "XXXTENTACION"
+              ? "Artista que transformou dor, solidão e reflexão em música, marcando uma geração com sua autenticidade e vulnerabilidade."
+              : "Trap brasileiro, identidade sonora marcante e uma trajetória de grandes lançamentos."}
+          </p>
+          <div className="hero-actions">
+            <button className="primary" onClick={showDemo}>
+              <Play size={18} fill="currentColor" /> Selecionar faixa
+            </button>
+            <button
+              className="outline"
+              onClick={() => toggleLike(selectedArtist)}
+            >
+              {favorites.includes(selectedArtist) ? "Seguindo" : "Seguir"}
+            </button>
+            <IconButton
+              Icon={Heart}
+              title="Favoritar artista"
+              active={favorites.includes(selectedArtist)}
+              onClick={() => toggleLike(selectedArtist)}
+            />
+          </div>
+        </div>
+        <div className="hero-sun" />
+        <div className="hero-person">
+          <Art
+            type={
+              selectedArtist === "XXXTENTACION"
+                ? "artist-x"
+                : selectedArtist === "Matuê"
+                  ? "artist-matue"
+                  : selectedArtist === "Teto"
+                    ? "artist-teto"
+                    : "artist-wiu"
+            }
+          />
+        </div>
+      </div>
+      <PaneTitle action="Ver todas" onClick={() => navigate("Biblioteca")}>
+        Músicas populares
+      </PaneTitle>
+      {selectedArtist === "XXXTENTACION" ? (
+        tableX(xTracks.slice(0, 3))
+      ) : selectedArtist === "Matuê" ? (
+        tableX(matueTracks.slice(0, 3))
+      ) : (
+        <div className="playlist-disclaimer">
+          O catálogo de {selectedArtist} será incorporado após a conferência das
+          faixas. A playlist Trap BR já está disponível.
+        </div>
+      )}
+      <PaneTitle action="Ver discografia" onClick={() => navigate("Álbuns")}>
+        Álbuns em destaque
+      </PaneTitle>
+      <div className="album-strips">
+        {albums
+          .filter((album) => album.artist === selectedArtist)
+          .slice(0, 5)
+          .map((a) => (
+            <button
+              className="album-strip"
+              key={a.title}
+              onClick={() => chooseAlbum(a.title)}
+            >
+              <Art type={a.art} />
+              <span>
+                <b>{a.title}</b>
+                <small>{a.artist}</small>
+                <small>{a.year} · Álbum</small>
+              </span>
+              <span className="record-play">
+                <Play size={15} fill="currentColor" />
+              </span>
+            </button>
+          ))}
+      </div>
+      <PaneTitle action="Ver álbuns" onClick={() => navigate("Álbuns")}>
+        Outros projetos de {selectedArtist}
+      </PaneTitle>
+      <div className="recent-grid artist-discography">
+        {albums
+          .filter((album) => album.artist === selectedArtist)
+          .slice(0, 4)
+          .map(albumTile)}
+      </div>
+    </>
+  );
+  const a = albums.find((v) => v.title === selectedAlbum) || {
+    title: selectedAlbum,
+    artist: "SONARA Sessions",
+    year: "2026",
+    art: "dark",
+  };
+  const albumEntry = albumCatalog[a.art];
+  const albumTracks = albumEntry?.tracks?.length
+    ? albumEntry.tracks
+    : (a.tracks || []).map((title) => ({
+        title,
+        duration: null,
+        number: null,
+      }));
+  const albumVerified = !!albumEntry?.complete;
+  const pageAlbum = (
+    <>
+      <div className="featured album-hero album-detail-premium">
+        <div className="album-backdrop">
+          <Art type={a.art} />
+        </div>
+        <div className="album-cover">
+          <Art type={a.art} />
+        </div>
+        <div className="album-description">
+          <Label>{a.kind || "Álbum"} · SONARA DISCOGRAPHY</Label>
+          <h1>{a.title}</h1>
+          <button
+            className="album-artist-link"
+            onClick={() => chooseArtist(a.artist)}
+          >
+            {a.artist} <ChevronRight size={16} />
+          </button>
+          <div className="album-stats">
+            {a.year} <span>·</span> {a.kind || "Álbum"} <span>·</span>{" "}
+            {albumTracks.length
+              ? albumTracks.length +
+                (albumVerified ? " faixas" : " faixas catalogadas até agora")
+              : "Faixas em catalogação"}
+          </div>
+          <p>{a.desc}</p>
+          <div className="hero-actions">
+            <button
+              className="primary"
+              onClick={() => {
+                if (a.artist === "XXXTENTACION") {
+                  setPlaylistSelected(0);
+                } else {
+                  setPlaylistSelected(1);
+                }
+                navigate("Playlists");
+              }}
+            >
+              <ListMusic size={18} /> Ver na playlist
+            </button>
+            <IconButton
+              Icon={Heart}
+              title="Favoritar álbum"
+              active={favorites.includes(a.title)}
+              fill={favorites.includes(a.title)}
+              onClick={() => toggleLike(a.title)}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="album-track-panel sonara-album-table">
+        <div className="album-track-header">
+          <span>#</span>
+          <span>Título</span>
+          <span>Álbum</span>
+          <Clock3 size={16} />
+          <span />
+        </div>
+        {albumTracks.length ? (
+          <div className="album-track-list">
+            {albumTracks.map((track, i) => (
+              <div className="album-track-item" key={track.title + "-" + i}>
+                <span className="album-track-index">
+                  {String(track.number || i + 1).padStart(2, "0")}
+                </span>
+                <span className="album-track-name">
+                  <strong>{track.title}</strong>
+                  <small className="track-artist">{a.artist}</small>
+                </span>
+                <span className="album-row-album">{a.title}</span>
+                <span className="album-row-time">{track.duration || "—"}</span>
+                <button
+                  title="Favoritar faixa"
+                  className={
+                    favorites.includes(
+                      trackId({ title: track.title, artist: a.artist }),
+                    )
+                      ? "favored"
+                      : ""
+                  }
+                  onClick={() =>
+                    toggleLike(
+                      trackId({ title: track.title, artist: a.artist }),
+                    )
+                  }
+                >
+                  <Heart
+                    size={18}
+                    fill={
+                      favorites.includes(
+                        trackId({ title: track.title, artist: a.artist }),
+                      )
+                        ? "currentColor"
+                        : "none"
+                    }
+                  />
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="album-empty">
+            <Disc3 size={29} />
+            <strong>Repertório em catalogação</strong>
+            <p>As músicas deste projeto serão adicionadas após conferência.</p>
+          </div>
+        )}
+      </div>
+      <div className="album-note">
+        {albumVerified
+          ? "Lista de faixas do lançamento consultada em " +
+            albumEntry.source +
+            "."
+          : "Catálogo em expansão: a lista ainda pode estar incompleta."}{" "}
+        A SONARA não hospeda gravações comerciais.
+      </div>
+    </>
+  );
+  const pageLegacy = (
+    <Legacy
+      favorites={favorites}
+      toggleLike={toggleLike}
+      chooseAlbum={chooseAlbum}
+      chooseArtist={chooseArtist}
+    />
+  );
+  const pageExplore = (
+    <>
+      <div className="page-heading">
+        <Label>SONARA ECLIPSE · DESCUBRA</Label>
+        <h1>Explorar</h1>
+        <p>O universo de XXXTENTACION e dos artistas da 30PRAUM.</p>
+      </div>
+      <PaneTitle>Artistas</PaneTitle>
+      <div className="recent-grid featured-artists">
+        {[
+          ["XXXTENTACION", "artist-x"],
+          ["Matuê", "artist-matue"],
+          ["Teto", "artist-teto"],
+          ["WIU", "artist-wiu"],
+        ].map(([name, type]) => (
+          <button
+            className="record"
+            key={name}
+            onClick={() => chooseArtist(name)}
+          >
+            <Art type={type} />
+            <b>{name}</b>
+            <small>{name === "XXXTENTACION" ? "LEGACY" : "30PRAUM"}</small>
+          </button>
+        ))}
+      </div>
+      <PaneTitle>Playlists em destaque</PaneTitle>
+      <div className="home-collections">
+        {playlists.map((l, i) => (
+          <button
+            className="home-collection"
+            key={l.name}
+            onClick={() => {
+              setPlaylistSelected(i);
+              navigate("Playlists");
+            }}
+          >
+            <Art type={l.art} />
+            <span>
+              <small>{i === 0 ? "JAHSEH" : "30PRAUM"}</small>
+              <strong>{l.name}</strong>
+              <span>{l.note}</span>
+            </span>
+            <ChevronRight size={20} />
+          </button>
+        ))}
+      </div>
+      <PaneTitle>Álbuns</PaneTitle>
+      <div className="recent-grid">
+        {albums
+          .filter((a) => a.artist === "XXXTENTACION" || a.artist === "Matuê")
+          .slice(0, 5)
+          .map(albumTile)}
+      </div>
+    </>
+  );
+  const pageLibrary = (
+    <>
+      <div className="page-heading">
+        <Label>SUA COLEÇÃO</Label>
+        <h1>Biblioteca</h1>
+        <p>Suas músicas, playlists e descobertas em um só lugar.</p>
+      </div>
+      <div className="library-stats">
+        {[
+          [albums.length, "Álbuns catalogados"],
+          [favorites.length, "Favoritos"],
+          [playlists.length, "Playlists"],
+        ].map(([v, l]) => (
+          <div key={l}>
+            <strong>{v}</strong>
+            <small>{l}</small>
+          </div>
+        ))}
+      </div>
+      <PaneTitle>Suas playlists</PaneTitle>
+      <div className="personal-playlists library-playlists">
+        {playlists.map((l, i) => (
+          <button
+            className="personal-playlist"
+            key={l.name}
+            onClick={() => {
+              setPlaylistSelected(i);
+              navigate("Playlists");
+            }}
+          >
+            <Art type={l.art} />
+            <span className="personal-playlist-info">
+              <small>{i === 0 ? "LEGADO · JAHSEH" : "TRAP BR · 30PRAUM"}</small>
+              <strong>{l.name}</strong>
+              <span>{l.note}</span>
+            </span>
+            <ChevronRight size={19} />
+          </button>
+        ))}
+      </div>
+    </>
+  );
+  const pageAlbums = (
+    <>
+      <div className="page-heading discography-heading">
+        <Label>SONARA ECLIPSE · DISCOGRAFIA</Label>
+        <h1>Álbuns & projetos</h1>
+        <p>Quatro artistas. Histórias diferentes. Um universo musical.</p>
+        <div className="discography-count">
+          <Disc3 size={17} /> {albums.length} lançamentos catalogados
+        </div>
+      </div>
+      {["XXXTENTACION", "Matuê", "Teto", "WIU"].map((artist) => (
+        <section className="discography-section" key={artist}>
+          <div className="discography-section-title">
+            <div>
+              <span className="discography-number">
+                0{["XXXTENTACION", "Matuê", "Teto", "WIU"].indexOf(artist) + 1}
+              </span>
+              <h2>{artist}</h2>
+            </div>
+            <small>
+              {albums.filter((a) => a.artist === artist).length} projetos
+            </small>
+          </div>
+          <div className="album-gallery">
+            {albums.filter((a) => a.artist === artist).map(albumTile)}
+          </div>
+        </section>
+      ))}
+    </>
+  );
+  const pageArtists = (
+    <>
+      <div className="page-heading">
+        <Label>QUEM FAZ A MÚSICA</Label>
+        <h1>Artistas</h1>
+        <p>Conheça os artistas em destaque na SONARA.</p>
+      </div>
+      <div className="recent-grid featured-artists">
+        {[
+          ["XXXTENTACION", "artist-x"],
+          ["Matuê", "artist-matue"],
+          ["Teto", "artist-teto"],
+          ["WIU", "artist-wiu"],
+        ].map(([name, type]) => (
+          <button
+            className="record"
+            key={name}
+            onClick={() => chooseArtist(name)}
+          >
+            <Art type={type} />
+            <b>{name}</b>
+            <small>{name === "XXXTENTACION" ? "LEGACY" : "30PRAUM"}</small>
+          </button>
+        ))}
+      </div>
+      <PaneTitle>Homenagem especial</PaneTitle>
+      <button className="legacy-invite" onClick={() => navigate("LEGACY")}>
+        <strong>LEGACY — The Music Lives On.</strong>
+        <span>Conhecer FOREVER JAHSEH →</span>
+      </button>
+    </>
+  );
+  const pageFavorites = (
+    <>
+      <div className="page-heading">
+        <Label>SUAS ESCOLHAS</Label>
+        <h1>Favoritos</h1>
+        <p>Tudo aquilo que merece ficar com você.</p>
+      </div>
+      <PaneTitle>Salvos na SONARA</PaneTitle>
+      {favorites.length ? (
+        <div className="favorites-stack">
+          {favorites.map((id) => (
+            <div key={id}>
+              <Heart size={18} fill="#ff0000" color="#ff0000" />
+              <strong>{favoriteLabel(id)}</strong>
+              <button onClick={() => toggleLike(id)}>Remover</button>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="empty-state">
+          <Heart size={36} />
+          <h3>Seu universo começa aqui</h3>
+          <p>Favorite músicas, álbuns e artistas para encontrá-los depois.</p>
+        </div>
+      )}
+    </>
+  );
+  const pagePlaylists = (
+    <>
+      <div className="page-heading">
+        <Label>SUAS PLAYLISTS · SONARA ECLIPSE</Label>
+        <h1>Minhas Playlists</h1>
+        <p>Duas coleções pessoais. Mais playlists só quando fizer sentido.</p>
+      </div>
+      <div className="personal-playlists">
+        {playlists.map((l, i) => (
+          <button
+            className={
+              "personal-playlist " + (playlistSelected === i ? "selected" : "")
+            }
+            key={l.name}
+            onClick={() => setPlaylistSelected(i)}
+          >
+            <Art type={l.art} />
+            <span className="personal-playlist-info">
+              <small>
+                {i === 0 ? "LEGADO · JAHSEH" : "TRAP NACIONAL · 30PRAUM"}
+              </small>
+              <strong>{l.name}</strong>
+              <span>{l.note}</span>
+            </span>
+            <ChevronRight size={21} />
+          </button>
+        ))}
+      </div>
+      {playlistSelected === 0 ? (
+        <div className="playlist-detail">
+          <div className="playlist-heading">
+            <Label>DISCOGRAFIA · XXXTENTACION</Label>
+            <h2>XXXTENTACION</h2>
+            <p>
+              Uma coleção dedicada à obra de Jahseh. A meta é catalogar todas as
+              faixas, incluindo álbuns, singles e participações. O catálogo
+              completo e o streaming autorizado serão integrados em etapas.
+            </p>
+            <button
+              className="playlist-legacy-link"
+              onClick={() => navigate("LEGACY")}
+            >
+              <Heart size={17} /> Conhecer FOREVER JAHSEH na LEGACY{" "}
+              <ChevronRight size={18} />
+            </button>
+          </div>
+          <div className="playlist-artists">
+            <div>
+              <Art type="artist-x" />
+              <span>
+                <strong>XXXTENTACION</strong>
+                <small>Artista da coleção · catálogo em expansão</small>
+              </span>
+            </div>
+          </div>
+          <div className="playlist-song-section">
+            <h3>Faixas em destaque</h3>
+            <span>Discografia catalogada · sem reprodução comercial</span>
+            <div className="playlist-song-list">
+              {(albums
+                .filter((v) => v.artist === "XXXTENTACION")
+                .flatMap((v) =>
+                  (albumCatalog[v.art]?.tracks || []).map((t) => ({
+                    ...t,
+                    cover: v.art,
+                    album: v.title,
+                  })),
+                ).length
+                ? albums
+                    .filter((v) => v.artist === "XXXTENTACION")
+                    .flatMap((v) =>
+                      (albumCatalog[v.art]?.tracks || []).map((t) => ({
+                        ...t,
+                        cover: v.art,
+                        album: v.title,
+                      })),
+                    )
+                : xTracks
+              ).map((t, i) => (
+                <div className="playlist-song-row" key={t.title + "-" + i}>
+                  <span>{String(i + 1).padStart(2, "0")}</span>
+                  <Art type={t.cover || "album-17"} />
+                  <div>
+                    <strong>{t.title}</strong>
+                    <small>{t.album || "XXXTENTACION"}</small>
+                  </div>
+                  {(t.duration || t.length) && (
+                    <em>{t.duration || t.length}</em>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="playlist-detail">
+          <div className="playlist-heading">
+            <Label>TRAP BR · 30PRAUM</Label>
+            <h2>Matuê · Teto · WIU</h2>
+            <p>
+              Uma coleção para reunir as discografias dos três artistas,
+              incluindo álbuns, singles e participações. Vamos ampliar e
+              conferir o catálogo antes de marcar a playlist como completa.
+            </p>
+          </div>
+          <div className="playlist-artists">
+            {["Matuê", "Teto", "WIU"].map((name, i) => (
+              <div key={name}>
+                <Art
+                  type={
+                    name === "Matuê"
+                      ? "artist-matue"
+                      : name === "Teto"
+                        ? "artist-teto"
+                        : "artist-wiu"
+                  }
+                />
+                <span>
+                  <strong>{name}</strong>
+                  <small>30PRAUM · catálogo em expansão</small>
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="playlist-song-section">
+            <h3>Faixas em destaque</h3>
+            <span>Discografias · Matuê, Teto e WIU</span>
+            <div className="playlist-song-list">
+              {(albums
+                .filter((v) => ["Matuê", "Teto", "WIU"].includes(v.artist))
+                .flatMap((v) =>
+                  (albumCatalog[v.art]?.tracks || []).map((t) => ({
+                    ...t,
+                    cover: v.art,
+                    artist: v.artist,
+                  })),
+                ).length
+                ? albums
+                    .filter((v) => ["Matuê", "Teto", "WIU"].includes(v.artist))
+                    .flatMap((v) =>
+                      (albumCatalog[v.art]?.tracks || []).map((t) => ({
+                        ...t,
+                        cover: v.art,
+                        artist: v.artist,
+                      })),
+                    )
+                : matueTracks.map((t) => ({ ...t, artist: "Matuê" }))
+              ).map((t, i) => (
+                <div className="playlist-song-row" key={t.title + "-" + i}>
+                  <span>{String(i + 1).padStart(2, "0")}</span>
+                  <Art type={t.cover || "album-maquina"} />
+                  <div>
+                    <strong>{t.title}</strong>
+                    <small>{t.artist}</small>
+                  </div>
+                  {(t.duration || t.length) && (
+                    <em>{t.duration || t.length}</em>
+                  )}
+                </div>
+              ))}
+            </div>
+            <p className="playlist-catalogue-note">
+              Músicas organizadas por lançamento e artista. Álbuns não
+              encontrados nos catálogos continuam em conferência.
+            </p>
+          </div>
+        </div>
+      )}
+      <p className="playlist-disclaimer">
+        As coleções representam os artistas e o repertório planejado. A
+        reprodução de gravações comerciais depende de integrações licenciadas.
+      </p>
+    </>
+  );
+  const normal = (s) =>
+    String(s)
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  const matches = (s) => normal(s).includes(normal(search.trim()));
+  const results = albums.filter((a) =>
+    matches([a.title, a.artist, a.year].join(" ")),
+  );
+  const searchArtists = ["XXXTENTACION", "Matuê", "Teto", "WIU"].filter(
+    matches,
+  );
+  const searchTracks = albums
+    .flatMap((a) =>
+      (albumCatalog[a.art]?.tracks?.length
+        ? albumCatalog[a.art].tracks
+        : (a.tracks || []).map((title) => ({ title }))
+      )
+        .filter((t) => matches(t.title))
+        .map((t) => ({
+          ...t,
+          artist: a.artist,
+          cover: a.art,
+          art: a.art,
+          length: t.duration || "—",
+          id: a.title + "|" + t.title,
+          album: a.title,
+        })),
+    )
+    .filter(
+      (t, i, all) => all.findIndex((x) => trackId(x) === trackId(t)) === i,
+    );
+  const pageSearch = (
+    <>
+      <div className="page-heading">
+        <Label>RESULTADOS DA BUSCA</Label>
+        <h1>Buscar</h1>
+        <p>
+          {search
+            ? "Resultados para “" + search + "”"
+            : "Pesquise músicas, álbuns e artistas."}
+        </p>
+      </div>
+      {searchArtists.length > 0 && (
+        <>
+          <PaneTitle>Artistas</PaneTitle>
+          <div className="search-artists">
+            {searchArtists.map((name) => (
+              <button
+                className="outline"
+                key={name}
+                onClick={() => chooseArtist(name)}
+              >
+                {name}
+                <ChevronRight size={14} />
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+      {results.length > 0 && (
+        <>
+          <PaneTitle>Álbuns</PaneTitle>
+          <div className="album-gallery">{results.map(albumTile)}</div>
+        </>
+      )}
+      {search.trim() && searchTracks.length > 0 && (
+        <>
+          <PaneTitle>Músicas</PaneTitle>
+          {tableX(searchTracks)}
+        </>
+      )}
+      {!results.length && !searchArtists.length && !searchTracks.length && (
+        <div className="empty-state">Nenhum resultado encontrado.</div>
+      )}
+    </>
+  );
+  let main =
+    {
+      Início: pageHome,
+      Explorar: pageExplore,
+      Biblioteca: pageLibrary,
+      Álbuns: pageAlbums,
+      Artistas: pageArtists,
+      Favoritos: pageFavorites,
+      Playlists: pagePlaylists,
+      "Detalhe Álbum": pageAlbum,
+      "Detalhe Artista": pageArtist,
+      LEGACY: pageLegacy,
+      Buscar: pageSearch,
+    }[page] || pageHome;
+  const isArtist = page === "Detalhe Artista",
+    isAlbum = page === "Detalhe Álbum";
+  const sidebarRight = isArtist ? (
+    <>
+      <StatCard title="Sobre o artista">
+        <p>
+          {selectedArtist === "XXXTENTACION"
+            ? "XXXTENTACION foi um artista e compositor cuja obra marcou uma geração pela mistura de rap, rock e R&B e pela intensidade emocional."
+            : selectedArtist === "Matuê"
+              ? "Matuê é um artista brasileiro de trap, conhecido por sua sonoridade e estética marcantes."
+              : selectedArtist +
+                " integra o universo do trap brasileiro e da 30PRAUM."}
+        </p>
+        <div className="facts">
+          <span>
+            <CalendarDays size={16} />{" "}
+            {selectedArtist === "XXXTENTACION"
+              ? "Nascimento: 23 jan. 1998"
+              : "Artista brasileiro"}
+          </span>
+          <span>
+            <Music2 size={16} /> Gêneros: Rap, Hip-hop
+          </span>
+          <span>
+            <Tag size={16} /> Perfil demonstrativo
+          </span>
+        </div>
+      </StatCard>
+      <StatCard title="Ouvintes mensais">
+        <div className="metric">
+          <strong>—</strong>
+          <span>Dados não disponíveis nesta demonstração</span>
+        </div>
+      </StatCard>
+      <StatCard title="Artistas relacionados">
+        <div className="relation-list">
+          {["XXXTENTACION", "Matuê", "Teto", "WIU"]
+            .filter((name) => name !== selectedArtist)
+            .map((name) => (
+              <button
+                className="home-related-artist"
+                key={name}
+                onClick={() => chooseArtist(name)}
+              >
+                <Art
+                  type={
+                    name === "XXXTENTACION"
+                      ? "artist-x"
+                      : name === "Matuê"
+                        ? "artist-matue"
+                        : name === "Teto"
+                          ? "artist-teto"
+                          : "artist-wiu"
+                  }
+                />
+                <span>
+                  <strong>{name}</strong>
+                  <small>
+                    {name === "XXXTENTACION" ? "LEGACY" : "30PRAUM"}
+                  </small>
+                </span>
+                <ChevronRight size={15} />
+              </button>
+            ))}
+        </div>
+      </StatCard>
+    </>
+  ) : isAlbum ? (
+    <>
+      <StatCard title="Sobre o álbum">
+        <div className="facts">
+          <span>
+            <CalendarDays size={16} /> Lançamento: {a.year}
+          </span>
+          <span>
+            <Disc3 size={16} /> Tipo: {a.kind || "Álbum"}
+          </span>
+          <span>
+            <Music2 size={16} />{" "}
+            {a.tracks?.length
+              ? a.tracks.length + " faixas na prévia"
+              : "Repertório em catalogação"}
+          </span>
+          <span>
+            <Tag size={16} />{" "}
+            {a.artist === "XXXTENTACION"
+              ? "Hip-hop / Emo Rap"
+              : "Trap brasileiro"}
+          </span>
+        </div>
+      </StatCard>
+      <StatCard title={"Mais de " + a.artist}>
+        <div className="side-album-grid">
+          {albums
+            .filter((v) => v.artist === a.artist && v.title !== a.title)
+            .slice(0, 3)
+            .map((v) => (
+              <button onClick={() => chooseAlbum(v.title)} key={v.title}>
+                <Art type={v.art} />
+                <b>{v.title}</b>
+                <small>{v.year}</small>
+              </button>
+            ))}
+        </div>
+      </StatCard>
+      <StatCard title="Outros lançamentos">
+        <div className="side-album-grid">
+          {albums
+            .filter((v) => v.artist !== a.artist)
+            .slice(0, 3)
+            .map((v) => (
+              <button onClick={() => chooseAlbum(v.title)} key={v.title}>
+                <Art type={v.art} />
+                <b>{v.title}</b>
+                <small>{v.artist}</small>
+              </button>
+            ))}
+        </div>
+      </StatCard>
+    </>
+  ) : page === "Início" ? (
+    <>
+      <StatCard title="ARTISTAS EM DESTAQUE">
+        <div className="relation-list">
+          {[
+            ["XXXTENTACION", "artist-x"],
+            ["Matuê", "artist-matue"],
+            ["Teto", "artist-teto"],
+            ["WIU", "artist-wiu"],
+          ].map(([name, type]) => (
+            <button
+              className="home-related-artist"
+              key={name}
+              onClick={() => chooseArtist(name)}
+            >
+              <Art type={type} />
+              <span>
+                <strong>{name}</strong>
+                <small>{name === "XXXTENTACION" ? "LEGACY" : "30PRAUM"}</small>
+              </span>
+              <ChevronRight size={16} />
+            </button>
+          ))}
+        </div>
+      </StatCard>
+      <StatCard title="LEGACY · FOREVER JAHSEH">
+        <button className="legacy-aside" onClick={() => navigate("LEGACY")}>
+          <Art type="artist-x" />
+          <span>
+            <b>The Music Lives On.</b>
+            <small>Homenagem especial ao Jahseh</small>
+          </span>
+          <ChevronRight size={17} />
+        </button>
+      </StatCard>
+    </>
+  ) : (
+    <>
+      <StatCard title="SONARA EXCLUSIVE">
+        <Art className="aside-feature" type="dark" />
+        <strong className="side-feature-name">Sua música, seu universo.</strong>
+        <p>Explore, salve e organize tudo o que inspira você.</p>
+      </StatCard>
+      <StatCard title="LEGACY">
+        <button className="legacy-aside" onClick={() => navigate("LEGACY")}>
+          <Art type="x" />
+          <span>
+            <b>FOREVER JAHSEH</b>
+            <small>The Music Lives On.</small>
+          </span>
+          <ChevronRight size={17} />
+        </button>
+      </StatCard>
+    </>
+  );
+  return (
+    <div className={"app-shell " + (page === "LEGACY" ? "legacy17-mode" : "")}>
+      <aside
+        ref={navRef}
+        role={mobileNav ? "dialog" : undefined}
+        aria-modal={mobileNav ? true : undefined}
+        aria-label="Navegação SONARA"
+        className={"nav-sidebar " + (mobileNav ? "open" : "")}
+      >
+        <div className="brand-area">
+          <Brand />
+          <button
+            className="mobile-x"
+            aria-label="Fechar navegação"
+            onClick={() => setMobileNav(false)}
+          >
+            <X />
+          </button>
+        </div>
+        <div className="navigation">
+          {NAV.map(([name, Icon]) => (
+            <button
+              key={name}
+              className={
+                page === name ||
+                (page === "Detalhe Álbum" && name === "Álbuns") ||
+                (page === "Detalhe Artista" && name === "Artistas")
+                  ? "active"
+                  : ""
+              }
+              onClick={() => navigate(name)}
+            >
+              <Icon size={23} strokeWidth={1.8} />
+              <span>{name}</span>
+            </button>
+          ))}
+        </div>
+        <button
+          className={"legacy-spotlight " + (page === "LEGACY" ? "active" : "")}
+          onClick={() => navigate("LEGACY")}
+          aria-label="Abrir LEGACY — FOREVER JAHSEH"
+        >
+          <Art type="artist-x" />
+          <span className="legacy-spotlight-copy">
+            <small>SONARA EXCLUSIVE</small>
+            <strong>LEGACY</strong>
+            <span>FOREVER JAHSEH</span>
+            <em>The Music Lives On.</em>
+          </span>
+          <ChevronRight size={19} />
+        </button>
+        <div className="my-playlists">
+          <div className="sidebar-section-title">
+            Minhas Playlists{" "}
+            <button
+              aria-label="Ver playlists"
+              onClick={() => navigate("Playlists")}
+            >
+              <Plus size={21} />
+            </button>
+          </div>
+          {playlists.map((l, i) => (
+            <button
+              className="sidebar-playlist"
+              key={l.name}
+              onClick={() => {
+                setPlaylistSelected(i);
+                navigate("Playlists");
+              }}
+            >
+              <Art type={l.art} />
+              <span>
+                <b>{l.name}</b>
+                <small>
+                  {i === 0 ? "Jahseh · discografia" : "Matuê · Teto · WIU"}
+                </small>
+              </span>
+            </button>
+          ))}
+        </div>
+        <div className="sidebar-wave" />
+        <a
+          className="credits-link"
+          href={`${import.meta.env.BASE_URL}credits.html`}
+        >
+          Créditos & fontes ↗
+        </a>
+      </aside>
+      {mobileNav && (
+        <div className="screen-shade" onClick={() => setMobileNav(false)} />
+      )}
+      <div className="main-area" inert={mobileNav}>
+        <header className="top-header">
+          <button
+            className="mobile-menu"
+            aria-label="Abrir navegação"
+            aria-expanded={mobileNav}
+            onClick={() => setMobileNav(true)}
+          >
+            <Menu size={25} />
+          </button>
+          <div className="search-box">
+            <Search size={23} />
+            <input
+              aria-label="Buscar músicas, artistas e álbuns"
+              placeholder="Buscar músicas, artistas, álbuns..."
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                navigate("Buscar");
+              }}
+            />
+          </div>
+          <span className="header-edition">ECLIPSE / VOL. 02</span>
+        </header>
+        <div className="page-columns">
+          <main id="main-content" className="main-content">
+            {main}
+          </main>
+          {page !== "LEGACY" && (
+            <aside className="context-sidebar">{sidebarRight}</aside>
+          )}
+        </div>
+      </div>
+      <div inert={mobileNav}>
+        <Player
+          track={currentTrack}
+          queue={currentQueue}
+          onSelect={setCurrentTrack}
+          favorites={favorites}
+          toggleLike={toggleLike}
+        />
+      </div>
+    </div>
+  );
 }

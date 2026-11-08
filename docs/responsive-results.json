@@ -1,0 +1,198 @@
+[
+  {
+    "clientWidth": 305,
+    "overflow": [],
+    "page": "LEGACY",
+    "scrollWidth": 305,
+    "viewport": 320
+  },
+  {
+    "clientWidth": 360,
+    "overflow": [],
+    "page": "LEGACY",
+    "scrollWidth": 360,
+    "viewport": 375
+  },
+  {
+    "clientWidth": 375,
+    "overflow": [],
+    "page": "LEGACY",
+    "scrollWidth": 375,
+    "viewport": 390
+  },
+  {
+    "clientWidth": 415,
+    "overflow": [],
+    "page": "LEGACY",
+    "scrollWidth": 415,
+    "viewport": 430
+  },
+  {
+    "clientWidth": 753,
+    "overflow": [],
+    "page": "LEGACY",
+    "scrollWidth": 753,
+    "viewport": 768
+  },
+  {
+    "clientWidth": 1009,
+    "overflow": [],
+    "page": "LEGACY",
+    "scrollWidth": 1009,
+    "viewport": 1024
+  },
+  {
+    "clientWidth": 1425,
+    "overflow": [],
+    "page": "LEGACY",
+    "scrollWidth": 1425,
+    "viewport": 1440
+  },
+  {
+    "clientWidth": 305,
+    "overflow": [],
+    "page": "Início",
+    "scrollWidth": 305,
+    "viewport": 320
+  },
+  {
+    "clientWidth": 360,
+    "overflow": [],
+    "page": "Início",
+    "scrollWidth": 360,
+    "viewport": 375
+  },
+  {
+    "clientWidth": 375,
+    "overflow": [],
+    "page": "Início",
+    "scrollWidth": 375,
+    "viewport": 390
+  },
+  {
+    "clientWidth": 415,
+    "overflow": [],
+    "page": "Início",
+    "scrollWidth": 415,
+    "viewport": 430
+  },
+  {
+    "clientWidth": 753,
+    "overflow": [],
+    "page": "Início",
+    "scrollWidth": 753,
+    "viewport": 768
+  },
+  {
+    "clientWidth": 1009,
+    "overflow": [],
+    "page": "Início",
+    "scrollWidth": 1009,
+    "viewport": 1024
+  },
+  {
+    "clientWidth": 1425,
+    "overflow": [],
+    "page": "Início",
+    "scrollWidth": 1425,
+    "viewport": 1440
+  },
+  {
+    "clientWidth": 305,
+    "overflow": [],
+    "page": "Detalhe Artista/XXXTENTACION",
+    "scrollWidth": 305,
+    "viewport": 320
+  },
+  {
+    "clientWidth": 360,
+    "overflow": [],
+    "page": "Detalhe Artista/XXXTENTACION",
+    "scrollWidth": 360,
+    "viewport": 375
+  },
+  {
+    "clientWidth": 375,
+    "overflow": [],
+    "page": "Detalhe Artista/XXXTENTACION",
+    "scrollWidth": 375,
+    "viewport": 390
+  },
+  {
+    "clientWidth": 415,
+    "overflow": [],
+    "page": "Detalhe Artista/XXXTENTACION",
+    "scrollWidth": 415,
+    "viewport": 430
+  },
+  {
+    "clientWidth": 753,
+    "overflow": [],
+    "page": "Detalhe Artista/XXXTENTACION",
+    "scrollWidth": 753,
+    "viewport": 768
+  },
+  {
+    "clientWidth": 1009,
+    "overflow": [],
+    "page": "Detalhe Artista/XXXTENTACION",
+    "scrollWidth": 1009,
+    "viewport": 1024
+  },
+  {
+    "clientWidth": 1425,
+    "overflow": [],
+    "page": "Detalhe Artista/XXXTENTACION",
+    "scrollWidth": 1425,
+    "viewport": 1440
+  },
+  {
+    "clientWidth": 305,
+    "overflow": [],
+    "page": "Detalhe Álbum/17",
+    "scrollWidth": 305,
+    "viewport": 320
+  },
+  {
+    "clientWidth": 360,
+    "overflow": [],
+    "page": "Detalhe Álbum/17",
+    "scrollWidth": 360,
+    "viewport": 375
+  },
+  {
+    "clientWidth": 375,
+    "overflow": [],
+    "page": "Detalhe Álbum/17",
+    "scrollWidth": 375,
+    "viewport": 390
+  },
+  {
+    "clientWidth": 415,
+    "overflow": [],
+    "page": "Detalhe Álbum/17",
+    "scrollWidth": 415,
+    "viewport": 430
+  },
+  {
+    "clientWidth": 753,
+    "overflow": [],
+    "page": "Detalhe Álbum/17",
+    "scrollWidth": 753,
+    "viewport": 768
+  },
+  {
+    "clientWidth": 1009,
+    "overflow": [],
+    "page": "Detalhe Álbum/17",
+    "scrollWidth": 1009,
+    "viewport": 1024
+  },
+  {
+    "clientWidth": 1425,
+    "overflow": [],
+    "page": "Detalhe Álbum/17",
+    "scrollWidth": 1425,
+    "viewport": 1440
+  }
+]

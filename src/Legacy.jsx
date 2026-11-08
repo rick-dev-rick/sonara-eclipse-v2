@@ -1,0 +1,278 @@
+import { trackId } from "./catalog.js";
+import React from "react";
+import { ArrowUpRight, Disc3, Heart, ListMusic } from "lucide-react";
+import Art from "./Art.jsx";
+import { legacyTracks } from "./data.js";
+import "./legacy.css";
+
+const coverFor = (name) =>
+  [
+    "Carry On",
+    "Jocelyn Flores",
+    "Everybody Dies In Their Nightmares",
+    "Save Me",
+    "Fuck Love",
+  ].includes(name)
+    ? "album-17"
+    : [
+          "Hope",
+          "changes",
+          "the remedy for a broken heart (why am I so in love)",
+          "Moonlight",
+        ].includes(name)
+      ? "album-question"
+      : ["whoa (mind in awe)", "Guardian angel"].includes(name)
+        ? "album-skins"
+        : "artist-x";
+export default function Legacy({
+  favorites,
+  toggleLike,
+  chooseAlbum,
+  chooseArtist,
+}) {
+  const jump = (id) =>
+    document.getElementById(id)?.scrollIntoView({
+      behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "instant"
+        : "smooth",
+      block: "start",
+    });
+  return (
+    <article className="memorial">
+      <div className="archive-line">
+        <span>SONARA / THE ARCHIVE</span>
+        <span>IN MEMORY OF JAHSEH</span>
+      </div>
+      <section className="memorial-hero" aria-labelledby="legacy-title">
+        <div className="memorial-copy">
+          <span className="archive-label">1998 — 2018 / FOREVER</span>
+          <h1 id="legacy-title">
+            LEGACY<span>.</span>
+          </h1>
+          <p className="memorial-script">Forever Jahseh</p>
+          <div className="memorial-rule" />
+          <p className="memorial-tagline">The Music Lives On.</p>
+          <p className="memorial-intro">
+            Algumas vozes nunca vão embora.
+            <br />
+            Continuam nas músicas que ficam com a gente.
+          </p>
+          <div className="memorial-actions">
+            <button
+              className="paper-button"
+              onClick={() => jump("legacy-songs")}
+            >
+              <ListMusic size={17} />
+              Explorar músicas
+            </button>
+            <button
+              className="archive-button"
+              onClick={() => chooseArtist("XXXTENTACION")}
+            >
+              <Disc3 size={17} />
+              Discografia
+            </button>
+          </div>
+        </div>
+        <figure className="memorial-photo">
+          <div className="archive-photo-label">PORTRAIT / JAHSEH ONFROY</div>
+          <Art
+            type="artist-x"
+            alt="Retrato em preto e branco de XXXTENTACION"
+            eager
+          />
+          <figcaption>
+            JAHSEH DWAYNE RICARDO ONFROY <span>17</span>
+          </figcaption>
+        </figure>
+        <div className="memorial-hero-foot">
+          <span>01 — THE ARCHIVE</span>
+          <span>LONG LIVE JAHSEH ✦</span>
+        </div>
+      </section>
+      <blockquote className="memorial-note">
+        <span className="archive-label">A NOTE FROM SONARA</span>
+        <p>
+          Algumas músicas se tornam parte de quem somos.
+          <br />
+          <em>O tempo passa. O significado permanece.</em>
+        </p>
+        <span className="note-signature">Forever Jahseh</span>
+      </blockquote>
+      <nav className="memorial-chapters" aria-label="Capítulos da homenagem">
+        {[
+          [
+            "01",
+            "A música",
+            "As canções que permanecem.",
+            "album-17",
+            "legacy-songs",
+          ],
+          [
+            "02",
+            "A história",
+            "A pessoa por trás da voz.",
+            "artist-x",
+            "legacy-story",
+          ],
+          [
+            "03",
+            "O legado",
+            "Uma memória que continua viva.",
+            "x",
+            "legacy-impact",
+          ],
+        ].map(([n, title, desc, art, id]) => (
+          <button key={id} onClick={() => jump(id)}>
+            <Art type={art} eager />
+            <span>
+              <small>CHAPTER {n}</small>
+              <strong>{title}</strong>
+              <em>{desc}</em>
+            </span>
+            <ArrowUpRight size={18} />
+          </button>
+        ))}
+      </nav>
+      <section
+        id="legacy-songs"
+        className="memorial-collection"
+        aria-labelledby="collection-title"
+      >
+        <div className="memorial-collection-head">
+          <button
+            className="memorial-album"
+            aria-label="Ver álbum 17"
+            onClick={() => chooseAlbum("17")}
+          >
+            <Art
+              type="album-17"
+              alt="Capa original do álbum 17 de XXXTENTACION"
+              eager
+            />
+            <span>
+              17 / THE DEBUT ALBUM · 2017 <ArrowUpRight size={14} />
+            </span>
+          </button>
+          <div>
+            <span className="archive-label">A PERSONAL COLLECTION / 01</span>
+            <h2 id="collection-title">
+              FOREVER
+              <br />
+              <em>JAHSEH</em>
+            </h2>
+            <p>
+              Canções que deixaram marcas.
+              <br />
+              Uma seleção pessoal para atravessar o tempo.
+            </p>
+            <span className="collection-count">
+              {legacyTracks.length} FAIXAS · THE MUSIC LIVES ON
+            </span>
+          </div>
+        </div>
+        <div className="memorial-section-title">
+          <h3>Every song tells a story.</h3>
+          <span>CURATED BY RICK_DEV</span>
+        </div>
+        <ol className="memorial-tracks">
+          {legacyTracks.map((name, i) => {
+            const id = trackId({ title: name, artist: "XXXTENTACION" }),
+              liked = favorites.includes(id);
+            return (
+              <li
+                key={name}
+                className={
+                  name === "Everybody Dies In Their Nightmares"
+                    ? "special-track"
+                    : ""
+                }
+              >
+                <span className="memorial-track-number">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <Art type={coverFor(name)} eager />
+                <span className="memorial-track-name">
+                  <strong>{name}</strong>
+                  <small>XXXTENTACION</small>
+                  {name === "Everybody Dies In Their Nightmares" && (
+                    <em>✦ SELEÇÃO ESPECIAL</em>
+                  )}
+                </span>
+                <button
+                  className={liked ? "liked" : ""}
+                  aria-label={`${liked ? "Remover" : "Adicionar"} ${name} ${liked ? "dos" : "aos"} favoritos`}
+                  aria-pressed={liked}
+                  onClick={() => toggleLike(id)}
+                >
+                  <Heart size={19} fill={liked ? "currentColor" : "none"} />
+                </button>
+              </li>
+            );
+          })}
+        </ol>
+        <p className="archive-disclaimer">
+          Coleção editorial. As gravações originais não estão hospedadas nem são
+          reproduzidas nesta versão.
+        </p>
+      </section>
+      <section id="legacy-story" className="memorial-story">
+        <div>
+          <span className="archive-label">02 / THE STORY</span>
+          <h2>
+            Uma voz que
+            <br />
+            <em>permanece.</em>
+          </h2>
+          <p>
+            Jahseh Dwayne Ricardo Onfroy (1998–2018) deixou uma obra marcada por
+            vulnerabilidade, intensidade e busca por compreensão. Entre rap,
+            rock e R&amp;B, encontrou uma linguagem que continua acompanhando
+            momentos difíceis de colocar em palavras.
+          </p>
+          <div className="memorial-dates">
+            <span>
+              1998<small>23 DE JANEIRO</small>
+            </span>
+            <span>
+              2017<small>17 · ÁLBUM DE ESTREIA</small>
+            </span>
+            <span>
+              2018<small>A MÚSICA CONTINUA</small>
+            </span>
+          </div>
+        </div>
+        <figure>
+          <Art type="x" alt="Fotografia de Jahseh na coleção memorial" />
+          <figcaption>THE HUMAN BEHIND THE MUSIC.</figcaption>
+        </figure>
+      </section>
+      <section id="legacy-impact" className="memorial-impact">
+        <Art type="artist-x" eager />
+        <div>
+          <span className="archive-label">03 / THE IMPACT</span>
+          <span className="memorial-seventeen" aria-hidden="true">
+            17
+          </span>
+          <h2>O legado vive.</h2>
+          <p>
+            Nas palavras que confortam.
+            <br />
+            Nas canções que encontram a gente.
+            <br />
+            Na memória de quem continua ouvindo.
+          </p>
+          <span className="impact-signature">
+            LONG LIVE JAHSEH / 1998 — 2018
+          </span>
+        </div>
+      </section>
+      <footer className="memorial-end">
+        <span>SONARA ECLIPSE / LEGACY</span>
+        <a href={`${import.meta.env.BASE_URL}credits.html`}>
+          CRÉDITOS & FONTES ↗
+        </a>
+      </footer>
+    </article>
+  );
+}
