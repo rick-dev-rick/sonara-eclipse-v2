@@ -1,0 +1,177 @@
+
+/* SONARA ECLIPSE — Premium polish layer, November 2026
+   Loaded after the legacy stylesheet; intentionally non-destructive. */
+:root{
+  --se-bg:#07080b;--se-surface:#101116;--se-elevated:#17191e;
+  --se-border:rgba(235,238,245,.105);--se-text:#f8f8fa;
+  --se-muted:#a8aab4;--se-red:#ff2636;--se-ease:cubic-bezier(.22,1,.36,1);
+  --se-space-1:8px;--se-space-2:12px;--se-space-3:16px;
+  --se-space-4:24px;--se-space-5:32px;--se-space-6:48px;
+}
+html{scroll-behavior:smooth;scroll-padding-top:86px}
+body{min-width:320px}
+button,input{touch-action:manipulation}
+button{transition:background-color .22s var(--se-ease),border-color .22s var(--se-ease),color .22s var(--se-ease),box-shadow .22s var(--se-ease),transform .22s var(--se-ease)}
+button:focus-visible,input:focus-visible{outline:2px solid #ff6470!important;outline-offset:3px}
+button:disabled{cursor:not-allowed;opacity:.48}
+button:active:not(:disabled){transform:scale(.975)}
+.app-shell{color:var(--se-text)}
+.top-header{position:relative;z-index:12}
+.search-box{transition:border-color .25s,box-shadow .25s,background .25s}
+.search-box:focus-within{border-color:#ff405864;box-shadow:0 0 0 4px #ff263613;background:#1c1c22}
+.search-box input:focus-visible{outline:none!important}
+.nav-sidebar{scrollbar-width:thin;scrollbar-color:#474047 transparent;overflow-y:auto;overflow-x:hidden}
+.navigation button:hover,.sidebar-playlist:hover{background:#19181d}
+.navigation button.active{box-shadow:inset 3px 0 0 var(--se-red),0 8px 28px #30070b3d}
+.sidebar-playlist,.legacy-spotlight{border-radius:12px}
+.pane-title{margin-block:32px 16px;min-height:28px}
+.pane-title h2{font-size:clamp(18px,1.6vw,23px);letter-spacing:-.55px}
+.pane-title button:hover{color:#fff}
+.primary{box-shadow:0 6px 22px #f0091b25;min-height:44px}
+.primary:hover{box-shadow:0 9px 32px #f0091b50;transform:translateY(-1px)}
+.outline:hover,.icon-button:hover{background:#25242b}
+.record,.album-strip,.home-collection,.home-legacy{transition:transform .28s var(--se-ease),filter .28s var(--se-ease),border-color .28s}
+.record:hover,.album-strip:hover,.home-collection:hover,.home-legacy:hover{transform:translateY(-3px)}
+.record .cover,.album-strip .cover,.home-collection .cover{overflow:hidden}
+.record .cover img,.album-strip .cover img{transition:transform .45s var(--se-ease)}
+.record:hover .cover img,.album-strip:hover .cover img{transform:scale(1.055)}
+.record>b{font-size:13px;line-height:1.45}
+.record>small{font-size:11px;line-height:1.5}
+.aside-panel{border-color:var(--se-border);box-shadow:0 14px 38px #0003}
+.featured{border-color:var(--se-border);box-shadow:0 18px 60px #0005}
+.artist-hero .hero-copy h1{overflow-wrap:anywhere;line-height:1.08}
+.artist-hero .hero-copy p,.sonara-hero .hero-copy p{line-height:1.65}
+.music-row{transition:background-color .2s}
+.music-row:hover{background:#211b20}
+.music-row .row-track{min-width:0}
+.music-row .row-track strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.music-table,.album-strip,.aside-panel{backdrop-filter:saturate(1.05)}
+/* Player refinement: catalog UI remains explicitly non-playing. */
+.bottom-player{background:linear-gradient(180deg,#17181deb,#0a0b0ff5);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-color:#383039b0;box-shadow:0 -15px 45px #0009}
+.now-song b{max-width:100%;line-height:1.4}
+.now-song small{line-height:1.5}
+.transport-buttons{gap:clamp(9px,1.3vw,18px)}
+.transport-play{border-color:var(--se-red);box-shadow:0 0 0 4px #f5213010,0 0 18px #ff142a38}
+.progress input,.volume-area input{accent-color:var(--se-red)}
+.expanded-player{background:#07080af7}
+.expanded-player .expand-body{text-align:center}
+.expand-close{z-index:2;min-width:44px;min-height:44px;display:grid;place-items:center;border-radius:50%;background:#24232a}
+.expanded-player .expand-body .cover{box-shadow:0 20px 70px #000b;border-radius:16px}
+.expanded-player .expand-body h1{line-height:1.25;overflow-wrap:anywhere}
+/* ARCHIVE: preserve sepia styling, while improving readability and structure. */
+.legacy17-page{--se-archive:#e6d5bb}
+.legacy17-collection{scroll-margin-top:90px}
+.legacy17-collection-copy h2{overflow-wrap:anywhere}
+.legacy17-collection-copy p{line-height:1.7}
+.legacy17-tracklist{min-width:0}
+.legacy17-track{display:flex;align-items:center;gap:clamp(9px,1.2vw,17px);min-width:0;transition:background-color .22s ease}
+.legacy17-track-no{flex:0 0 27px;text-align:center}
+.legacy17-track-name{flex:1 1 auto;min-width:0}
+.legacy17-track-name strong{display:block;overflow-wrap:anywhere;line-height:1.4}
+.legacy17-track-name small{display:block;line-height:1.5}
+.legacy17-track-heart{flex:0 0 42px;min-width:42px;min-height:44px;display:grid;place-items:center;border-radius:11px}
+.legacy17-track-heart:hover{background:#e3c5a81a}
+.legacy17-track-heart.active{color:#ff5961}
+.legacy17-track-loved{border-radius:9px}
+.legacy17-track-loved .legacy17-track-name strong{color:#f4e0c9}
+.legacy17-curated-tag{display:inline-block}
+.legacy17-collection .legacy17-section-heading{gap:16px}
+.legacy17-story p{line-height:1.85}
+.legacy17-hero-v2 .legacy17-actions{flex-wrap:wrap}
+.legacy17-feature:hover{transform:translateY(-3px)}
+/* Laptop/tablet: keep usable center column. */
+@media (min-width:761px) and (max-width:1280px){
+  .page-columns{gap:18px}
+  .artist-hero .hero-copy{max-width:65%}
+  .legacy17-collection-banner{gap:24px!important;padding-inline:26px!important}
+  .legacy17-collection-cover{width:185px!important;height:185px!important;flex-basis:185px!important}
+}
+@media(max-width:760px){
+  :root{--se-space-5:24px}
+  html{scroll-padding-top:72px}
+  .app-shell{overflow-x:clip}
+  .top-header{gap:10px;padding-inline:14px}
+  .search-box{max-width:none;min-width:0}
+  .profile{flex:none}
+  .page-columns{padding:0 15px}
+  .main-area{padding-bottom:110px}
+  .pane-title{margin-block:26px 13px}
+  .pane-title h2{font-size:18px}
+  .recent-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .recent-grid .record:nth-child(n+4){display:block}
+  .record .cover{border-radius:12px}
+  .record>b{font-size:12px}
+  .sonara-hero{height:280px}
+  .sonara-hero .hero-copy{max-width:78%;padding:29px 20px}
+  .sonara-hero .hero-copy h1{font-size:clamp(35px,9vw,48px)}
+  .sonara-hero .hero-copy p{font-size:12px}
+  .sonara-hero .hero-person{width:79%;opacity:.74}
+  .artist-hero{min-height:295px;height:auto}
+  .artist-hero .hero-copy{max-width:85%;padding:23px}
+  .artist-hero .hero-copy h1{font-size:clamp(24px,6.4vw,35px);line-height:1.12}
+  .artist-hero .hero-copy p{font-size:12px;max-width:36ch}
+  .artist-hero .hero-person{width:74%;opacity:.5}
+  .music-table-header,.music-row{gap:7px}
+  .row-track .cover{width:38px;height:38px}
+  .row-track strong{font-size:12px}
+  .bottom-player{height:82px;padding:9px 13px;border-radius:17px 17px 0 0;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding-bottom:max(9px,env(safe-area-inset-bottom))}
+  .now-song{gap:10px;min-width:0}
+  .now-cover .cover{width:48px;height:48px}
+  .now-song>div:not(.cover){flex:1;min-width:0}
+  .now-song .icon-button{margin-left:0}
+  .transport-buttons{gap:3px}
+  .transport-buttons .icon-button:first-child,.transport-buttons .icon-button:last-child{display:none}
+  .transport .progress,.volume-area{display:none}
+  .transport-play{height:42px;width:42px}
+  .expanded-player{padding:68px 20px max(25px,env(safe-area-inset-bottom));overflow-y:auto}
+  .legacy17-collection{padding:14px!important;margin-inline:0;overflow:hidden}
+  .legacy17-collection-banner{display:grid!important;grid-template-columns:100px minmax(0,1fr);gap:16px!important;align-items:center!important;padding:20px 15px!important;min-width:0}
+  .legacy17-collection-cover{width:100px!important;height:100px!important;flex-basis:auto!important;border-width:5px!important;border-bottom-width:16px!important;transform:rotate(-4deg)!important}
+  .legacy17-collection-stamp{font-size:5px}
+  .legacy17-collection-copy{min-width:0}
+  .legacy17-collection-copy>span{font-size:9px;letter-spacing:1.4px}
+  .legacy17-collection-copy h2{font-size:clamp(27px,7vw,40px)!important;line-height:1.1;margin:9px 0!important;letter-spacing:-.8px}
+  .legacy17-collection-copy h2 em{font-size:clamp(25px,7vw,35px)!important}
+  .legacy17-collection-copy p{font-size:11px;line-height:1.55}
+  .legacy17-collection-meta{gap:5px!important;font-size:9px!important;letter-spacing:.15px!important}
+  .legacy17-collection-number,.legacy17-collection-written,.legacy17-collection-tape{display:none}
+  .legacy17-collection .legacy17-section-heading{padding:23px 4px 17px;align-items:start}
+  .legacy17-section-heading h2{overflow-wrap:anywhere}
+  .legacy17-count{white-space:nowrap}
+  .legacy17-table-heading{padding-inline:8px}
+  .legacy17-track{padding:11px 6px!important;min-height:66px!important;gap:10px!important}
+  .legacy17-track-no{flex-basis:22px;font-size:12px}
+  .legacy17-track-cover{width:42px;height:42px;flex:0 0 42px}
+  .legacy17-track-name strong{font-size:13px!important}
+  .legacy17-track-name small{font-size:10px}
+  .legacy17-track-heart{flex-basis:42px}
+  .legacy17-track-loved:after{display:none}
+  .legacy17-curated-tag{margin:4px 0 0;display:block;font-size:8px}
+  .legacy17-hero-v2 .legacy17-hero-content{padding-inline:22px!important}
+  .legacy17-hero-v2 .legacy17-hero-content h1{font-size:clamp(50px,13vw,71px)!important}
+  .legacy17-story{padding:42px 22px 28px!important;gap:18px!important}
+  .legacy17-story p{font-size:13px}
+}
+@media(max-width:420px){
+  .page-columns{padding-inline:11px}
+  .search-box{padding-inline:10px}
+  .search-box input{font-size:11px}
+  .artist-hero .hero-copy{max-width:92%;padding:18px}
+  .artist-hero .hero-copy h1{font-size:25px}
+  .artist-hero .hero-copy p{font-size:11px}
+  .artist-hero .hero-person{opacity:.35}
+  .legacy17-collection-banner{grid-template-columns:82px minmax(0,1fr);gap:12px!important;padding:15px 10px!important}
+  .legacy17-collection-cover{width:82px!important;height:82px!important;border-width:4px!important;border-bottom-width:12px!important}
+  .legacy17-collection-copy h2{font-size:29px!important}
+  .legacy17-collection-copy h2 em{font-size:27px!important}
+  .legacy17-collection-copy p{font-size:10px}
+  .legacy17-collection-meta{font-size:8px!important}
+  .legacy17-track{gap:7px!important;padding-inline:3px!important}
+  .legacy17-track-cover{width:36px;height:36px;flex-basis:36px}
+  .legacy17-track-heart{flex-basis:38px;min-width:38px}
+  .now-song .icon-button{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
